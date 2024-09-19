@@ -150,7 +150,7 @@ const CustomViewClient: React.FC = () => {
                                         ? UserIconLight
                                         : collection.slug === 'servicesRendered'
                                           ? CopyIconLight
-                                        : FileIconLight
+                                          : FileIconLight
                               }
                               alt=""
                               className="link_icon"
@@ -164,7 +164,8 @@ const CustomViewClient: React.FC = () => {
                         <div className="channel_list" style={{ marginTop: '0px' }}>
                           {docs[collection.slug] && docs[collection.slug].length > 0 ? (
                             <div>
-                              {docs[collection.slug].map((doc: any) => (
+                              {/* Slice the array to limit the number of displayed items to 3 */}
+                              {docs[collection.slug].slice(0, 3).map((doc: any) => (
                                 <div key={doc.id}>
                                   {/* Link for title with text truncation */}
                                   <Link

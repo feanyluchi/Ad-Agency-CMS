@@ -55,7 +55,13 @@
 .nav_link {
   color: var(--nav-link);
   opacity: 60%;
+  transition: opacity 0.3s ease;
 }
+
+.nav_link:hover {
+  opacity: 100%;
+}
+
 
 .logout_container {
   margin-bottom: 40px;
