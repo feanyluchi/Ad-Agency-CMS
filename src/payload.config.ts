@@ -2,17 +2,30 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { CollectionConfig, buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { s3Storage } from '@payloadcms/storage-s3'
 // import { seoPlugin } from '@payloadcms/plugin-seo'
 
-import { Users } from './collections/Users'
+// import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import Users from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+const groupCollections = (group: string, collections: CollectionConfig[]): CollectionConfig[] => {
+  return collections.map(collection => {
+    return {
+      ...collection,
+      admin: {
+        ...collection.admin,
+        group,
+      },
+    };
+  });
+};
 
 export default buildConfig({
   admin: {
@@ -20,8 +33,33 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    meta: {
+      titleSuffix: '- Moments Estate',
+      icons: [
+        {
+          url: '@/graphics/favicon.png',
+        },
+      ],
+    },
+    components: {
+      graphics: {
+        Icon: {
+          path: '@/graphics/Icon/index#Icon',
+        },
+        Logo: '@/graphics/Logo/index#Logo',
+      },
+      views: {
+        Dashboard: {
+          Component: '@/components/CustomLayoutView/index#CustomView',
+        },
+      },
+      Nav: '@/components/NavLinks/index#Nav',
+    },
   },
-  collections: [Users, Media],
+  collections: [
+    ...groupCollections('Library', [Media]),
+    ...groupCollections('User Groups', [Users]),
+  ],
   editor: lexicalEditor(),
   plugins: [
     s3Storage({

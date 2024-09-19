@@ -1,0 +1,62 @@
+:root {
+  --nav-bg-light: #ffffff;
+  --nav-text-light: #000000;
+  --nav-link-light: #000000;
+  --nav-label-light: #000000;
+  --nav-border-light: #cccccc;
+
+  --nav-bg-dark: #343434;
+  --nav-text-dark: #ffffff;
+  --nav-link-dark: #ffffff;
+  --nav-label-dark: #ffffff;
+  --nav-border-dark: #484848;
+}
+
+[data-theme='light'] {
+  --nav-bg: var(--nav-bg-light);
+  --nav-text: var(--nav-text-light);
+  --nav-link: var(--nav-link-light);
+  --nav-label: var(--nav-label-light);
+  --nav-border: var(--nav-border-light);
+}
+
+[data-theme='dark'] {
+  --nav-bg: var(--nav-bg-dark);
+  --nav-text: var(--nav-text-dark);
+  --nav-link: var(--nav-link-dark);
+  --nav-label: var(--nav-label-dark);
+  --nav-border: var(--nav-border-dark);
+}
+
+.navbar {
+  padding: 60px 20px 0 25px;
+  width: 100%;
+  background-color: var(--nav-bg);
+  color: var(--nav-text);
+  font-family: Arial, sans-serif;
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.nav_label {
+  width: 100%;
+  font-size: 15px;
+  border-bottom: 1px solid var(--nav-border);
+  padding-bottom: 2px;
+  color: var(--nav-label);
+  opacity: 80%;
+}
+
+.nav_link {
+  color: var(--nav-link);
+  opacity: 60%;
+}
+
+.logout_container {
+  margin-bottom: 40px;
+}
