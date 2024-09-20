@@ -59,14 +59,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 18px;
   color: var(--text-color);
 }
 
 .link_icon {
   color: #fff;
   height: 20px;
-  width: 15px;
+  width: 20px;
 }
 
 .channel_style{
@@ -90,4 +92,21 @@
   align-items: center;
   justify-content: space-between;
   gap: 5px;
+}
+
+/* Hide the edit icon by default */
+.channel_item .link_icon {
+  opacity: 0; /* Initially hide the icon */
+  transition: opacity 0.3s ease; /* Smooth transition */
+}
+
+/* Show the icon when hovering over the channel_item */
+.channel_item:hover .link_icon {
+  opacity: 0.6; /* Show icon at 60% opacity when hovering */
+}
+
+/* Increase opacity to 100% when hovering over the icon itself */
+.channel_item:hover .link_icon:hover {
+  opacity: 1; /* Full opacity on hover over the icon */
+  transition: opacity 0.3s ease; /* Smooth transition */
 }
