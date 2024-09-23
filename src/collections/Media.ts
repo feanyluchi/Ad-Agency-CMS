@@ -1,7 +1,37 @@
-import type { CollectionConfig } from 'payload'
+import path from 'path';
+import { fileURLToPath } from 'url';
+import type { CollectionConfig } from 'payload';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const Media: CollectionConfig = {
   slug: 'media',
+  upload: {
+    staticDir: path.resolve(__dirname, '../../../media'),
+    imageSizes: [
+      {
+        name: 'mobile',
+        width: 480,
+        height: undefined,
+        position: 'centre',
+      },
+      {
+        name: 'tablet',
+        width: 768,
+        height: undefined,
+        position: 'centre',
+      },
+      {
+        name: 'desktop',
+        width: 1920,
+        height: undefined,
+        position: 'centre',
+      },
+    ],
+    crop: true,
+    focalPoint: true,
+  },
   access: {
     read: () => true,
   },
@@ -9,8 +39,9 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
+      label: 'Alt Text',
       required: true,
+      localized: true,
     },
   ],
-  upload: true,
 }

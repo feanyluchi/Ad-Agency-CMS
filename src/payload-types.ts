@@ -11,7 +11,9 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
+    homepage: Homepage;
     media: Media;
+    robots: Robot;
     users: User;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -19,8 +21,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  locale: null;
+  globals: {
+    header: Header;
+    footer: Footer;
+    staticTexts: StaticText;
+  };
+  locale: 'en' | 'es' | 'nl' | 'fr';
   user: User & {
     collection: 'users';
   };
@@ -45,6 +51,131 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+    slug?: string | null;
+  };
+  hero: {
+    mediaType?: ('image' | 'video') | null;
+    backgroundImage?: (string | null) | Media;
+    backgroundVideo?: (string | null) | Media;
+    backgroundColor:
+      | '#B37400'
+      | '#E69400'
+      | '#FFA500'
+      | '#FFB733'
+      | '#FFC966'
+      | '#FFDB99'
+      | '#262626'
+      | '#515151'
+      | '#7D7D7D'
+      | '#A8A8A8'
+      | '#D4D4D4'
+      | '#E9E9E9'
+      | '#415894'
+      | '#5776C5'
+      | '#6D93F6'
+      | '#8AA9F8'
+      | '#A7BEFA'
+      | '#C5D4FB';
+    heroTitle?: string | null;
+    subtitle?: string | null;
+    description?: string | null;
+  };
+  discoverblock: {
+    blockTitle: string;
+    columns?:
+      | {
+          columnTitle: string;
+          columnContent: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whatWeDoBlock: {
+    backgroundImage: string | Media;
+    teamPhoto: string | Media;
+    title: {
+      text: string;
+      id?: string | null;
+    }[];
+    description: string;
+    backgroundColor:
+      | '#B37400'
+      | '#E69400'
+      | '#FFA500'
+      | '#FFB733'
+      | '#FFC966'
+      | '#FFDB99'
+      | '#262626'
+      | '#515151'
+      | '#7D7D7D'
+      | '#A8A8A8'
+      | '#D4D4D4'
+      | '#E9E9E9'
+      | '#415894'
+      | '#5776C5'
+      | '#6D93F6'
+      | '#8AA9F8'
+      | '#A7BEFA'
+      | '#C5D4FB';
+  };
+  whyChooseAdAgencyBlock?: {
+    rows?:
+      | {
+          rowTitle?: string | null;
+          image: string | Media;
+          imagePosition?: ('right' | 'left') | null;
+          backgroundColor:
+            | '#B37400'
+            | '#E69400'
+            | '#FFA500'
+            | '#FFB733'
+            | '#FFC966'
+            | '#FFDB99'
+            | '#262626'
+            | '#515151'
+            | '#7D7D7D'
+            | '#A8A8A8'
+            | '#D4D4D4'
+            | '#E9E9E9'
+            | '#415894'
+            | '#5776C5'
+            | '#6D93F6'
+            | '#8AA9F8'
+            | '#A7BEFA'
+            | '#C5D4FB';
+          columns?:
+            | {
+                title: string;
+                text: string;
+                number: number;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contactBlock: {
+    content: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
@@ -61,6 +192,43 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "robots".
+ */
+export interface Robot {
+  id: string;
+  domain?: string | null;
+  content?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -116,6 +284,93 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  firstNavItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  logo: string | Media;
+  secondNavItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  quickLinks?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  logo: string | Media;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staticTexts".
+ */
+export interface StaticText {
+  id: string;
+  title: string;
+  featuredHousesSection: string;
+  contactUs: string;
+  contactFormPlaceholders: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+    message: string;
+    send: string;
+  };
+  interestedContactAgent: string;
+  mainFeatures: string;
+  otherFeatures: string;
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
