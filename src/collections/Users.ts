@@ -49,7 +49,7 @@ const Users: CollectionConfig = {
     {
       name: 'profilePicture',
       type: 'upload',
-      relationTo: 'media', // Assuming you have a 'media' collection for file uploads
+      relationTo: 'photos', // Assuming you have a 'photos' collection for file uploads
       label: 'Profile Picture',
     },
   ],
