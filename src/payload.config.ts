@@ -20,6 +20,9 @@ import { Photos } from './collections/Photos'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
 
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import nodemailer from 'nodemailer'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -36,6 +39,19 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 };
 
 export default buildConfig({
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
+    defaultFromName: 'payload',
+    // Nodemailer transportOptions
+    transport: nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    }),
+  }),
   admin: {
     user: Users.slug,
     importMap: {

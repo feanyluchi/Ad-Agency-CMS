@@ -22,6 +22,7 @@ export interface Config {
     photos: Photo;
     video: Video;
     users: User;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -244,6 +245,65 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: string;
+  document?:
+    | ({
+        relationTo: 'home';
+        value: string | Home;
+      } | null)
+    | ({
+        relationTo: 'aboutus';
+        value: string | Aboutus;
+      } | null)
+    | ({
+        relationTo: 'productsoverview';
+        value: string | Productsoverview;
+      } | null)
+    | ({
+        relationTo: 'newsoverview';
+        value: string | Newsoverview;
+      } | null)
+    | ({
+        relationTo: 'contact';
+        value: string | Contact;
+      } | null)
+    | ({
+        relationTo: 'productentry';
+        value: string | Productentry;
+      } | null)
+    | ({
+        relationTo: 'newsentry';
+        value: string | Newsentry;
+      } | null)
+    | ({
+        relationTo: 'generalPageEntry';
+        value: string | GeneralPageEntry;
+      } | null)
+    | ({
+        relationTo: 'photos';
+        value: string | Photo;
+      } | null)
+    | ({
+        relationTo: 'video';
+        value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: string | User;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
