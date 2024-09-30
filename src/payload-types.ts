@@ -11,15 +11,28 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
-    media: Media;
+    home: Home;
+    aboutus: Aboutus;
+    productsoverview: Productsoverview;
+    newsoverview: Newsoverview;
+    contact: Contact;
+    productentry: Productentry;
+    newsentry: Newsentry;
+    generalPageEntry: GeneralPageEntry;
+    photos: Photo;
+    video: Video;
     users: User;
+    'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   db: {
     defaultIDType: string;
   };
-  globals: {};
+  globals: {
+    header: Header;
+    footer: Footer;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -45,9 +58,159 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
+ * via the `definition` "home".
  */
-export interface Media {
+export interface Home {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aboutus".
+ */
+export interface Aboutus {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  aboutuscontent: {
+    contentBackground: string | Photo;
+    contentSubtitle: string;
+    content: string;
+    socialMedia: {
+      facebook: string;
+      linkedin: string;
+      instagram: string;
+    };
+    seo?: {
+      ogImage?: (string | null) | Photo;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
+      twitterCard?: ('summary' | 'summary_large_image') | null;
+      twitterImage?: (string | null) | Photo;
+      twitterTitle?: string | null;
+      twitterDescription?: string | null;
+    };
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photos".
+ */
+export interface Photo {
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productsoverview".
+ */
+export interface Productsoverview {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsoverview".
+ */
+export interface Newsoverview {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productentry".
+ */
+export interface Productentry {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsentry".
+ */
+export interface Newsentry {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "generalPageEntry".
+ */
+export interface GeneralPageEntry {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video".
+ */
+export interface Video {
   id: string;
   alt: string;
   updatedAt: string;
@@ -71,7 +234,7 @@ export interface User {
   role?: ('admin' | 'client') | null;
   firstName: string;
   lastName: string;
-  profilePicture?: (string | null) | Media;
+  profilePicture?: (string | null) | Photo;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -82,6 +245,65 @@ export interface User {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents".
+ */
+export interface PayloadLockedDocument {
+  id: string;
+  document?:
+    | ({
+        relationTo: 'home';
+        value: string | Home;
+      } | null)
+    | ({
+        relationTo: 'aboutus';
+        value: string | Aboutus;
+      } | null)
+    | ({
+        relationTo: 'productsoverview';
+        value: string | Productsoverview;
+      } | null)
+    | ({
+        relationTo: 'newsoverview';
+        value: string | Newsoverview;
+      } | null)
+    | ({
+        relationTo: 'contact';
+        value: string | Contact;
+      } | null)
+    | ({
+        relationTo: 'productentry';
+        value: string | Productentry;
+      } | null)
+    | ({
+        relationTo: 'newsentry';
+        value: string | Newsentry;
+      } | null)
+    | ({
+        relationTo: 'generalPageEntry';
+        value: string | GeneralPageEntry;
+      } | null)
+    | ({
+        relationTo: 'photos';
+        value: string | Photo;
+      } | null)
+    | ({
+        relationTo: 'video';
+        value: string | Video;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: string | User;
+      } | null);
+  globalSlug?: string | null;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -116,6 +338,73 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  logo: string | Photo;
+  quickLinks?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?:
+            | ({
+                relationTo: 'aboutus';
+                value: string | Aboutus;
+              } | null)
+            | ({
+                relationTo: 'home';
+                value: string | Home;
+              } | null)
+            | ({
+                relationTo: 'contact';
+                value: string | Contact;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  logo: string | Photo;
+  quickLinks?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?:
+            | ({
+                relationTo: 'aboutus';
+                value: string | Aboutus;
+              } | null)
+            | ({
+                relationTo: 'home';
+                value: string | Home;
+              } | null)
+            | ({
+                relationTo: 'contact';
+                value: string | Contact;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
