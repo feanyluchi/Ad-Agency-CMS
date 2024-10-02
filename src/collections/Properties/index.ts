@@ -1,11 +1,11 @@
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 
-export const Properties: CollectionConfig = {
-  slug: 'properties',
+export const PropertiesOverview: CollectionConfig = {
+  slug: 'propertiesoverview',
   labels: {
-    singular: 'Properties',
-    plural: 'Properties',
+    singular: 'Properties Overview',
+    plural: 'Properties Overview',
   },
   admin: {
     //   useAsTitle: 'title',
