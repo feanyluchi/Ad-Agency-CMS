@@ -1,4 +1,3 @@
-
 import type { Field } from 'payload'
 
 import deepMerge from '../utilities/deepMerge'
