@@ -20,8 +20,11 @@ import { Photos } from './collections/Photos'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
 
+import { seoPlugin } from '@payloadcms/plugin-seo'
+
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
+import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -82,7 +85,7 @@ export default buildConfig({
   },
   collections: [
     ...groupCollections('Single Pages', [HomePage, AboutUsPage, ProductsOverview, NewsOverview, Contact]),
-    ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry]),
+    ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, Properties]),
     ...groupCollections('Library', [Photos, Videos]),
     ...groupCollections('User Groups', [Users]),
   ],
@@ -107,6 +110,13 @@ export default buildConfig({
         region: process.env.S3_REGION || '',
         endpoint: process.env.S3_ENDPOINT || '',
       },
+    }),
+    seoPlugin({
+      collections: ['homepage', 'aboutus', 'productsoverview', 'newsoverview', 'contact', 'productEntry', 'newentry', 'generalPageEntry', 'properties'],
+      uploadsCollection: 'media',
+      generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
+      generateDescription: ({ doc }) => doc.excerpt,
+      tabbedUI: true,
     }),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
