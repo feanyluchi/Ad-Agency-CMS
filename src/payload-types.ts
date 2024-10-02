@@ -11,16 +11,9 @@ export interface Config {
     users: UserAuthOperations;
   };
   collections: {
-    home: Home;
-    aboutus: Aboutus;
-    productsoverview: Productsoverview;
-    newsoverview: Newsoverview;
-    contact: Contact;
-    productentry: Productentry;
-    newsentry: Newsentry;
-    generalPageEntry: GeneralPageEntry;
-    photos: Photo;
-    video: Video;
+    homepage: Homepage;
+    media: Media;
+    robots: Robot;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -32,8 +25,9 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    staticTexts: StaticText;
   };
-  locale: null;
+  locale: 'en' | 'es' | 'nl' | 'fr';
   user: User & {
     collection: 'users';
   };
@@ -58,46 +52,124 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "home".
+ * via the `definition` "homepage".
  */
-export interface Home {
+export interface Homepage {
   id: string;
   home: {
     title: string;
     excerpt: string;
+    slug?: string | null;
   };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "aboutus".
- */
-export interface Aboutus {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
+  hero: {
+    mediaType?: ('image' | 'video') | null;
+    backgroundImage?: (string | null) | Media;
+    backgroundVideo?: (string | null) | Media;
+    backgroundColor:
+      | '#B37400'
+      | '#E69400'
+      | '#FFA500'
+      | '#FFB733'
+      | '#FFC966'
+      | '#FFDB99'
+      | '#262626'
+      | '#515151'
+      | '#7D7D7D'
+      | '#A8A8A8'
+      | '#D4D4D4'
+      | '#E9E9E9'
+      | '#415894'
+      | '#5776C5'
+      | '#6D93F6'
+      | '#8AA9F8'
+      | '#A7BEFA'
+      | '#C5D4FB';
+    heroTitle?: string | null;
+    subtitle?: string | null;
+    description?: string | null;
   };
-  aboutuscontent: {
-    contentBackground: string | Photo;
-    contentSubtitle: string;
+  discoverblock: {
+    blockTitle: string;
+    columns?:
+      | {
+          columnTitle: string;
+          columnContent: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whatWeDoBlock: {
+    backgroundImage: string | Media;
+    teamPhoto: string | Media;
+    title: {
+      text: string;
+      id?: string | null;
+    }[];
+    description: string;
+    backgroundColor:
+      | '#B37400'
+      | '#E69400'
+      | '#FFA500'
+      | '#FFB733'
+      | '#FFC966'
+      | '#FFDB99'
+      | '#262626'
+      | '#515151'
+      | '#7D7D7D'
+      | '#A8A8A8'
+      | '#D4D4D4'
+      | '#E9E9E9'
+      | '#415894'
+      | '#5776C5'
+      | '#6D93F6'
+      | '#8AA9F8'
+      | '#A7BEFA'
+      | '#C5D4FB';
+  };
+  whyChooseAdAgencyBlock?: {
+    rows?:
+      | {
+          rowTitle?: string | null;
+          image: string | Media;
+          imagePosition?: ('right' | 'left') | null;
+          backgroundColor:
+            | '#B37400'
+            | '#E69400'
+            | '#FFA500'
+            | '#FFB733'
+            | '#FFC966'
+            | '#FFDB99'
+            | '#262626'
+            | '#515151'
+            | '#7D7D7D'
+            | '#A8A8A8'
+            | '#D4D4D4'
+            | '#E9E9E9'
+            | '#415894'
+            | '#5776C5'
+            | '#6D93F6'
+            | '#8AA9F8'
+            | '#A7BEFA'
+            | '#C5D4FB';
+          columns?:
+            | {
+                title: string;
+                text: string;
+                number: number;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  contactBlock: {
     content: string;
-    socialMedia: {
-      facebook: string;
-      linkedin: string;
-      instagram: string;
-    };
-    seo?: {
-      ogImage?: (string | null) | Photo;
-      ogTitle?: string | null;
-      ogDescription?: string | null;
-      twitterCard?: ('summary' | 'summary_large_image') | null;
-      twitterImage?: (string | null) | Photo;
-      twitterTitle?: string | null;
-      twitterDescription?: string | null;
-    };
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Media;
   };
   updatedAt: string;
   createdAt: string;
@@ -105,9 +177,9 @@ export interface Aboutus {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "photos".
+ * via the `definition` "media".
  */
-export interface Photo {
+export interface Media {
   id: string;
   alt: string;
   updatedAt: string;
@@ -121,109 +193,43 @@ export interface Photo {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "productsoverview".
- */
-export interface Productsoverview {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
   };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsoverview".
+ * via the `definition` "robots".
  */
-export interface Newsoverview {
+export interface Robot {
   id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
+  domain?: string | null;
+  content?: string | null;
   updatedAt: string;
   createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact".
- */
-export interface Contact {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "productentry".
- */
-export interface Productentry {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "newsentry".
- */
-export interface Newsentry {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "generalPageEntry".
- */
-export interface GeneralPageEntry {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "video".
- */
-export interface Video {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -234,7 +240,7 @@ export interface User {
   role?: ('admin' | 'client') | null;
   firstName: string;
   lastName: string;
-  profilePicture?: (string | null) | Photo;
+  profilePicture?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -254,44 +260,16 @@ export interface PayloadLockedDocument {
   id: string;
   document?:
     | ({
-        relationTo: 'home';
-        value: string | Home;
+        relationTo: 'homepage';
+        value: string | Homepage;
       } | null)
     | ({
-        relationTo: 'aboutus';
-        value: string | Aboutus;
+        relationTo: 'media';
+        value: string | Media;
       } | null)
     | ({
-        relationTo: 'productsoverview';
-        value: string | Productsoverview;
-      } | null)
-    | ({
-        relationTo: 'newsoverview';
-        value: string | Newsoverview;
-      } | null)
-    | ({
-        relationTo: 'contact';
-        value: string | Contact;
-      } | null)
-    | ({
-        relationTo: 'productentry';
-        value: string | Productentry;
-      } | null)
-    | ({
-        relationTo: 'newsentry';
-        value: string | Newsentry;
-      } | null)
-    | ({
-        relationTo: 'generalPageEntry';
-        value: string | GeneralPageEntry;
-      } | null)
-    | ({
-        relationTo: 'photos';
-        value: string | Photo;
-      } | null)
-    | ({
-        relationTo: 'video';
-        value: string | Video;
+        relationTo: 'robots';
+        value: string | Robot;
       } | null)
     | ({
         relationTo: 'users';
@@ -345,24 +323,29 @@ export interface PayloadMigration {
  */
 export interface Header {
   id: string;
-  logo: string | Photo;
-  quickLinks?:
+  firstNavItems?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
-          reference?:
-            | ({
-                relationTo: 'aboutus';
-                value: string | Aboutus;
-              } | null)
-            | ({
-                relationTo: 'home';
-                value: string | Home;
-              } | null)
-            | ({
-                relationTo: 'contact';
-                value: string | Contact;
-              } | null);
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  logo: string | Media;
+  secondNavItems?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
           url?: string | null;
           label: string;
         };
@@ -378,31 +361,46 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  logo: string | Photo;
   quickLinks?:
     | {
         link: {
           type?: ('reference' | 'custom') | null;
-          reference?:
-            | ({
-                relationTo: 'aboutus';
-                value: string | Aboutus;
-              } | null)
-            | ({
-                relationTo: 'home';
-                value: string | Home;
-              } | null)
-            | ({
-                relationTo: 'contact';
-                value: string | Contact;
-              } | null);
+          reference?: {
+            relationTo: 'homepage';
+            value: string | Homepage;
+          } | null;
           url?: string | null;
           label: string;
         };
         id?: string | null;
       }[]
     | null;
+  logo: string | Media;
   copyright: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staticTexts".
+ */
+export interface StaticText {
+  id: string;
+  title: string;
+  featuredHousesSection: string;
+  contactUs: string;
+  contactFormPlaceholders: {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+    message: string;
+    send: string;
+  };
+  interestedContactAgent: string;
+  mainFeatures: string;
+  otherFeatures: string;
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

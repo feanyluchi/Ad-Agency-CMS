@@ -8,13 +8,6 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
-      name: 'logo',
-      label: 'Logo',
-      type: 'upload',
-      required: true,
-      relationTo: 'photos'
-    },
-    {
       name: "quickLinks",
       label: "Quick Links",
       type: "array",
@@ -24,6 +17,13 @@ export const Footer: GlobalConfig = {
           appearances: false,
         }),
       ],
+    },
+    {
+      name: 'logo',
+      label: 'Logo',
+      type: 'upload',
+      required: true,
+      relationTo: 'media'
     },
     {
       name: 'copyright',

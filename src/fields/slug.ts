@@ -1,4 +1,5 @@
-import type { Field } from "payload";
+
+import type { Field } from 'payload'
 
 import deepMerge from '../utilities/deepMerge'
 import formatSlug from '../utilities/formatSlug'
@@ -13,8 +14,11 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
       label: 'Slug',
       type: 'text',
       index: true,
+      localized: true,
       admin: {
         position: 'sidebar',
+        condition: ({ user }) => user?.role === 'main-user',
+        readOnly: true,
       },
       hooks: {
         beforeValidate: [formatSlug(fieldToUse)],

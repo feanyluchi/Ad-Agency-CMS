@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload';
 const Users: CollectionConfig = {
   slug: 'users',
   admin: {
-    // useAsTitle: 'email',
+    useAsTitle: 'email',
     defaultColumns: ['email', 'role', 'firstName', 'lastName'],
   },
   auth: true,
@@ -49,7 +49,7 @@ const Users: CollectionConfig = {
     {
       name: 'profilePicture',
       type: 'upload',
-      relationTo: 'photos', // Assuming you have a 'photos' collection for file uploads
+      relationTo: 'media',
       label: 'Profile Picture',
     },
   ],

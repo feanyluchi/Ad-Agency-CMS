@@ -1,4 +1,4 @@
-import type { Field } from "payload";
+import { Field } from 'payload'
 import deepMerge from '../utilities/deepMerge'
 
 export const appearanceOptions = {
@@ -21,10 +21,16 @@ export type LinkAppearances = 'primary' | 'secondary' | 'default'
 type LinkType = (options?: {
   appearances?: LinkAppearances[] | false
   disableLabel?: boolean
+  required?: boolean
   overrides?: Record<string, unknown>
 }) => Field
 
-const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+const link: LinkType = ({
+  appearances,
+  disableLabel = false,
+  required = true,
+  overrides = {},
+} = {}) => {
   const linkResult: Field = {
     name: 'link',
     type: 'group',
@@ -54,17 +60,6 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
               width: '50%',
             },
           },
-          // {
-          //   name: 'newTab',
-          //   label: 'Open in new tab',
-          //   type: 'checkbox',
-          //   admin: {
-          //     width: '50%',
-          //     style: {
-          //       alignSelf: 'flex-end',
-          //     },
-          //   },
-          // },
         ],
       },
     ],
@@ -75,8 +70,9 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
       name: 'reference',
       label: 'Document to link to',
       type: 'relationship',
-      relationTo: ['aboutus', 'home', 'contact'],
+      relationTo: ['homepage' ],
       required: true,
+      localized: true,
       maxDepth: 1,
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'reference',
@@ -86,7 +82,8 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
       name: 'url',
       label: 'Custom URL',
       type: 'text',
-      required: true,
+      required,
+      localized: true,
       admin: {
         condition: (_, siblingData) => siblingData?.type === 'custom',
       },
@@ -94,13 +91,12 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
   ]
 
   if (!disableLabel) {
-    linkTypes.map(linkType => ({
-      ...linkType,
-      admin: {
+    linkTypes.forEach((linkType) => {
+      linkType.admin = {
         ...linkType.admin,
         width: '50%',
-      },
-    }))
+      }
+    })
 
     linkResult.fields.push({
       type: 'row',
@@ -110,7 +106,8 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
           name: 'label',
           label: 'Label',
           type: 'text',
-          required: true,
+          required,
+          localized: true,
           admin: {
             width: '50%',
           },
@@ -119,6 +116,28 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
     })
   } else {
     linkResult.fields = [...linkResult.fields, ...linkTypes]
+  }
+
+  if (appearances !== false) {
+    let appearanceOptionsToUse = [
+      appearanceOptions.default,
+      appearanceOptions.primary,
+      appearanceOptions.secondary,
+    ]
+
+    if (appearances) {
+      appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])
+    }
+
+    linkResult.fields.push({
+      name: 'appearance',
+      type: 'select',
+      defaultValue: 'default',
+      options: appearanceOptionsToUse,
+      admin: {
+        description: 'Choose how the link should be rendered.',
+      },
+    })
   }
   return deepMerge(linkResult, overrides)
 }

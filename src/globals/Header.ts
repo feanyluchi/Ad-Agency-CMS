@@ -9,17 +9,26 @@ export const Header: GlobalConfig = {
   },
   fields: [
     {
+      name: 'firstNavItems',
+      type: 'array',
+      maxRows: 2,
+      fields: [
+        link({
+          appearances: false,
+        }),
+      ],
+    },
+    {
       name: 'logo',
       label: 'Logo',
       type: 'upload',
       required: true,
-      relationTo: 'photos'
+      relationTo: 'media'
     },
     {
-      name: "quickLinks",
-      label: "Quick Links",
-      type: "array",
-      maxRows: 6,
+      name: 'secondNavItems',
+      type: 'array',
+      maxRows: 2,
       fields: [
         link({
           appearances: false,
