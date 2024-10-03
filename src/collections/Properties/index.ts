@@ -17,6 +17,7 @@ export const PropertiesOverview: CollectionConfig = {
       required: true,
       editor: lexicalEditor({}),
       label: 'Content',
+      localized: true
     },
   ],
 }
