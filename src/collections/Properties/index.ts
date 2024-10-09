@@ -1,23 +1,40 @@
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import type { CollectionConfig } from 'payload'
 
-export const PropertiesOverview: CollectionConfig = {
-  slug: 'propertiesoverview',
+// collections/Properties.js
+import { slugField } from '@/fields/slug'
+import { CollectionConfig } from 'payload'
+
+export const Properties: CollectionConfig = {
+  slug: 'properties',
   labels: {
-    singular: 'Properties Overview',
-    plural: 'Properties Overview',
+    singular: 'Properties',
+    plural: 'Properties',
   },
   admin: {
-    //   useAsTitle: 'title',
+    useAsTitle: 'title',
+  },
+  access: {
+    read: () => true,
   },
   fields: [
     {
-      name: 'content',
-      type: 'richText',
+      name: 'title',
+      type: 'text',
       required: true,
-      editor: lexicalEditor({}),
-      label: 'Content',
-      localized: true
+      localized: true,
+    },
+    slugField(),
+    {
+      name: 'description',
+      type: 'textarea',
+    },
+    {
+      name: 'price',
+      type: 'number',
+    },
+    {
+      name: 'featured',
+      type: 'checkbox',
+      label: 'Featured Property',
     },
   ],
 }

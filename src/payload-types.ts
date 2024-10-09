@@ -19,6 +19,7 @@ export interface Config {
     productentry: Productentry;
     newsentry: Newsentry;
     generalPageEntry: GeneralPageEntry;
+    properties: Property;
     photos: Photo;
     video: Video;
     users: User;
@@ -99,6 +100,11 @@ export interface Aboutus {
       twitterDescription?: string | null;
     };
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -132,6 +138,11 @@ export interface Productsoverview {
     title: string;
     excerpt: string;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -146,6 +157,11 @@ export interface Newsoverview {
     title: string;
     excerpt: string;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -159,6 +175,11 @@ export interface Contact {
   home: {
     title: string;
     excerpt: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
   };
   updatedAt: string;
   createdAt: string;
@@ -202,9 +223,418 @@ export interface GeneralPageEntry {
     title: string;
     excerpt: string;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties".
+ */
+export interface Property {
+  id: string;
+  title: string;
+  slug?: string | null;
+  description?: string | null;
+  price?: number | null;
+  featured?: boolean | null;
+  parent?: (string | null) | Property;
+  breadcrumbs?:
+    | {
+        doc?: (string | null) | Property;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  propertyFilter?: {
+    filters?:
+      | {
+          filterType:
+            | 'propertyCity'
+            | 'numberOfBedrooms'
+            | 'numberOfBathrooms'
+            | 'propertyType'
+            | 'propertyFeaturesType'
+            | 'propertyStatus'
+            | 'propertyTransactionType'
+            | 'mlsType'
+            | 'buildingStatusType'
+            | 'energyCertificationConsumptionType'
+            | 'energyCertificationEmissionsType'
+            | 'floorType'
+            | 'furnishedType'
+            | 'garageType'
+            | 'gardenType'
+            | 'heatingType'
+            | 'hotWaterType'
+            | 'kitchenType'
+            | 'noOfBuildingFloorType'
+            | 'orientationType'
+            | 'parkingType'
+            | 'patioType'
+            | 'priceFrequencyType'
+            | 'propertyStatusType'
+            | 'refurbishedType'
+            | 'roadType'
+            | 'shuttersType'
+            | 'swimmingPoolType'
+            | 'terraceType'
+            | 'waterHeaterType'
+            | 'viewType'
+            | 'windowsMaterialType'
+            | 'windowsType'
+            | 'propertyConditionType'
+            | 'equipmentType'
+            | 'labelType';
+          propertyCity?:
+            | (
+                | 'Albir'
+                | 'Alcalali'
+                | 'Alfaz del Pi'
+                | 'Altea'
+                | 'Altea Hills'
+                | 'Beniarbeig'
+                | 'Benidoleig'
+                | 'Benidorm'
+                | 'Benimeli'
+                | 'Benissa'
+                | 'Benitachell'
+                | 'Calpe'
+                | 'City 2'
+                | 'Denia'
+                | 'Dénia'
+                | 'El Vergel'
+                | 'Els Poblets'
+                | 'Finestrat'
+                | 'Gandia'
+                | 'Gata de Gorgos'
+                | 'Guadalest'
+                | 'Jalon'
+                | 'Javea'
+                | 'Jesus Pobre'
+                | 'Kota'
+                | 'La Nucia'
+                | 'La Xara'
+                | 'Lliber'
+                | 'Moraira'
+                | 'Murla'
+                | 'Mutxamel'
+                | 'Oliva'
+                | 'Ondara'
+                | 'Orba'
+                | 'Parcent'
+                | 'Pedreguer'
+                | 'Pego'
+                | 'Penaguila'
+                | 'Polop'
+                | 'Sagra'
+                | 'Senija'
+                | 'Teulada'
+                | 'Valdemadera'
+                | 'Vilajoyosa'
+              )
+            | null;
+          numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
+          numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
+          propertyType?:
+            | (
+                | 'apartment'
+                | 'townhouse'
+                | 'detached_house'
+                | 'semi_detached_house'
+                | 'finca'
+                | 'villa'
+                | 'duplex'
+                | 'penthouse'
+                | 'commercial_property'
+                | 'plot_land'
+                | 'bungalow'
+              )
+            | null;
+          propertyFeaturesType?:
+            | (
+                | 'accessible_property'
+                | 'adapted_entrance'
+                | 'adapted_for_wheelchair'
+                | 'air_conditioning'
+                | 'Attic'
+                | 'bank_property'
+                | 'basement'
+                | 'bbq_area'
+                | 'beach_front'
+                | 'blinds'
+                | 'builtin_wardrobes'
+                | 'Cable Satellite'
+                | 'chimney'
+                | 'community_pool'
+                | 'courtyard'
+                | 'deck'
+                | 'dock'
+                | 'double_glazing'
+                | 'elevator'
+                | 'equipped_kitchen'
+                | 'exterior'
+                | 'fitted_wardrobes'
+                | 'Furnished'
+                | 'garden'
+                | 'gated entry'
+                | 'greenhouse'
+                | 'home_automation'
+                | 'Home Theater'
+                | 'hottub_spa'
+                | 'Intercom'
+                | 'Jetted Bath Tub'
+                | 'laundry'
+                | 'lift'
+                | 'luxury_home'
+                | 'parking'
+                | 'patio'
+                | 'pets_allowed'
+                | 'pond'
+                | 'porch'
+                | 'reinforced_door'
+                | 'Sauna'
+                | 'security_guard'
+                | 'service_entrance'
+                | 'smoke_outlet'
+                | 'solarium'
+                | 'sports_court'
+                | 'sprinkler_system'
+                | 'storage_room'
+                | 'swimming_pool'
+                | 'technical_inspection_approved'
+                | 'terrace'
+                | 'Vaulted Ceiling'
+                | 'Wet Bar'
+                | 'with_mooring'
+              )
+            | null;
+          propertyStatus?:
+            | (
+                | 'draft'
+                | 'pending_approval'
+                | 'active'
+                | 'sold'
+                | 'rented'
+                | 'under_offer'
+                | 'cancelled'
+                | 'off_market'
+                | 'negotiating'
+                | 'under_contract'
+                | 'open_house'
+                | 'key_ready'
+                | 'under_construction'
+                | 'reserved'
+              )
+            | null;
+          propertyTransactionType?: ('for_sale' | 'for_rent' | 'transfer' | 'rental_with_option_of_purchase') | null;
+          mlsType?:
+            | ('kyero' | 'idealista' | 'think_spain' | 'place_in_the_sun' | 'luxury_estate' | 'own_company_xml')
+            | null;
+          buildingStatusType?: ('in_good_conditions' | 'to_reform') | null;
+          energyCertificationConsumptionType?:
+            | ('A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'not_available' | 'exempted' | 'in_process')
+            | null;
+          energyCertificationEmissionsType?:
+            | ('A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'not_available' | 'exempted' | 'in_process')
+            | null;
+          floorType?: ('top_floor' | 'middle_floor' | 'ground_floor') | null;
+          furnishedType?: ('furnished' | 'partly_furnished' | 'not_furnished') | null;
+          garageType?: ('yes' | 'numbered' | 'unnumbered' | 'personal') | null;
+          gardenType?: ('private' | 'communal') | null;
+          heatingType?:
+            | (
+                | 'electrical_heating'
+                | 'gas_heating'
+                | 'under_floor_heating'
+                | 'solar_heating'
+                | 'diesel_heating'
+                | 'aerothermy'
+                | 'geothermal'
+                | 'other'
+              )
+            | null;
+          hotWaterType?: ('not_available' | 'individual' | 'central') | null;
+          kitchenType?: ('individual' | 'american_style') | null;
+          noOfBuildingFloorType?:
+            | (
+                | 'indifferent'
+                | 'mezzanine'
+                | 'ground_Floor'
+                | '1ª'
+                | '2ª'
+                | '3ª'
+                | '4ª'
+                | '5ª'
+                | '6ª'
+                | '7ª'
+                | '8ª'
+                | '9ª'
+                | '10ª'
+                | '11ª'
+                | '12ª'
+                | '13ª'
+                | '14ª'
+                | '15ª'
+                | '16ª'
+                | '17ª'
+                | '18ª'
+                | '19ª'
+                | '20ª'
+                | '21ª'
+                | '22ª'
+                | '23ª'
+                | '24ª'
+                | '25ª'
+                | '26ª'
+                | '27ª'
+                | '28ª'
+                | '29ª'
+                | '30ª'
+                | '31ª'
+                | '32ª'
+                | '33ª'
+                | '34ª'
+                | '35ª'
+                | '36ª'
+                | '37ª'
+                | '38ª'
+                | '39ª'
+                | '40ª'
+                | '41ª'
+                | '42ª'
+                | '43ª'
+                | '44ª'
+                | '45ª'
+                | '46ª'
+                | '47ª'
+                | '48ª'
+                | '49ª'
+                | '50ª'
+              )
+            | null;
+          orientationType?:
+            | ('north' | 'northeast' | 'east' | 'southeast' | 'south' | 'southwest' | 'west' | 'northwest')
+            | null;
+          parkingType?: ('yes' | 'numbered' | 'unnumbered') | null;
+          patioType?: ('private' | 'shared') | null;
+          priceFrequencyType?: ('sale' | 'month' | 'longterm') | null;
+          propertyStatusType?: ('in_capture' | 'active' | 'reserved' | 'sold/rented' | 'archived') | null;
+          refurbishedType?:
+            | ('reformed' | 'not_reformed_but_in_good_condition' | 'not_reformed_and_needs_reform')
+            | null;
+          roadType?:
+            | (
+                | 'al'
+                | 'ad'
+                | 'ap'
+                | 'ar'
+                | 'ay'
+                | 'av'
+                | 'bj'
+                | 'br'
+                | 'bo'
+                | 'bl'
+                | 'cl'
+                | 'cj'
+                | 'cm'
+                | 'cr'
+                | 'cs'
+                | 'ch'
+                | 'cg'
+                | 'co'
+                | 'cn'
+                | 'ct'
+                | 'ed'
+                | 'en'
+                | 'es'
+                | 'ex'
+                | 'em'
+                | 'er'
+                | 'fc'
+                | 'gl'
+                | 'gv'
+                | 'gr'
+                | 'ht'
+                | 'jr'
+                | 'ld'
+                | 'lg'
+                | 'mz'
+                | 'ms'
+                | 'mc'
+                | 'mt'
+                | 'ml'
+                | 'mn'
+                | 'pa'
+                | 'pq'
+                | 'po'
+                | 'pd'
+                | 'pj'
+                | 'ps'
+                | 'pz'
+                | 'pb'
+                | 'pg'
+                | 'pr'
+                | 'pt'
+                | 'pu'
+                | 'qt'
+                | 'rm'
+                | 'rb'
+                | 'rp'
+                | 'rr'
+                | 'rc'
+                | 'rd'
+                | 'ru'
+                | 'sa'
+                | 'sc'
+                | 'sd'
+                | 'sl'
+                | 'sb'
+                | 'tn'
+                | 'to'
+                | 'tr'
+                | 'ur'
+                | 'vi'
+                | 'via'
+              )
+            | null;
+          shuttersType?: ('unknown' | 'wood' | 'aluminium' | 'anodized_aluminium' | 'PVC' | 'other') | null;
+          swimmingPoolType?: ('private' | 'communal' | 'climatized' | 'other') | null;
+          terraceType?: ('glazed' | 'not_glazed') | null;
+          waterHeaterType?:
+            | ('electric' | 'natural_gas' | 'butane_gas' | 'ropane_gas' | 'diesel' | 'wood_coal' | 'solar_energy')
+            | null;
+          viewType?:
+            | (
+                | 'sea_views'
+                | 'mountain_views'
+                | 'to_the_canal'
+                | 'to_the_golf_course'
+                | 'clear_views'
+                | 'panoramic_views'
+                | 'spectacular_views'
+                | 'other'
+              )
+            | null;
+          windowsMaterialType?: ('pcv' | 'aluminium' | 'wood') | null;
+          windowsType?:
+            | ('fixed' | 'framed' | 'tilt_and_turn' | 'slide' | 'parallel_tilt' | 'pivoting' | 'combined' | 'foldable')
+            | null;
+          propertyConditionType?: ('new' | 'good_condition' | 'needs_renovation') | null;
+          equipmentType?: ('indifferent' | 'fully_fitted_kitchen' | 'furnished') | null;
+          labelType?: ('super_featured' | 'featured' | 'new_construction') | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -284,6 +714,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'generalPageEntry';
         value: string | GeneralPageEntry;
+      } | null)
+    | ({
+        relationTo: 'properties';
+        value: string | Property;
       } | null)
     | ({
         relationTo: 'photos';
