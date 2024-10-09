@@ -16,10 +16,13 @@ import Users from './collections/Users'
 import { Robots } from './collections/Robot'
 
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
-import { PropertiesOverview } from './collections/Properties'
+import { Properties } from './collections/Properties'
+import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+// import { PropertiesOverview } from './collections/Properties'
 // import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
@@ -79,7 +82,7 @@ export default buildConfig({
   globals: [Header, Footer, StaticTexts],
   collections: [
     ...groupCollections('Single Pages', [HomePage]),
-    ...groupCollections('Channels Pages', [PropertiesOverview]),
+    ...groupCollections('Channels Pages', [Properties]),
     ...groupCollections('Library', [Media]),
     ...groupCollections('Robot file', [Robots]),
     ...groupCollections('User Groups', [Users]),
@@ -107,12 +110,17 @@ export default buildConfig({
       },
     }),
     seoPlugin({
-      collections: ['homepage', 'propertiesoverview'],
+      collections: ['homepage', 'properties'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt,
       tabbedUI: true,
     }),
+    nestedDocsPlugin({
+      collections: ['properties'],
+      generateURL: (docs: any) => docs.reduce((url: any, doc: any) => `${url}/${doc.slug}`, ''),
+    }),
+    propertyFilterPlugin(),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   localization: {
