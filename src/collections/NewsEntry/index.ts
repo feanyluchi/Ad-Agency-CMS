@@ -1,0 +1,48 @@
+import type { CollectionConfig } from 'payload'
+
+export const NewsEntry: CollectionConfig = {
+  slug: 'newsentry',
+  labels: {
+    singular: 'News Entry',
+    plural: 'News Entry',
+  },
+  admin: {
+    // useAsTitle: 'title',
+  },
+  versions: {
+    drafts: true,
+  },
+  access: {
+    read: () => true,
+  },
+  fields: [
+    {
+      name: 'home',
+      type: 'group',
+      label: 'Home',
+      access: {
+        read: ({ req: { user } }) => {
+          console.log('User object:', user)
+          return user?.role === 'admin'
+        },
+        update: ({ req: { user } }) => {
+          return user?.role === 'admin'
+        },
+      },
+      fields: [
+        {
+          name: 'title',
+          type: 'text',
+          required: true,
+          localized: true,
+        },
+        {
+          name: 'excerpt',
+          type: 'textarea',
+          required: true,
+          localized: true,
+        },
+      ],
+    },
+  ],
+}

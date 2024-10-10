@@ -3,7 +3,7 @@ import { CollectionConfig } from 'payload'
 export const Robots: CollectionConfig = {
   slug: 'robots',
   admin: {
-    useAsTitle: 'name',
+    // useAsTitle: 'name',
   },
   access: {
     read: () => true,

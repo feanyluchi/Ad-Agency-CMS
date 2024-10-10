@@ -139,7 +139,6 @@ const link: LinkType = ({
       },
     })
   }
-
   return deepMerge(linkResult, overrides)
 }
 

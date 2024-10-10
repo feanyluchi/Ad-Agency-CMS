@@ -133,7 +133,7 @@ const CustomViewClient: React.FC = () => {
                             <Image
                               src={
                                 theme === 'dark'
-                                  ? collection.slug === 'media'
+                                  ? collection.slug === 'photos'
                                     ? MediaIcon
                                     : collection.slug === 'homepage'
                                       ? Home
@@ -142,7 +142,7 @@ const CustomViewClient: React.FC = () => {
                                         : collection.slug === 'servicesRendered'
                                           ? CopyIcon
                                           : FileIcon
-                                  : collection.slug === 'media'
+                                  : collection.slug === 'photos'
                                     ? MediaIconLight
                                     : collection.slug === 'homepage'
                                       ? HomeLight

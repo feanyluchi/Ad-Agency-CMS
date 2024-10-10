@@ -11,11 +11,19 @@ import { Footer } from './globals/Footer'
 import { HomePage } from './collections/HomePage'
 import { s3Storage } from '@payloadcms/storage-s3'
 
-import { seoPlugin } from '@payloadcms/plugin-seo'
-
 import StaticTexts from './globals/StaticTexts'
 import Users from './collections/Users'
 import { Robots } from './collections/Robot'
+
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
+
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import nodemailer from 'nodemailer'
+import { Properties } from './collections/Properties'
+import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+// import { PropertiesOverview } from './collections/Properties'
+// import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,6 +41,19 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
+    defaultFromName: 'payload',
+    // Nodemailer transportOptions
+    transport: nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    }),
+  }),
   admin: {
     user: Users.slug,
     meta: {
@@ -61,6 +82,7 @@ export default buildConfig({
   globals: [Header, Footer, StaticTexts],
   collections: [
     ...groupCollections('Single Pages', [HomePage]),
+    ...groupCollections('Channels Pages', [Properties]),
     ...groupCollections('Library', [Media]),
     ...groupCollections('Robot file', [Robots]),
     ...groupCollections('User Groups', [Users]),
@@ -88,12 +110,17 @@ export default buildConfig({
       },
     }),
     seoPlugin({
-      collections: ['homepage'],
+      collections: ['homepage', 'properties'],
       uploadsCollection: 'media',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt,
       tabbedUI: true,
     }),
+    nestedDocsPlugin({
+      collections: ['properties'],
+      generateURL: (docs: any) => docs.reduce((url: any, doc: any) => `${url}/${doc.slug}`, ''),
+    }),
+    propertyFilterPlugin(),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   localization: {

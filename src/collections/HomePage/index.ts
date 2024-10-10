@@ -18,7 +18,6 @@ export const HomePage: CollectionConfig = {
   },
   admin: {
     // useAsTitle: 'title',
-    // defaultColumns: ['title', 'seo', 'updatedAt'],
   },
   versions: {
     drafts: true,
