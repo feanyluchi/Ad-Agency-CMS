@@ -21,10 +21,13 @@ import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
 
 import { seoPlugin } from '@payloadcms/plugin-seo'
+import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
-import { PropertiesOverview } from './collections/Properties'
+import { Properties } from './collections/Properties'
+import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+// import { PropertiesOverview } from './collections/Properties'
 // import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
@@ -86,7 +89,7 @@ export default buildConfig({
   },
   collections: [
     ...groupCollections('Single Pages', [HomePage, AboutUsPage, ProductsOverview, NewsOverview, Contact]),
-    ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, PropertiesOverview]),
+    ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, Properties]),
     ...groupCollections('Library', [Photos, Videos]),
     ...groupCollections('User Groups', [Users]),
   ],
@@ -114,11 +117,16 @@ export default buildConfig({
     }),
     seoPlugin({
       collections: ['homepage', 'aboutus', 'productsoverview', 'newsoverview', 'contact', 'productEntry', 'newentry', 'generalPageEntry', 'propertiesoverview'],
-      uploadsCollection: 'media',
+      uploadsCollection: 'photos',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt,
       tabbedUI: true,
     }),
+    nestedDocsPlugin({
+      collections: ['properties'],
+      generateURL: (docs: any) => docs.reduce((url: any, doc: any) => `${url}/${doc.slug}`, ''),
+    }),
+    propertyFilterPlugin(),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

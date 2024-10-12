@@ -19,6 +19,7 @@
     "@payloadcms/email-nodemailer": "3.0.0-beta.108",
     "@payloadcms/next": "3.0.0-beta.108",
     "@payloadcms/plugin-cloud": "3.0.0-beta.108",
+    "@payloadcms/plugin-nested-docs": "3.0.0-beta.108",
     "@payloadcms/plugin-seo": "3.0.0-beta.108",
     "@payloadcms/richtext-lexical": "3.0.0-beta.108",
     "@payloadcms/storage-s3": "3.0.0-beta.108",

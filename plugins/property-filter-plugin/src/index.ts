@@ -1,0 +1,1 @@
+export { propertyFilterPlugin } from './plugin';
