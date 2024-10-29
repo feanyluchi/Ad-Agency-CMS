@@ -203,6 +203,7 @@ export const HomePage: CollectionConfig = {
               type: 'text',
               label: 'Title Segment',
               required: true,
+              localized: true,
             },
           ],
         },        
