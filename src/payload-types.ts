@@ -431,6 +431,7 @@ export interface Property {
                 | 'key_ready'
                 | 'under_construction'
                 | 'reserved'
+                | 'removed_by_feed'
               )
             | null;
           propertyTransactionType?: ('for_sale' | 'for_rent' | 'transfer' | 'rental_with_option_of_purchase') | null;
