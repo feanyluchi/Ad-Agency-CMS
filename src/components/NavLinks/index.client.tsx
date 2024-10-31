@@ -1,9 +1,10 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Logout, useConfig, useTheme } from '@payloadcms/ui'
 import './index.css'
+import useFetchDocs from '@/hook/useFetchDocs'
 
 const styles = {
   navLists: {
@@ -32,19 +33,18 @@ const styles = {
 
 const NavLinks: React.FC = () => {
   const { config } = useConfig()
-  const { routes: { admin: adminRoute }, collections, globals } = config
-
-
+  const {
+    routes: { admin: adminRoute },
+    collections,
+    globals,
+  } = config
   const { theme } = useTheme()
 
-  useEffect(() => {
-    // Set the data-theme attribute on the root element based on the current theme
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
+  const { isLoading, docs } = useFetchDocs()
 
   const filteredCollections = collections.filter(
     (collection: any) =>
-      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations',
+      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations' && collection.slug !== 'payload-locked-documents',
   )
 
   const groupedCollections = filteredCollections.reduce((acc: any, collection: any) => {
@@ -59,21 +59,30 @@ const NavLinks: React.FC = () => {
   return (
     <div className="navbar">
       <nav style={styles.nav}>
-        {Object.keys(groupedCollections).map((group) => (
-          <div style={styles.section} key={group}>
-            <div className="nav_label">{group}</div>
-            {groupedCollections[group].map((collection: any) => (
-              <Link
-                href={`${adminRoute}/collections/${collection.slug}`}
-                key={collection.slug}
-                style={styles.link}
-                className="nav_link"
-              >
-                {collection.labels.plural}
-              </Link>
-            ))}
-          </div>
-        ))}
+        {isLoading ? (
+          <span>...</span> // Replace with your loading spinner or message
+        ) : (
+          Object.keys(groupedCollections).map((group) => (
+            <div style={styles.section} key={group}>
+              <div className="nav_label">{group}</div>
+              {groupedCollections[group].map((collection: any) => (
+                <div key={collection.slug}>
+                  <Link
+                    href={
+                      collection.admin.group === 'Single Pages' && docs[collection.slug]?.length > 0
+                        ? `${adminRoute}/collections/${collection.slug}/${docs[collection.slug][0].id}`
+                        : `${adminRoute}/collections/${collection.slug}`
+                    }
+                    style={styles.link}
+                    className="nav_link"
+                  >
+                    {collection.labels.plural}
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ))
+        )}
         <div style={styles.section}>
           <div className="nav_label">Globals</div>
           {globals && globals.length > 0 ? (
