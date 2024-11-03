@@ -24,61 +24,19 @@ import UserIconLight from '../../graphics/BxBxsUserCircleDark.svg'
 import FileIconLight from '../../graphics/BxFileBlankDark.svg'
 import CopyIconLight from '../../graphics/BxBxsCopyAlt.svg'
 import EditIconLight from '../../graphics/BxBxsEditAltLight.svg'
+import useFetchDocs from '@/hooks/useFetchDocs'
+// import useFetchDocs from '@/hook/useFetchDocs'
 
 const CustomViewClient: React.FC = () => {
   const { config } = useConfig()
   const { collections, globals } = config
   const { theme } = useTheme()
 
-  // State to hold documents for each collection
-  const [docs, setDocs] = useState<{ [key: string]: any[] }>({})
-
-  useEffect(() => {
-    // Set the data-theme attribute on the root element based on the current theme
-    document.documentElement.setAttribute('data-theme', theme)
-  }, [theme])
-
-  // Fetch documents for a given collection slug
-  const fetchDocs = async (collectionSlug: string) => {
-    try {
-      const res = await fetch(`/api/${collectionSlug}?limit=100`) // Fetch documents with a limit of 100
-      const data = await res.json()
-      return data.docs || [] // Return documents array
-    } catch (error) {
-      console.error('Error fetching documents:', error)
-      return []
-    }
-  }
-
-  useEffect(() => {
-    const loadDocuments = async () => {
-      const documents: { [key: string]: any[] } = {}
-
-      // Fetch documents for each collection
-      await Promise.all(
-        collections.map(async (collection: any) => {
-          if (
-            collection.slug !== 'payload-preferences' &&
-            collection.slug !== 'payload-migrations'
-          ) {
-            const collectionDocs = await fetchDocs(collection.slug)
-            documents[collection.slug] = collectionDocs
-
-            // Log the fetched documents for this collection
-            console.log(`Documents for ${collection.slug}:`, collectionDocs)
-          }
-        }),
-      )
-
-      setDocs(documents)
-    }
-
-    loadDocuments()
-  }, [collections])
+  const { isLoading, docs } = useFetchDocs()
 
   const filteredCollections = collections.filter(
     (collection: any) =>
-      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations',
+      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations' && collection.slug !== 'payload-locked-documents',
   )
 
   const groupedCollections = filteredCollections.reduce((acc: any, collection: any) => {
@@ -99,103 +57,115 @@ const CustomViewClient: React.FC = () => {
     <div className="gutter_background">
       <Gutter className="dashboard__wrap">
         <div className="main_container">
-          {Object.keys(groupedCollections).map((group) => (
-            <div style={{ marginBottom: '40px' }} key={group}>
-              <h2
-                style={{
-                  fontSize: '34px',
-                  paddingBottom: '12px',
-                  fontWeight: '600',
-                  marginBottom: '8px',
-                  color: 'var(--text-color)',
-                }}
-              >
-                {group}
-              </h2>
-              <div className="group_container">
-                <div className="group_flex">
-                  {groupedCollections[group].map((collection: any) => (
-                    <div key={collection.slug} className="channel_style">
-                      <Link
-                        href={`/admin/collections/${collection.slug}`}
-                        style={{
-                          borderRadius: '7px',
-                          textAlign: 'center',
-                          color: 'var(--text-color)',
-                          fontSize: '14px',
-                          fontWeight: '500',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        <div className="">
-                          <div className="link_container">
-                            {collection.labels.plural}
-                            <Image
-                              src={
-                                theme === 'dark'
-                                  ? collection.slug === 'photos'
-                                    ? MediaIcon
-                                    : collection.slug === 'homepage'
-                                      ? Home
-                                      : collection.slug === 'users'
-                                        ? UserIcon
-                                        : collection.slug === 'servicesRendered'
-                                          ? CopyIcon
-                                          : FileIcon
-                                  : collection.slug === 'photos'
-                                    ? MediaIconLight
-                                    : collection.slug === 'homepage'
-                                      ? HomeLight
-                                      : collection.slug === 'users'
-                                        ? UserIconLight
-                                        : collection.slug === 'servicesRendered'
-                                          ? CopyIconLight
-                                          : FileIconLight
-                              }
-                              alt=""
-                              className="link_icon"
-                            />
-                          </div>
-                        </div>
-                      </Link>
-
-                      {/* Display the documents for collections in 'Channels Pages' group */}
-                      {collection.admin.group === 'Channels Pages' && (
-                        <div className="channel_list" style={{ marginTop: '0px' }}>
-                          {docs[collection.slug] && docs[collection.slug].length > 0 ? (
-                            <div>
-                              {/* Slice the array to limit the number of displayed items to 3 */}
-                              {docs[collection.slug].slice(0, 3).map((doc: any) => (
-                                <div key={doc.id}>
-                                  {/* Link for title with text truncation */}
-                                  <Link
-                                    className="channel_item"
-                                    href={`/admin/collections/${collection.slug}/${doc.id}`}
-                                    style={{ color: 'var(--text-color)', textDecoration: 'none' }}
-                                  >
-                                    <div className="">
-                                      {truncateText(doc.home?.title || `Document ${doc.id}`, 30)}
-                                    </div>
-                                    <Image
-                                      src={theme === 'dark' ? EditIcon : EditIconLight}
-                                      alt="edit"
-                                      className="link_icon"
-                                    />
-                                  </Link>
-                                </div>
-                              ))}
+          {isLoading ? (
+            <div className="spinner-container">
+              <div className="spinner"></div>
+            </div> // Replace with your loading spinner
+          ) : (
+            Object.keys(groupedCollections).map((group) => (
+              <div style={{ marginBottom: '40px' }} key={group}>
+                <h2
+                  style={{
+                    fontSize: '34px',
+                    paddingBottom: '12px',
+                    fontWeight: '600',
+                    marginBottom: '8px',
+                    color: 'var(--text-color)',
+                  }}
+                >
+                  {group}
+                </h2>
+                <div className="group_container">
+                  <div className="group_flex">
+                    {groupedCollections[group].map((collection: any) => (
+                      <div key={collection.slug} className="channel_style">
+                        <Link
+                          href={
+                            // Check if it's a single page collection and has documents
+                            collection.admin.group === 'Single Pages' &&
+                            docs[collection.slug]?.length > 0
+                              ? `/admin/collections/${collection.slug}/${docs[collection.slug][0].id}`
+                              : `/admin/collections/${collection.slug}`
+                          }
+                          style={{
+                            borderRadius: '7px',
+                            textAlign: 'center',
+                            color: 'var(--text-color)',
+                            fontSize: '14px',
+                            fontWeight: '500',
+                            textDecoration: 'none',
+                          }}
+                        >
+                          <div className="">
+                            <div className="link_container">
+                              {collection.labels.plural}
+                              <Image
+                                src={
+                                  theme === 'dark'
+                                    ? collection.slug === 'media'
+                                      ? MediaIcon
+                                      : collection.slug === 'homepage'
+                                        ? Home
+                                        : collection.slug === 'users'
+                                          ? UserIcon
+                                          : collection.slug === 'servicesRendered'
+                                            ? CopyIcon
+                                            : FileIcon
+                                    : collection.slug === 'media'
+                                      ? MediaIconLight
+                                      : collection.slug === 'homepage'
+                                        ? HomeLight
+                                        : collection.slug === 'users'
+                                          ? UserIconLight
+                                          : collection.slug === 'servicesRendered'
+                                            ? CopyIconLight
+                                            : FileIconLight
+                                }
+                                alt=""
+                                className="link_icon"
+                              />
                             </div>
-                          ) : (
-                            <p>No documents available for this collection</p>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                          </div>
+                        </Link>
+
+                        {/* Display the documents for collections in 'Channels Pages' group */}
+                        {collection.admin.group === 'Channels Pages' && (
+                          <div className="channel_list" style={{ marginTop: '0px' }}>
+                            {docs[collection.slug] && docs[collection.slug].length > 0 ? (
+                              <div>
+                                {/* Slice the array to limit the number of displayed items to 3 */}
+                                {docs[collection.slug].slice(0, 3).map((doc: any) => (
+                                  <div key={doc.id}>
+                                    {/* Link for title with text truncation */}
+                                    <Link
+                                      className="channel_item"
+                                      href={`/admin/collections/${collection.slug}/${doc.id}`}
+                                      style={{ color: 'var(--text-color)', textDecoration: 'none' }}
+                                    >
+                                      <div className="">
+                                        {truncateText(doc.home?.title || `Document ${doc.id}`, 30)}
+                                      </div>
+                                      <Image
+                                        src={theme === 'dark' ? EditIcon : EditIconLight}
+                                        alt="edit"
+                                        className="link_icon"
+                                      />
+                                    </Link>
+                                  </div>
+                                ))}
+                              </div>
+                            ) : (
+                              <p>No documents available for this collection</p>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
 
           <div style={{ marginBottom: '40px' }}>
             <h2
