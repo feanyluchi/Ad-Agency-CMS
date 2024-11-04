@@ -4,8 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Logout, useConfig, useTheme } from '@payloadcms/ui'
 import './index.css'
-import useFetchDocs from '@/hooks/useFetchDocs'
-// import useFetchDocs from '@/hook/useFetchDocs'
+import useFetchDocs from '@/hook/useFetchDocs'
 
 const styles = {
   navLists: {
