@@ -7,7 +7,7 @@ const fetchEnums = async () => {
   const response = await fetch(apiUrl, {
     method: 'GET',
     headers: {
-      'X-Company-Api-Key': `${apiKey}`,
+      'X-Api-Key': `${apiKey}`,
       'Content-Type': 'application/json',
     },
   });
@@ -26,7 +26,7 @@ const fetchCities = async () => {
   const response = await fetch(citiesApiUrl, {
     method: 'GET',
     headers: {
-      'X-Company-Api-Key': `${apiKey}`,
+      'X-Api-Key': `${apiKey}`,
       'Content-Type': 'application/json',
     },
   });
