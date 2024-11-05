@@ -27,6 +27,23 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsSelect?: {
+    home: HomeSelect<false> | HomeSelect<true>;
+    aboutus: AboutusSelect<false> | AboutusSelect<true>;
+    productsoverview: ProductsoverviewSelect<false> | ProductsoverviewSelect<true>;
+    newsoverview: NewsoverviewSelect<false> | NewsoverviewSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
+    productentry: ProductentrySelect<false> | ProductentrySelect<true>;
+    newsentry: NewsentrySelect<false> | NewsentrySelect<true>;
+    generalPageEntry: GeneralPageEntrySelect<false> | GeneralPageEntrySelect<true>;
+    properties: PropertiesSelect<false> | PropertiesSelect<true>;
+    photos: PhotosSelect<false> | PhotosSelect<true>;
+    video: VideoSelect<false> | VideoSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
     defaultIDType: string;
   };
@@ -34,9 +51,17 @@ export interface Config {
     header: Header;
     footer: Footer;
   };
+  globalsSelect?: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
+  };
+  jobs?: {
+    tasks: unknown;
+    workflows?: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -776,6 +801,351 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "aboutus_select".
+ */
+export interface AboutusSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  aboutuscontent?:
+    | T
+    | {
+        contentBackground?: T;
+        contentSubtitle?: T;
+        content?: T;
+        socialMedia?:
+          | T
+          | {
+              facebook?: T;
+              linkedin?: T;
+              instagram?: T;
+            };
+        seo?:
+          | T
+          | {
+              ogImage?: T;
+              ogTitle?: T;
+              ogDescription?: T;
+              twitterCard?: T;
+              twitterImage?: T;
+              twitterTitle?: T;
+              twitterDescription?: T;
+            };
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productsoverview_select".
+ */
+export interface ProductsoverviewSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsoverview_select".
+ */
+export interface NewsoverviewSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productentry_select".
+ */
+export interface ProductentrySelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsentry_select".
+ */
+export interface NewsentrySelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "generalPageEntry_select".
+ */
+export interface GeneralPageEntrySelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties_select".
+ */
+export interface PropertiesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  price?: T;
+  featured?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  propertyFilter?:
+    | T
+    | {
+        filters?:
+          | T
+          | {
+              filterType?: T;
+              propertyCity?: T;
+              numberOfBedrooms?: T;
+              numberOfBathrooms?: T;
+              propertyType?: T;
+              propertyFeaturesType?: T;
+              propertyStatus?: T;
+              propertyTransactionType?: T;
+              mlsType?: T;
+              buildingStatusType?: T;
+              energyCertificationConsumptionType?: T;
+              energyCertificationEmissionsType?: T;
+              floorType?: T;
+              furnishedType?: T;
+              garageType?: T;
+              gardenType?: T;
+              heatingType?: T;
+              hotWaterType?: T;
+              kitchenType?: T;
+              noOfBuildingFloorType?: T;
+              orientationType?: T;
+              parkingType?: T;
+              patioType?: T;
+              priceFrequencyType?: T;
+              propertyStatusType?: T;
+              refurbishedType?: T;
+              roadType?: T;
+              shuttersType?: T;
+              swimmingPoolType?: T;
+              terraceType?: T;
+              waterHeaterType?: T;
+              viewType?: T;
+              windowsMaterialType?: T;
+              windowsType?: T;
+              propertyConditionType?: T;
+              equipmentType?: T;
+              labelType?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photos_select".
+ */
+export interface PhotosSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "video_select".
+ */
+export interface VideoSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  firstName?: T;
+  lastName?: T;
+  profilePicture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
 export interface Header {
@@ -840,6 +1210,53 @@ export interface Footer {
   copyright: string;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  logo?: T;
+  quickLinks?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  logo?: T;
+  quickLinks?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
