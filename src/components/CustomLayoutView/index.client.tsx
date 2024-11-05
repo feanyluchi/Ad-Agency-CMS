@@ -24,8 +24,7 @@ import UserIconLight from '../../graphics/BxBxsUserCircleDark.svg'
 import FileIconLight from '../../graphics/BxFileBlankDark.svg'
 import CopyIconLight from '../../graphics/BxBxsCopyAlt.svg'
 import EditIconLight from '../../graphics/BxBxsEditAltLight.svg'
-import useFetchDocs from '@/hooks/useFetchDocs'
-// import useFetchDocs from '@/hook/useFetchDocs'
+import useFetchDocs from '@/hook/useFetchDocs'
 
 const CustomViewClient: React.FC = () => {
   const { config } = useConfig()

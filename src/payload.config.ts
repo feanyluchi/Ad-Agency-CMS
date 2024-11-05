@@ -22,8 +22,6 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
-// import { PropertiesOverview } from './collections/Properties'
-// import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
