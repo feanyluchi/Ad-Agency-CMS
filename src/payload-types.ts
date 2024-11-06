@@ -27,7 +27,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsSelect?: {
+  collectionsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     aboutus: AboutusSelect<false> | AboutusSelect<true>;
     productsoverview: ProductsoverviewSelect<false> | ProductsoverviewSelect<true>;
@@ -51,7 +51,7 @@ export interface Config {
     header: Header;
     footer: Footer;
   };
-  globalsSelect?: {
+  globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
@@ -317,54 +317,7 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?:
-            | (
-                | 'Albir'
-                | 'Alcalali'
-                | 'Alfaz del Pi'
-                | 'Altea'
-                | 'Altea Hills'
-                | 'Beniarbeig'
-                | 'Benidoleig'
-                | 'Benidorm'
-                | 'Benimeli'
-                | 'Benissa'
-                | 'Benitachell'
-                | 'Calpe'
-                | 'City 2'
-                | 'Denia'
-                | 'Dénia'
-                | 'El Vergel'
-                | 'Els Poblets'
-                | 'Finestrat'
-                | 'Gandia'
-                | 'Gata de Gorgos'
-                | 'Guadalest'
-                | 'Jalon'
-                | 'Javea'
-                | 'Jesus Pobre'
-                | 'Kota'
-                | 'La Nucia'
-                | 'La Xara'
-                | 'Lliber'
-                | 'Moraira'
-                | 'Murla'
-                | 'Mutxamel'
-                | 'Oliva'
-                | 'Ondara'
-                | 'Orba'
-                | 'Parcent'
-                | 'Pedreguer'
-                | 'Pego'
-                | 'Penaguila'
-                | 'Polop'
-                | 'Sagra'
-                | 'Senija'
-                | 'Teulada'
-                | 'Valdemadera'
-                | 'Vilajoyosa'
-              )
-            | null;
+          propertyCity?: string | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
