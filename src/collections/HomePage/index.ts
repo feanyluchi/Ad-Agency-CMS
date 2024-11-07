@@ -1,3 +1,6 @@
+import { Hero } from '@/blocks/Hero'
+import { ImageGallery } from '@/blocks/ImageGallery'
+import { PrestigeLivingSection } from '@/blocks/PrestigeLivingSection'
 import type { CollectionConfig } from 'payload'
 
 export const HomePage: CollectionConfig = {
@@ -49,6 +52,12 @@ export const HomePage: CollectionConfig = {
           type: 'textarea',
           required: true,
           localized: true,
+        },
+        {
+          name: 'layout',
+          type: 'blocks',
+          required: true,
+          blocks: [Hero, PrestigeLivingSection, ImageGallery],
         },
       ],
     },

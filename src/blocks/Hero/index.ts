@@ -1,25 +1,34 @@
-import type { Block, Field } from "payload";;
-import link from '../../fields/link';
-import linkGroup from '@/fields/linkGroup';
-
-const columnFields: Field[] = [
-  {
-    name: 'heroBackground',
-    label: 'Hero background',
-    type: 'upload',
-    relationTo: 'photos',
-    required: true,
-  },
-  {
-    name: 'title',
-    label: 'Title',
-    type: 'text',
-    required: true,
-    localized: true,
-  }
-]
+import type { Block, Field } from 'payload'
 
 export const Hero: Block = {
-  slug: 'hero',
-  fields: columnFields,
+  slug: 'heroSection',
+  fields: [
+    {
+      name: 'backgroundImages',
+      type: 'array',
+      label: 'Background Images',
+      minRows: 1,
+      labels: {
+        singular: 'Image',
+        plural: 'Images',
+      },
+      fields: [
+        {
+          name: 'image',
+          type: 'upload',
+          label: 'Image',
+          relationTo: 'photos',
+        },
+      ],
+    },
+    {
+      name: 'autoSlide',
+      type: 'checkbox',
+      label: 'Auto Slide',
+      defaultValue: true,
+      admin: {
+        description: 'Enable auto-sliding between background images.',
+      },
+    },
+  ],
 }
