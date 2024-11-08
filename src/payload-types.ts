@@ -151,6 +151,56 @@ export interface Home {
           blockName?: string | null;
           blockType: 'imageGallery';
         }
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'richText';
+        }
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'linkItem';
+        }
     )[];
   };
   updatedAt: string;
@@ -254,6 +304,25 @@ export interface Aboutus {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "productsoverview".
  */
 export interface Productsoverview {
@@ -276,25 +345,6 @@ export interface Productsoverview {
  * via the `definition` "newsoverview".
  */
 export interface Newsoverview {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: (string | null) | Photo;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact".
- */
-export interface Contact {
   id: string;
   home: {
     title: string;
@@ -959,6 +1009,34 @@ export interface HomeSelect<T extends boolean = true> {
                       | {
                           image?: T;
                           overlayText?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              richText?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              linkItem?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
                           id?: T;
                         };
                     id?: T;
