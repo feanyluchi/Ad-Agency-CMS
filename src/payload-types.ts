@@ -128,12 +128,25 @@ export interface Home {
           content: string;
           mapSection: {
             mapImage: string | Photo;
-            locations?:
-              | {
-                  locationName: string;
-                  id?: string | null;
-                }[]
-              | null;
+            regions: (
+              | 'andalusia'
+              | 'aragon'
+              | 'asturias'
+              | 'balearic_islands'
+              | 'basque_country'
+              | 'canary_islands'
+              | 'cantabria'
+              | 'castile_and_leon'
+              | 'castile_la_mancha'
+              | 'catalonia'
+              | 'extremadura'
+              | 'galicia'
+              | 'la_rioja'
+              | 'madrid'
+              | 'murcia'
+              | 'navarre'
+              | 'valencian_community'
+            )[];
           };
           id?: string | null;
           blockName?: string | null;
@@ -991,12 +1004,7 @@ export interface HomeSelect<T extends boolean = true> {
                       | T
                       | {
                           mapImage?: T;
-                          locations?:
-                            | T
-                            | {
-                                locationName?: T;
-                                id?: T;
-                              };
+                          regions?: T;
                         };
                     id?: T;
                     blockName?: T;
