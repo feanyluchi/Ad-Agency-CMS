@@ -22,6 +22,7 @@ export interface Config {
     properties: Property;
     photos: Photo;
     video: Video;
+    propertyTypes: PropertyType;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -39,6 +40,7 @@ export interface Config {
     properties: PropertiesSelect<false> | PropertiesSelect<true>;
     photos: PhotosSelect<false> | PhotosSelect<true>;
     video: VideoSelect<false> | VideoSelect<true>;
+    propertyTypes: PropertyTypesSelect<false> | PropertyTypesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,10 +93,97 @@ export interface Home {
   home: {
     title: string;
     excerpt: string;
+    layout: (
+      | {
+          backgroundImages?:
+            | {
+                image?: (string | null) | Photo;
+                id?: string | null;
+              }[]
+            | null;
+          autoSlide?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'heroSection';
+        }
+      | {
+          title: string;
+          content: string;
+          mapSection: {
+            mapImage: string | Photo;
+            locations?:
+              | {
+                  locationName: string;
+                  id?: string | null;
+                }[]
+              | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'prestigeLivingSection';
+        }
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'imageGallery';
+        }
+    )[];
   };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photos".
+ */
+export interface Photo {
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -133,25 +222,6 @@ export interface Aboutus {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "photos".
- */
-export interface Photo {
-  id: string;
-  alt: string;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -317,7 +387,7 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?: string | null;
+          propertyCity?: 'Valdemadera' | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
@@ -633,6 +703,44 @@ export interface Video {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes".
+ */
+export interface PropertyType {
+  id: string;
+  name: string;
+  description?: string | null;
+  icon?: (string | null) | Photo;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -707,6 +815,10 @@ export interface PayloadLockedDocument {
         value: string | Video;
       } | null)
     | ({
+        relationTo: 'propertyTypes';
+        value: string | PropertyType;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null);
@@ -762,6 +874,55 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+        layout?:
+          | T
+          | {
+              heroSection?:
+                | T
+                | {
+                    backgroundImages?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                    autoSlide?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              prestigeLivingSection?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    mapSection?:
+                      | T
+                      | {
+                          mapImage?: T;
+                          locations?:
+                            | T
+                            | {
+                                locationName?: T;
+                                id?: T;
+                              };
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              imageGallery?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1027,6 +1188,40 @@ export interface PhotosSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        mobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1045,6 +1240,51 @@ export interface VideoSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        mobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes_select".
+ */
+export interface PropertyTypesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
