@@ -27,6 +27,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+import { PropertyTypes } from './collections/PropertyType'
 // import { PropertiesOverview } from './collections/Properties'
 // import { Properties } from './collections/Properties'
 
@@ -90,7 +91,7 @@ export default buildConfig({
   collections: [
     ...groupCollections('Single Pages', [HomePage, AboutUsPage, ProductsOverview, NewsOverview, Contact]),
     ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, Properties]),
-    ...groupCollections('Library', [Photos, Videos]),
+    ...groupCollections('Library', [Photos, Videos, PropertyTypes]),
     ...groupCollections('User Groups', [Users]),
   ],
   globals: [Header, Footer],

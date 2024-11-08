@@ -22,6 +22,7 @@ export interface Config {
     properties: Property;
     photos: Photo;
     video: Video;
+    propertyTypes: PropertyType;
     users: User;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -39,6 +40,7 @@ export interface Config {
     properties: PropertiesSelect<false> | PropertiesSelect<true>;
     photos: PhotosSelect<false> | PhotosSelect<true>;
     video: VideoSelect<false> | VideoSelect<true>;
+    propertyTypes: PropertyTypesSelect<false> | PropertyTypesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,10 +93,176 @@ export interface Home {
   home: {
     title: string;
     excerpt: string;
+    layout: (
+      | {
+          backgroundImages?:
+            | {
+                image?: (string | null) | Photo;
+                id?: string | null;
+              }[]
+            | null;
+          autoSlide?: boolean | null;
+          searchTabs: {
+            buyTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              price?: number | null;
+            };
+            rentTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              monthlyRent?: number | null;
+            };
+            sellTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              askingPrice?: number | null;
+            };
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'heroSection';
+        }
+      | {
+          title: string;
+          content: string;
+          mapSection: {
+            mapImage: string | Photo;
+            locations?:
+              | {
+                  locationName: string;
+                  id?: string | null;
+                }[]
+              | null;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'prestigeLivingSection';
+        }
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'imageGallery';
+        }
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'richText';
+        }
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'linkItem';
+        }
+    )[];
   };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photos".
+ */
+export interface Photo {
+  id: string;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes".
+ */
+export interface PropertyType {
+  id: string;
+  name: string;
+  description?: string | null;
+  icon?: (string | null) | Photo;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -136,22 +304,22 @@ export interface Aboutus {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "photos".
+ * via the `definition` "contact".
  */
-export interface Photo {
+export interface Contact {
   id: string;
-  alt: string;
+  home: {
+    title: string;
+    excerpt: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -177,25 +345,6 @@ export interface Productsoverview {
  * via the `definition` "newsoverview".
  */
 export interface Newsoverview {
-  id: string;
-  home: {
-    title: string;
-    excerpt: string;
-  };
-  meta?: {
-    title?: string | null;
-    description?: string | null;
-    image?: (string | null) | Photo;
-  };
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact".
- */
-export interface Contact {
   id: string;
   home: {
     title: string;
@@ -317,7 +466,7 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?: string | null;
+          propertyCity?: 'Valdemadera' | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
@@ -633,6 +782,32 @@ export interface Video {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
+  sizes?: {
+    mobile?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    tablet?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    desktop?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -707,6 +882,10 @@ export interface PayloadLockedDocument {
         value: string | Video;
       } | null)
     | ({
+        relationTo: 'propertyTypes';
+        value: string | PropertyType;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null);
@@ -762,6 +941,108 @@ export interface HomeSelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+        layout?:
+          | T
+          | {
+              heroSection?:
+                | T
+                | {
+                    backgroundImages?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                    autoSlide?: T;
+                    searchTabs?:
+                      | T
+                      | {
+                          buyTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                price?: T;
+                              };
+                          rentTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                monthlyRent?: T;
+                              };
+                          sellTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                askingPrice?: T;
+                              };
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              prestigeLivingSection?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    mapSection?:
+                      | T
+                      | {
+                          mapImage?: T;
+                          locations?:
+                            | T
+                            | {
+                                locationName?: T;
+                                id?: T;
+                              };
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              imageGallery?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              richText?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              linkItem?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1027,6 +1308,40 @@ export interface PhotosSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        mobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1045,6 +1360,51 @@ export interface VideoSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+  sizes?:
+    | T
+    | {
+        mobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes_select".
+ */
+export interface PropertyTypesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
