@@ -1,6 +1,7 @@
 import { Hero } from '@/blocks/alpha/Hero'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
 import { PrestigeLivingSection } from '@/blocks/alpha/PrestigeLivingSection'
+import { RichText } from '@/blocks/alpha/Richtext'
 import type { CollectionConfig } from 'payload'
 
 export const HomePage: CollectionConfig = {
@@ -57,7 +58,7 @@ export const HomePage: CollectionConfig = {
           name: 'layout',
           type: 'blocks',
           required: true,
-          blocks: [Hero, PrestigeLivingSection, ImageGallery],
+          blocks: [Hero, PrestigeLivingSection, ImageGallery, RichText],
         },
       ],
     },

@@ -102,6 +102,23 @@ export interface Home {
               }[]
             | null;
           autoSlide?: boolean | null;
+          searchTabs: {
+            buyTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              price?: number | null;
+            };
+            rentTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              monthlyRent?: number | null;
+            };
+            sellTab: {
+              propertyType?: (string | null) | PropertyType;
+              location: string;
+              askingPrice?: number | null;
+            };
+          };
           id?: string | null;
           blockName?: string | null;
           blockType: 'heroSection';
@@ -184,6 +201,18 @@ export interface Photo {
       filename?: string | null;
     };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes".
+ */
+export interface PropertyType {
+  id: string;
+  name: string;
+  description?: string | null;
+  icon?: (string | null) | Photo;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -732,18 +761,6 @@ export interface Video {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "propertyTypes".
- */
-export interface PropertyType {
-  id: string;
-  name: string;
-  description?: string | null;
-  icon?: (string | null) | Photo;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -887,6 +904,31 @@ export interface HomeSelect<T extends boolean = true> {
                           id?: T;
                         };
                     autoSlide?: T;
+                    searchTabs?:
+                      | T
+                      | {
+                          buyTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                price?: T;
+                              };
+                          rentTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                monthlyRent?: T;
+                              };
+                          sellTab?:
+                            | T
+                            | {
+                                propertyType?: T;
+                                location?: T;
+                                askingPrice?: T;
+                              };
+                        };
                     id?: T;
                     blockName?: T;
                   };
