@@ -1,4 +1,5 @@
 import { ContactForm } from '@/blocks/alpha/ ContactForm'
+import { FeaturedProperties } from '@/blocks/alpha/FeaturedProperties'
 import { Hero } from '@/blocks/alpha/Hero'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
 import { LinkItem } from '@/blocks/alpha/LinkItemSection'
@@ -60,7 +61,7 @@ export const HomePage: CollectionConfig = {
           name: 'layout',
           type: 'blocks',
           required: true,
-          blocks: [Hero, PrestigeLivingSection, ImageGallery, RichText, LinkItem, ContactForm],
+          blocks: [Hero, PrestigeLivingSection, ImageGallery, RichText, LinkItem, ContactForm, FeaturedProperties],
         },
       ],
     },
