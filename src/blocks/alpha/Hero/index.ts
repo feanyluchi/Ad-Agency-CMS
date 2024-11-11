@@ -51,11 +51,13 @@ export const Hero: Block = {
               type: 'text',
               label: 'Location',
               required: true,
+              localized: true,
             },
             {
               name: 'price',
               type: 'number',
               label: 'Price',
+              required: true,
             },
           ],
         },
@@ -75,6 +77,7 @@ export const Hero: Block = {
               type: 'text',
               label: 'Location',
               required: true,
+              localized: true,
             },
             {
               name: 'monthlyRent',
@@ -99,6 +102,7 @@ export const Hero: Block = {
               type: 'text',
               label: 'Location',
               required: true,
+              localized: true,
             },
             {
               name: 'askingPrice',

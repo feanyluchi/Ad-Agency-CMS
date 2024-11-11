@@ -1,4 +1,4 @@
-import type { Block } from 'payload';
+import type { Block } from 'payload'
 
 export const PrestigeLivingSection: Block = {
   slug: 'prestigeLivingSection',
@@ -8,6 +8,7 @@ export const PrestigeLivingSection: Block = {
       type: 'text',
       label: 'Main Title',
       required: true,
+      localized: true,
       defaultValue: 'The Essence of Prestige Living',
     },
     {
@@ -15,6 +16,7 @@ export const PrestigeLivingSection: Block = {
       type: 'textarea',
       label: 'Content',
       required: true,
+      localized: true,
       admin: {
         description: 'Main descriptive content for this section.',
       },
@@ -66,4 +68,4 @@ export const PrestigeLivingSection: Block = {
       ],
     },
   ],
-};
+}

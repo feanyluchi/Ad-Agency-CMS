@@ -8,6 +8,7 @@ export const FeaturedProperties: Block = {
       type: 'text',
       label: 'Section Title',
       required: true,
+      localized: true,
       defaultValue: 'Featured Properties',
       admin: {
         description: 'Title displayed above the featured properties section.',

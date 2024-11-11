@@ -29,6 +29,7 @@ export const ImageGallery: Block = {
           type: 'text',
           label: 'Overlay Text',
           required: true,
+          localized: true,
           admin: {
             description: 'Text that will appear over the image.',
           },
