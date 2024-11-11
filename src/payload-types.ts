@@ -214,6 +214,15 @@ export interface Home {
           blockName?: string | null;
           blockType: 'linkItem';
         }
+      | {
+          title: string;
+          description?: string | null;
+          successMessage: string;
+          submitButtonText: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contactForm';
+        }
     )[];
   };
   updatedAt: string;
@@ -1047,6 +1056,16 @@ export interface HomeSelect<T extends boolean = true> {
                               };
                           id?: T;
                         };
+                    id?: T;
+                    blockName?: T;
+                  };
+              contactForm?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    successMessage?: T;
+                    submitButtonText?: T;
                     id?: T;
                     blockName?: T;
                   };
