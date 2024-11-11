@@ -1,4 +1,5 @@
-import type { Block, Field } from 'payload'
+import link from '@/fields/link'
+import type { Block } from 'payload'
 
 export const ImageGallery: Block = {
   slug: 'imageGallery',
@@ -32,6 +33,21 @@ export const ImageGallery: Block = {
             description: 'Text that will appear over the image.',
           },
         },
+        {
+          name: 'enableLink',
+          type: 'checkbox',
+          label: 'Enable Link',
+          admin: {
+            description: 'Check to add a link to this image.',
+          },
+        },
+        link({
+          overrides: {
+            admin: {
+              condition: (_: any, { enableLink }: any) => Boolean(enableLink),
+            },
+          },
+        }),
       ],
     },
   ],
