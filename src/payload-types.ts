@@ -57,7 +57,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -106,7 +106,7 @@ export interface Home {
             buyTab: {
               propertyType?: (string | null) | PropertyType;
               location: string;
-              price?: number | null;
+              price: number;
             };
             rentTab: {
               propertyType?: (string | null) | PropertyType;
@@ -157,6 +157,7 @@ export interface Home {
             | {
                 image: string | Photo;
                 overlayText: string;
+                textPosition: 'top' | 'center' | 'bottom';
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -435,7 +436,7 @@ export interface Property {
   id: string;
   title: string;
   slug?: string | null;
-  description?: string | null;
+  description: string;
   price?: number | null;
   featured?: boolean | null;
   parent?: (string | null) | Property;
@@ -1025,6 +1026,7 @@ export interface HomeSelect<T extends boolean = true> {
                       | {
                           image?: T;
                           overlayText?: T;
+                          textPosition?: T;
                           enableLink?: T;
                           link?:
                             | T

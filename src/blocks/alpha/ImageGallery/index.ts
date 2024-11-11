@@ -35,6 +35,30 @@ export const ImageGallery: Block = {
           },
         },
         {
+          name: 'textPosition',
+          type: 'radio',
+          label: 'Overlay Text Position',
+          options: [
+            {
+              label: 'Top',
+              value: 'top',
+            },
+            {
+              label: 'Center',
+              value: 'center',
+            },
+            {
+              label: 'Bottom',
+              value: 'bottom',
+            },
+          ],
+          defaultValue: 'center',
+          required: true,
+          admin: {
+            description: 'Select the position of the overlay text on the image.',
+          },
+        },
+        {
           name: 'enableLink',
           type: 'checkbox',
           label: 'Enable Link',
