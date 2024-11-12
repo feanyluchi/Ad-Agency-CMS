@@ -223,6 +223,95 @@ export interface Home {
           blockName?: string | null;
           blockType: 'featuredProperties';
         }
+      | {
+          image: string | Photo;
+          bannerText: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'banner';
+        }
+      | {
+          subtitle: string;
+          title: string;
+          experienceImage: string | Photo;
+          nightImage: string | Photo;
+          experience: string;
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          testimonialsImage?:
+            | {
+                image?: (string | null) | Photo;
+                id?: string | null;
+              }[]
+            | null;
+          testimonialsCount?: string | null;
+          link: {
+            type?: ('reference' | 'custom') | null;
+            reference?:
+              | ({
+                  relationTo: 'aboutus';
+                  value: string | Aboutus;
+                } | null)
+              | ({
+                  relationTo: 'home';
+                  value: string | Home;
+                } | null)
+              | ({
+                  relationTo: 'contact';
+                  value: string | Contact;
+                } | null);
+            url?: string | null;
+            label: string;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'about-us';
+        }
+      | {
+          title: string;
+          subtitle?: string | null;
+          neighborhoods?:
+            | {
+                image: string | Photo;
+                location: string;
+                link: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'popular-neighborhoods';
+        }
     )[];
   };
   updatedAt: string;
@@ -1066,6 +1155,64 @@ export interface HomeSelect<T extends boolean = true> {
                     propertyStatus?: T;
                     displayPrice?: T;
                     displayAddress?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              banner?:
+                | T
+                | {
+                    image?: T;
+                    bannerText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'about-us'?:
+                | T
+                | {
+                    subtitle?: T;
+                    title?: T;
+                    experienceImage?: T;
+                    nightImage?: T;
+                    experience?: T;
+                    description?: T;
+                    testimonialsImage?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                    testimonialsCount?: T;
+                    link?:
+                      | T
+                      | {
+                          type?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'popular-neighborhoods'?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    neighborhoods?:
+                      | T
+                      | {
+                          image?: T;
+                          location?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
                     id?: T;
                     blockName?: T;
                   };
