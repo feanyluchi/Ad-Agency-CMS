@@ -4,6 +4,7 @@ import { Hero } from '@/blocks/alpha/Hero'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
 import { PrestigeLivingSection } from '@/blocks/alpha/PrestigeLivingSection'
 import { RichText } from '@/blocks/alpha/Richtext'
+import AboutUsBlock from '@/blocks/beta/AboutUs'
 import { Banner } from '@/blocks/beta/banner'
 import type { CollectionConfig } from 'payload'
 
@@ -68,7 +69,8 @@ export const HomePage: CollectionConfig = {
             RichText,
             ContactForm,
             FeaturedProperties,
-            Banner
+            Banner,
+            AboutUsBlock
           ],
         },
       ],
