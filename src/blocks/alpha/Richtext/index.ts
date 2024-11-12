@@ -10,6 +10,7 @@ export const RichText: Block = {
       label: 'Content',
       editor: lexicalEditor(),
       required: true,
+      localized: true,
     },
   ],
 }

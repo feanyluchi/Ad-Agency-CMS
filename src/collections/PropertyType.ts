@@ -30,7 +30,7 @@ export const PropertyTypes: CollectionConfig = {
       name: 'icon',
       type: 'upload',
       label: 'Icon',
-      relationTo: 'photos', // Assuming "media" is the collection where images or icons are stored
+      relationTo: 'photos',
       required: false,
       admin: {
         description: 'Optional icon for the property type.',

@@ -57,7 +57,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -106,7 +106,7 @@ export interface Home {
             buyTab: {
               propertyType?: (string | null) | PropertyType;
               location: string;
-              price?: number | null;
+              price: number;
             };
             rentTab: {
               propertyType?: (string | null) | PropertyType;
@@ -157,6 +157,26 @@ export interface Home {
             | {
                 image: string | Photo;
                 overlayText: string;
+                textPosition: 'top' | 'center' | 'bottom';
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
                 id?: string | null;
               }[]
             | null;
@@ -185,36 +205,6 @@ export interface Home {
           blockType: 'richText';
         }
       | {
-          images?:
-            | {
-                image: string | Photo;
-                overlayText: string;
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  reference?:
-                    | ({
-                        relationTo: 'aboutus';
-                        value: string | Aboutus;
-                      } | null)
-                    | ({
-                        relationTo: 'home';
-                        value: string | Home;
-                      } | null)
-                    | ({
-                        relationTo: 'contact';
-                        value: string | Contact;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'linkItem';
-        }
-      | {
           title: string;
           description?: string | null;
           successMessage: string;
@@ -222,6 +212,16 @@ export interface Home {
           id?: string | null;
           blockName?: string | null;
           blockType: 'contactForm';
+        }
+      | {
+          title: string;
+          propertyCount: number;
+          propertyStatus: 'for_sale' | 'for_rent' | 'sold';
+          displayPrice?: boolean | null;
+          displayAddress?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'featuredProperties';
         }
     )[];
   };
@@ -436,7 +436,7 @@ export interface Property {
   id: string;
   title: string;
   slug?: string | null;
-  description?: string | null;
+  description: string;
   price?: number | null;
   featured?: boolean | null;
   parent?: (string | null) | Property;
@@ -1026,26 +1026,8 @@ export interface HomeSelect<T extends boolean = true> {
                       | {
                           image?: T;
                           overlayText?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              richText?:
-                | T
-                | {
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              linkItem?:
-                | T
-                | {
-                    images?:
-                      | T
-                      | {
-                          image?: T;
-                          overlayText?: T;
+                          textPosition?: T;
+                          enableLink?: T;
                           link?:
                             | T
                             | {
@@ -1059,6 +1041,13 @@ export interface HomeSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
+              richText?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
               contactForm?:
                 | T
                 | {
@@ -1066,6 +1055,17 @@ export interface HomeSelect<T extends boolean = true> {
                     description?: T;
                     successMessage?: T;
                     submitButtonText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              featuredProperties?:
+                | T
+                | {
+                    title?: T;
+                    propertyCount?: T;
+                    propertyStatus?: T;
+                    displayPrice?: T;
+                    displayAddress?: T;
                     id?: T;
                     blockName?: T;
                   };

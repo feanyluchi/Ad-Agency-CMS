@@ -130,6 +130,14 @@ export default buildConfig({
     propertyFilterPlugin(),
   ],
   secret: process.env.PAYLOAD_SECRET || '',
+  localization: {
+    locales: [
+      { code: 'en', label: { en: 'English' } },
+      { code: 'es', label: { en: 'Spanish', es: 'Español' } },
+    ],
+    defaultLocale: 'en',
+    fallback: true,
+  },
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
