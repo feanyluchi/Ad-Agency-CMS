@@ -7,6 +7,7 @@ import { RichText } from '@/blocks/alpha/Richtext'
 import AboutUsBlock from '@/blocks/beta/AboutUs'
 import { Banner } from '@/blocks/beta/banner'
 import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
+import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import type { CollectionConfig } from 'payload'
 
@@ -74,7 +75,8 @@ export const HomePage: CollectionConfig = {
             Banner,
             AboutUsBlock,
             PopularNeighborhoodsBlock,
-            WhyChooseUsBlock
+            WhyChooseUsBlock,
+            Testimonials
           ],
         },
       ],

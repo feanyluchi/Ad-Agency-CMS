@@ -328,6 +328,22 @@ export interface Home {
           blockName?: string | null;
           blockType: 'why-choose-us';
         }
+      | {
+          title: string;
+          subtitle: string;
+          testimonials?:
+            | {
+                image: string | Photo;
+                name: string;
+                rating: number;
+                testimonial: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'testimonials';
+        }
     )[];
   };
   updatedAt: string;
@@ -1246,6 +1262,23 @@ export interface HomeSelect<T extends boolean = true> {
                           id?: T;
                         };
                     image?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              testimonials?:
+                | T
+                | {
+                    title?: T;
+                    subtitle?: T;
+                    testimonials?:
+                      | T
+                      | {
+                          image?: T;
+                          name?: T;
+                          rating?: T;
+                          testimonial?: T;
+                          id?: T;
+                        };
                     id?: T;
                     blockName?: T;
                   };
