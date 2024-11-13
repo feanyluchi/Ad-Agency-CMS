@@ -4,6 +4,11 @@ import { Hero } from '@/blocks/alpha/Hero'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
 import { PrestigeLivingSection } from '@/blocks/alpha/PrestigeLivingSection'
 import { RichText } from '@/blocks/alpha/Richtext'
+import AboutUsBlock from '@/blocks/beta/AboutUs'
+import { Banner } from '@/blocks/beta/banner'
+import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
+import Testimonials from '@/blocks/beta/Testimonials'
+import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import type { CollectionConfig } from 'payload'
 
 export const HomePage: CollectionConfig = {
@@ -60,7 +65,19 @@ export const HomePage: CollectionConfig = {
           name: 'layout',
           type: 'blocks',
           required: true,
-          blocks: [Hero, PrestigeLivingSection, ImageGallery, RichText, ContactForm, FeaturedProperties],
+          blocks: [
+            Hero,
+            PrestigeLivingSection,
+            ImageGallery,
+            RichText,
+            ContactForm,
+            FeaturedProperties,
+            Banner,
+            AboutUsBlock,
+            PopularNeighborhoodsBlock,
+            WhyChooseUsBlock,
+            Testimonials
+          ],
         },
       ],
     },
