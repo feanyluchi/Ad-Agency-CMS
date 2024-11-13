@@ -344,6 +344,19 @@ export interface Home {
           blockName?: string | null;
           blockType: 'testimonials';
         }
+      | {
+          title: string;
+          subTitle: string;
+          backgroundImage: string | Photo;
+          description: string;
+          contactInfo: {
+            email: string;
+            phone: string;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contact-us';
+        }
     )[];
   };
   updatedAt: string;
@@ -1278,6 +1291,22 @@ export interface HomeSelect<T extends boolean = true> {
                           rating?: T;
                           testimonial?: T;
                           id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'contact-us'?:
+                | T
+                | {
+                    title?: T;
+                    subTitle?: T;
+                    backgroundImage?: T;
+                    description?: T;
+                    contactInfo?:
+                      | T
+                      | {
+                          email?: T;
+                          phone?: T;
                         };
                     id?: T;
                     blockName?: T;

@@ -6,6 +6,7 @@ import { PrestigeLivingSection } from '@/blocks/alpha/PrestigeLivingSection'
 import { RichText } from '@/blocks/alpha/Richtext'
 import AboutUsBlock from '@/blocks/beta/AboutUs'
 import { Banner } from '@/blocks/beta/banner'
+import ContactUs from '@/blocks/beta/ContactUs'
 import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
 import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
@@ -76,7 +77,8 @@ export const HomePage: CollectionConfig = {
             AboutUsBlock,
             PopularNeighborhoodsBlock,
             WhyChooseUsBlock,
-            Testimonials
+            Testimonials,
+            ContactUs
           ],
         },
       ],
