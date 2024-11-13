@@ -357,6 +357,15 @@ export interface Home {
           blockName?: string | null;
           blockType: 'contact-us';
         }
+      | {
+          title: string;
+          placeholderText: string;
+          buttonText: string;
+          footerText: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'newsletter-signup';
+        }
     )[];
   };
   updatedAt: string;
@@ -1308,6 +1317,16 @@ export interface HomeSelect<T extends boolean = true> {
                           email?: T;
                           phone?: T;
                         };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'newsletter-signup'?:
+                | T
+                | {
+                    title?: T;
+                    placeholderText?: T;
+                    buttonText?: T;
+                    footerText?: T;
                     id?: T;
                     blockName?: T;
                   };

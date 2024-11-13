@@ -8,6 +8,7 @@ import AboutUsBlock from '@/blocks/beta/AboutUs'
 import { Banner } from '@/blocks/beta/banner'
 import ContactUs from '@/blocks/beta/ContactUs'
 import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
+import NewsletterSignupBlock from '@/blocks/beta/NewsletterSignup'
 import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import type { CollectionConfig } from 'payload'
@@ -78,7 +79,8 @@ export const HomePage: CollectionConfig = {
             PopularNeighborhoodsBlock,
             WhyChooseUsBlock,
             Testimonials,
-            ContactUs
+            ContactUs,
+            NewsletterSignupBlock
           ],
         },
       ],
