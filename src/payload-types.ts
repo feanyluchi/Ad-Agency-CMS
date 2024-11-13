@@ -312,6 +312,22 @@ export interface Home {
           blockName?: string | null;
           blockType: 'popular-neighborhoods';
         }
+      | {
+          sectionTitle: string;
+          sectionSubtitle?: string | null;
+          features?:
+            | {
+                icon: string | Photo;
+                title: string;
+                description: string;
+                id?: string | null;
+              }[]
+            | null;
+          image: string | Photo;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'why-choose-us';
+        }
     )[];
   };
   updatedAt: string;
@@ -1213,6 +1229,23 @@ export interface HomeSelect<T extends boolean = true> {
                               };
                           id?: T;
                         };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'why-choose-us'?:
+                | T
+                | {
+                    sectionTitle?: T;
+                    sectionSubtitle?: T;
+                    features?:
+                      | T
+                      | {
+                          icon?: T;
+                          title?: T;
+                          description?: T;
+                          id?: T;
+                        };
+                    image?: T;
                     id?: T;
                     blockName?: T;
                   };
