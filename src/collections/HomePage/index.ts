@@ -6,7 +6,10 @@ import { PrestigeLivingSection } from '@/blocks/alpha/PrestigeLivingSection'
 import { RichText } from '@/blocks/alpha/Richtext'
 import AboutUsBlock from '@/blocks/beta/AboutUs'
 import { Banner } from '@/blocks/beta/banner'
+import ContactInfoMapBlock from '@/blocks/beta/ContactInfoMapBlock'
+import ContactUs from '@/blocks/beta/ContactUs'
 import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
+import NewsletterSignupBlock from '@/blocks/beta/NewsletterSignup'
 import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import type { CollectionConfig } from 'payload'
@@ -76,7 +79,10 @@ export const HomePage: CollectionConfig = {
             AboutUsBlock,
             PopularNeighborhoodsBlock,
             WhyChooseUsBlock,
-            Testimonials
+            Testimonials,
+            ContactUs,
+            NewsletterSignupBlock,
+            ContactInfoMapBlock
           ],
         },
       ],

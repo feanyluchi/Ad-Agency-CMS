@@ -9,6 +9,7 @@ const Testimonials: Block = {
       label: 'Section Title',
       defaultValue: 'Testimonials',
       required: true,
+      localized: true
     },
     {
       name: 'subtitle',
@@ -16,6 +17,7 @@ const Testimonials: Block = {
       label: 'Section Sub-title',
       defaultValue: 'Hear From Our Clients',
       required: true,
+      localized: true
     },
     {
       name: 'testimonials',
@@ -49,6 +51,7 @@ const Testimonials: Block = {
           type: 'textarea',
           label: 'Testimonial Text',
           required: true,
+          localized: true
         },
       ],
     },

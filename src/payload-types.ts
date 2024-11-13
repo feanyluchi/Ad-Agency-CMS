@@ -344,6 +344,37 @@ export interface Home {
           blockName?: string | null;
           blockType: 'testimonials';
         }
+      | {
+          title: string;
+          subTitle: string;
+          backgroundImage: string | Photo;
+          description: string;
+          contactInfo: {
+            email: string;
+            phone: string;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contact-us';
+        }
+      | {
+          title: string;
+          placeholderText: string;
+          buttonText: string;
+          footerText: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'newsletter-signup';
+        }
+      | {
+          addressTitle: string;
+          addressDetails: string;
+          email: string;
+          phone: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contact-info-map';
+        }
     )[];
   };
   updatedAt: string;
@@ -1279,6 +1310,42 @@ export interface HomeSelect<T extends boolean = true> {
                           testimonial?: T;
                           id?: T;
                         };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'contact-us'?:
+                | T
+                | {
+                    title?: T;
+                    subTitle?: T;
+                    backgroundImage?: T;
+                    description?: T;
+                    contactInfo?:
+                      | T
+                      | {
+                          email?: T;
+                          phone?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              'newsletter-signup'?:
+                | T
+                | {
+                    title?: T;
+                    placeholderText?: T;
+                    buttonText?: T;
+                    footerText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'contact-info-map'?:
+                | T
+                | {
+                    addressTitle?: T;
+                    addressDetails?: T;
+                    email?: T;
+                    phone?: T;
                     id?: T;
                     blockName?: T;
                   };
