@@ -12,6 +12,7 @@ const NewsletterSignupBlock: Block = {
       label: 'Title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'placeholderText',
@@ -19,6 +20,7 @@ const NewsletterSignupBlock: Block = {
       type: 'text',
       defaultValue: 'Enter your mail here...',
       required: true,
+      localized: true,
     },
     {
       name: 'buttonText',
@@ -26,6 +28,7 @@ const NewsletterSignupBlock: Block = {
       type: 'text',
       defaultValue: 'GO',
       required: true,
+      localized: true,
     },
     {
       name: 'footerText',
@@ -33,6 +36,7 @@ const NewsletterSignupBlock: Block = {
       type: 'text',
       defaultValue: "Your email is safe with us, we don’t spam.",
       required: true,
+      localized: true,
     },
   ],
 }

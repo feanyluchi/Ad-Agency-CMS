@@ -366,6 +366,15 @@ export interface Home {
           blockName?: string | null;
           blockType: 'newsletter-signup';
         }
+      | {
+          addressTitle: string;
+          addressDetails: string;
+          email: string;
+          phone: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contact-info-map';
+        }
     )[];
   };
   updatedAt: string;
@@ -1327,6 +1336,16 @@ export interface HomeSelect<T extends boolean = true> {
                     placeholderText?: T;
                     buttonText?: T;
                     footerText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              'contact-info-map'?:
+                | T
+                | {
+                    addressTitle?: T;
+                    addressDetails?: T;
+                    email?: T;
+                    phone?: T;
                     id?: T;
                     blockName?: T;
                   };
