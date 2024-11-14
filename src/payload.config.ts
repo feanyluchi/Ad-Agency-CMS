@@ -35,16 +35,16 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 const groupCollections = (group: string, collections: CollectionConfig[]): CollectionConfig[] => {
-  return collections.map(collection => {
+  return collections.map((collection) => {
     return {
       ...collection,
       admin: {
         ...collection.admin,
         group,
       },
-    };
-  });
-};
+    }
+  })
+}
 
 export default buildConfig({
   email: nodemailerAdapter({
@@ -89,7 +89,13 @@ export default buildConfig({
     },
   },
   collections: [
-    ...groupCollections('Single Pages', [HomePage, AboutUsPage, ProductsOverview, NewsOverview, Contact]),
+    ...groupCollections('Single Pages', [
+      HomePage,
+      AboutUsPage,
+      ProductsOverview,
+      NewsOverview,
+      Contact,
+    ]),
     ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, Properties]),
     ...groupCollections('Library', [Photos, Videos, PropertyTypes]),
     ...groupCollections('User Groups', [Users]),
@@ -117,7 +123,17 @@ export default buildConfig({
       },
     }),
     seoPlugin({
-      collections: ['homepage', 'aboutus', 'productsoverview', 'newsoverview', 'contact', 'productEntry', 'newentry', 'generalPageEntry', 'propertiesoverview'],
+      collections: [
+        'homepage',
+        'aboutus',
+        'productsoverview',
+        'newsoverview',
+        'contact',
+        'productEntry',
+        'newentry',
+        'generalPageEntry',
+        'propertiesoverview',
+      ],
       uploadsCollection: 'photos',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt,
