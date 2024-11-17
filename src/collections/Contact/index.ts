@@ -1,3 +1,6 @@
+import AddressBlock from '@/blocks/alpha/Address'
+import { ImageGallery } from '@/blocks/alpha/ImageGallery'
+import { RichText } from '@/blocks/alpha/Richtext'
 import type { CollectionConfig } from 'payload'
 
 export const Contact: CollectionConfig = {
@@ -50,6 +53,16 @@ export const Contact: CollectionConfig = {
           required: true,
           localized: true,
         },
+        {
+          name: 'layout',
+          type: 'blocks',
+          required: true,
+          blocks: [
+            ImageGallery,
+            RichText,
+            AddressBlock
+          ]
+        }
       ],
     },
   ],

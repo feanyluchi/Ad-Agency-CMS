@@ -102,23 +102,6 @@ export interface Home {
               }[]
             | null;
           autoSlide?: boolean | null;
-          searchTabs: {
-            buyTab: {
-              propertyType?: (string | null) | PropertyType;
-              location: string;
-              price: number;
-            };
-            rentTab: {
-              propertyType?: (string | null) | PropertyType;
-              location: string;
-              monthlyRent?: number | null;
-            };
-            sellTab: {
-              propertyType?: (string | null) | PropertyType;
-              location: string;
-              askingPrice?: number | null;
-            };
-          };
           id?: string | null;
           blockName?: string | null;
           blockType: 'heroSection';
@@ -428,18 +411,6 @@ export interface Photo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "propertyTypes".
- */
-export interface PropertyType {
-  id: string;
-  name: string;
-  description?: string | null;
-  icon?: (string | null) | Photo;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "aboutus".
  */
 export interface Aboutus {
@@ -485,6 +456,73 @@ export interface Contact {
   home: {
     title: string;
     excerpt: string;
+    layout: (
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                textPosition: 'top' | 'center' | 'bottom';
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'imageGallery';
+        }
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'richText';
+        }
+      | {
+          addresses?:
+            | {
+                title: string;
+                addressLine: string;
+                phone: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'addresses';
+        }
+    )[];
   };
   meta?: {
     title?: string | null;
@@ -985,6 +1023,18 @@ export interface Video {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "propertyTypes".
+ */
+export interface PropertyType {
+  id: string;
+  name: string;
+  description?: string | null;
+  icon?: (string | null) | Photo;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -1128,31 +1178,6 @@ export interface HomeSelect<T extends boolean = true> {
                           id?: T;
                         };
                     autoSlide?: T;
-                    searchTabs?:
-                      | T
-                      | {
-                          buyTab?:
-                            | T
-                            | {
-                                propertyType?: T;
-                                location?: T;
-                                price?: T;
-                              };
-                          rentTab?:
-                            | T
-                            | {
-                                propertyType?: T;
-                                location?: T;
-                                monthlyRent?: T;
-                              };
-                          sellTab?:
-                            | T
-                            | {
-                                propertyType?: T;
-                                location?: T;
-                                askingPrice?: T;
-                              };
-                        };
                     id?: T;
                     blockName?: T;
                   };
@@ -1462,6 +1487,54 @@ export interface ContactSelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+        layout?:
+          | T
+          | {
+              imageGallery?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          textPosition?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              richText?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              addresses?:
+                | T
+                | {
+                    addresses?:
+                      | T
+                      | {
+                          title?: T;
+                          addressLine?: T;
+                          phone?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
       };
   meta?:
     | T
