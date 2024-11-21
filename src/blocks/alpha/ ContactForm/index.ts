@@ -1,7 +1,8 @@
-import type { Block } from 'payload';
+import { CustomBlock } from "block-types";
 
-export const ContactForm: Block = {
+export const ContactForm: CustomBlock = {
   slug: 'contactForm',
+  customBlockType: 'alpha',
   fields: [
     {
       name: 'title',

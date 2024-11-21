@@ -1,6 +1,7 @@
-import { Block } from "payload"
+import { CustomBlock } from "block-types"
 
-const WhyChooseUsBlock: Block = {
+const WhyChooseUsBlock: CustomBlock = {
+  customBlockType: 'beta',
   slug: 'why-choose-us',
   labels: {
     singular: 'Why Choose Us',

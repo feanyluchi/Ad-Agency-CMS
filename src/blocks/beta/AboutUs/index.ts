@@ -1,7 +1,8 @@
 import link from "@/fields/link";
-import { Block } from "payload";
+import { CustomBlock } from "block-types";
 
-const AboutUsBlock: Block = {
+const AboutUsBlock: CustomBlock = {
+  customBlockType: 'beta',
     slug: 'about-us',
     labels: {
       singular: 'About Us Section',

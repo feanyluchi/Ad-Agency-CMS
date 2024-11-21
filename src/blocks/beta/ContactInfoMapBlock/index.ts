@@ -1,6 +1,7 @@
-import { Block } from "payload"
+import { CustomBlock } from "block-types"
 
-const ContactInfoMapBlock: Block = {
+const ContactInfoMapBlock: CustomBlock = {
+  customBlockType: 'beta',
   slug: 'contact-info-map',
   labels: {
     singular: 'Contact Info with Map',

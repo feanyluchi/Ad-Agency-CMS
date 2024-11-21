@@ -1,6 +1,7 @@
-import type { Block, Field } from 'payload'
+import { CustomBlock } from "block-types";
 
-export const Banner: Block = {
+export const Banner: CustomBlock = {
+  customBlockType: 'beta',
   slug: 'banner',
   fields: [
     {

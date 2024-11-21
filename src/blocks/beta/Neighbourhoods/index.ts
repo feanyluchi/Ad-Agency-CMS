@@ -1,7 +1,8 @@
 import link from "@/fields/link";
-import { Block } from "payload";
+import { CustomBlock } from "block-types";
 
-const PopularNeighborhoodsBlock: Block = {
+const PopularNeighborhoodsBlock: CustomBlock = {
+  customBlockType: 'beta',
     slug: 'popular-neighborhoods',
     labels: {
       singular: 'Popular Neighborhood',

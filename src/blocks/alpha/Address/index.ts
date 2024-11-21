@@ -1,6 +1,7 @@
-import { Block } from "payload"
+import { CustomBlock } from "block-types"
 
-const AddressBlock: Block = {
+const AddressBlock: CustomBlock = {
+  customBlockType: 'alpha',
   slug: 'addresses',
   labels: {
     singular: 'Address',

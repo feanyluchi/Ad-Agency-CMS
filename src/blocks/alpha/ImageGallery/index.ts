@@ -1,7 +1,8 @@
 import link from '@/fields/link'
-import type { Block } from 'payload'
+import { CustomBlock } from 'block-types'
 
-export const ImageGallery: Block = {
+export const ImageGallery: CustomBlock = {
+  customBlockType: 'alpha',
   slug: 'imageGallery',
   fields: [
     {

@@ -608,6 +608,120 @@ export interface GeneralPageEntry {
   home: {
     title: string;
     excerpt: string;
+    layout: (
+      | {
+          backgroundImages?:
+            | {
+                image?: (string | null) | Photo;
+                id?: string | null;
+              }[]
+            | null;
+          autoSlide?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'heroSection';
+        }
+      | {
+          title: string;
+          content: string;
+          mapSection: {
+            mapImage: string | Photo;
+            regions: (
+              | 'andalusia'
+              | 'aragon'
+              | 'asturias'
+              | 'balearic_islands'
+              | 'basque_country'
+              | 'canary_islands'
+              | 'cantabria'
+              | 'castile_and_leon'
+              | 'castile_la_mancha'
+              | 'catalonia'
+              | 'extremadura'
+              | 'galicia'
+              | 'la_rioja'
+              | 'madrid'
+              | 'murcia'
+              | 'navarre'
+              | 'valencian_community'
+            )[];
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'prestigeLivingSection';
+        }
+      | {
+          images?:
+            | {
+                image: string | Photo;
+                overlayText: string;
+                textPosition: 'top' | 'center' | 'bottom';
+                enableLink?: boolean | null;
+                link?: {
+                  type?: ('reference' | 'custom') | null;
+                  reference?:
+                    | ({
+                        relationTo: 'aboutus';
+                        value: string | Aboutus;
+                      } | null)
+                    | ({
+                        relationTo: 'home';
+                        value: string | Home;
+                      } | null)
+                    | ({
+                        relationTo: 'contact';
+                        value: string | Contact;
+                      } | null);
+                  url?: string | null;
+                  label: string;
+                };
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'imageGallery';
+        }
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'richText';
+        }
+      | {
+          title: string;
+          description?: string | null;
+          successMessage: string;
+          submitButtonText: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contactForm';
+        }
+      | {
+          title: string;
+          propertyCount: number;
+          propertyStatus: 'for_sale' | 'for_rent' | 'sold';
+          displayPrice?: boolean | null;
+          displayAddress?: boolean | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'featuredProperties';
+        }
+    )[];
   };
   meta?: {
     title?: string | null;
@@ -1589,6 +1703,88 @@ export interface GeneralPageEntrySelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+        layout?:
+          | T
+          | {
+              heroSection?:
+                | T
+                | {
+                    backgroundImages?:
+                      | T
+                      | {
+                          image?: T;
+                          id?: T;
+                        };
+                    autoSlide?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              prestigeLivingSection?:
+                | T
+                | {
+                    title?: T;
+                    content?: T;
+                    mapSection?:
+                      | T
+                      | {
+                          mapImage?: T;
+                          regions?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              imageGallery?:
+                | T
+                | {
+                    images?:
+                      | T
+                      | {
+                          image?: T;
+                          overlayText?: T;
+                          textPosition?: T;
+                          enableLink?: T;
+                          link?:
+                            | T
+                            | {
+                                type?: T;
+                                reference?: T;
+                                url?: T;
+                                label?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              richText?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              contactForm?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    successMessage?: T;
+                    submitButtonText?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              featuredProperties?:
+                | T
+                | {
+                    title?: T;
+                    propertyCount?: T;
+                    propertyStatus?: T;
+                    displayPrice?: T;
+                    displayAddress?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
       };
   meta?:
     | T
