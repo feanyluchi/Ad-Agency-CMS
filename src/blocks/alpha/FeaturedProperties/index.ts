@@ -1,6 +1,7 @@
-import type { Block } from 'payload';
+import { CustomBlock } from 'block-types';
 
-export const FeaturedProperties: Block = {
+export const FeaturedProperties: CustomBlock = {
+  customBlockType: 'alpha',
   slug: 'featuredProperties',
   fields: [
     {

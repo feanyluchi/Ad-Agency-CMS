@@ -1,7 +1,8 @@
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
-import type { Block } from 'payload'
+import { CustomBlock } from 'block-types'
 
-export const RichText: Block = {
+export const RichText: CustomBlock = {
+  customBlockType: 'alpha',
   slug: 'richText',
   fields: [
     {

@@ -1,6 +1,7 @@
-import { Block } from "payload"
+import { CustomBlock } from "block-types"
 
-const ContactUs: Block = {
+const ContactUs: CustomBlock = {
+  customBlockType: 'beta',
   slug: 'contact-us',
   fields: [
     {

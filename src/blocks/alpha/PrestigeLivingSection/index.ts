@@ -1,6 +1,7 @@
-import type { Block } from 'payload'
+import { CustomBlock } from 'block-types'
 
-export const PrestigeLivingSection: Block = {
+export const PrestigeLivingSection: CustomBlock = {
+  customBlockType: 'alpha',
   slug: 'prestigeLivingSection',
   fields: [
     {

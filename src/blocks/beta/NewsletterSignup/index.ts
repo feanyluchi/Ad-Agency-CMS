@@ -1,6 +1,7 @@
-import { Block } from 'payload'
+import { CustomBlock } from 'block-types'
 
-const NewsletterSignupBlock: Block = {
+const NewsletterSignupBlock: CustomBlock = {
+  customBlockType: 'beta',
   slug: 'newsletter-signup',
   labels: {
     singular: 'Newsletter Signup',
