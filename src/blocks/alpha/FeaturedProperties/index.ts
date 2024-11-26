@@ -1,3 +1,5 @@
+// import { customSelectField } from 'src/fields/CustomSelect';
+import { PropertyHashtag } from '@/fields/CustomSelect';
 import { CustomBlock } from 'block-types';
 
 export const FeaturedProperties: CustomBlock = {
@@ -15,6 +17,7 @@ export const FeaturedProperties: CustomBlock = {
         description: 'Title displayed above the featured properties section.',
       },
     },
+    PropertyHashtag,
     {
       name: 'propertyCount',
       type: 'number',
@@ -25,21 +28,21 @@ export const FeaturedProperties: CustomBlock = {
         description: 'Specify the number of properties to fetch and display as featured properties.',
       },
     },
-    {
-      name: 'propertyStatus',
-      type: 'select',
-      label: 'Property Status',
-      options: [
-        { label: 'For Sale', value: 'for_sale' },
-        { label: 'For Rent', value: 'for_rent' },
-        { label: 'Sold', value: 'sold' },
-      ],
-      required: true,
-      defaultValue: 'for_sale',
-      admin: {
-        description: 'Filter properties by their status.',
-      },
-    },
+    // {
+    //   name: 'propertyStatus',
+    //   type: 'select',
+    //   label: 'Property Status',
+    //   options: [
+    //     { label: 'For Sale', value: 'for_sale' },
+    //     { label: 'For Rent', value: 'for_rent' },
+    //     { label: 'Sold', value: 'sold' },
+    //   ],
+    //   required: true,
+    //   defaultValue: 'for_sale',
+    //   admin: {
+    //     description: 'Filter properties by their status.',
+    //   },
+    // },
     {
       name: 'displayPrice',
       type: 'checkbox',

@@ -198,8 +198,8 @@ export interface Home {
         }
       | {
           title: string;
+          propertyHashtag?: string | null;
           propertyCount: number;
-          propertyStatus: 'for_sale' | 'for_rent' | 'sold';
           displayPrice?: boolean | null;
           displayAddress?: boolean | null;
           id?: string | null;
@@ -713,8 +713,8 @@ export interface GeneralPageEntry {
         }
       | {
           title: string;
+          propertyHashtag?: string | null;
           propertyCount: number;
-          propertyStatus: 'for_sale' | 'for_rent' | 'sold';
           displayPrice?: boolean | null;
           displayAddress?: boolean | null;
           id?: string | null;
@@ -1353,8 +1353,8 @@ export interface HomeSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    propertyHashtag?: T;
                     propertyCount?: T;
-                    propertyStatus?: T;
                     displayPrice?: T;
                     displayAddress?: T;
                     id?: T;
@@ -1777,8 +1777,8 @@ export interface GeneralPageEntrySelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    propertyHashtag?: T;
                     propertyCount?: T;
-                    propertyStatus?: T;
                     displayPrice?: T;
                     displayAddress?: T;
                     id?: T;
