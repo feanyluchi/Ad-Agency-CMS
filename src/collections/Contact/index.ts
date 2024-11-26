@@ -33,7 +33,6 @@ export const Contact: CollectionConfig = {
       label: 'Home',
       access: {
         read: ({ req: { user } }) => {
-          console.log('User object:', user)
           return user?.role === 'admin'
         },
         update: ({ req: { user } }) => {

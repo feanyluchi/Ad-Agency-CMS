@@ -86,6 +86,7 @@ export default buildConfig({
         },
       },
       Nav: '@/components/NavLinks/index#Nav',
+      
     },
   },
   collections: [

@@ -43,7 +43,7 @@ export const propertyFilterPlugin = (pluginOptions = {}) => async (incomingConfi
 
   // Fetch enums and cities
   const enums = await fetchEnums();
-  console.log(enums.data.property);
+  // console.log(enums.data.property);
   
   const citiesResponse = await fetchCities();
 
