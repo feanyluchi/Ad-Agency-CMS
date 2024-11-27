@@ -47,7 +47,6 @@ const CustomViewClient: React.FC = () => {
     return acc
   }, {})
 
-  // Utility function to shorten text and add '...'
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text
   }
@@ -80,7 +79,6 @@ const CustomViewClient: React.FC = () => {
                       <div key={collection.slug} className="channel_style">
                         <Link
                           href={
-                            // Check if it's a single page collection and has documents
                             collection.admin.group === 'Single Pages' &&
                             docs[collection.slug]?.length > 0
                               ? `/admin/collections/${collection.slug}/${docs[collection.slug][0].id}`
