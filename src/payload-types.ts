@@ -28,6 +28,7 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
   collectionsSelect: {
     home: HomeSelect<false> | HomeSelect<true>;
     aboutus: AboutusSelect<false> | AboutusSelect<true>;
@@ -61,9 +62,9 @@ export interface Config {
   user: User & {
     collection: 'users';
   };
-  jobs?: {
+  jobs: {
     tasks: unknown;
-    workflows?: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
