@@ -81,7 +81,7 @@ export default buildConfig({
         Logo: '@/graphics/Logo/index#Logo',
       },
       views: {
-        Dashboard: {
+        dashboard: {
           Component: '@/components/CustomLayoutView/index#CustomView',
         },
       },
