@@ -70,11 +70,12 @@ export default buildConfig({
         Logo: '@/graphics/Logo/index#Logo',
       },
       views: {
-        Dashboard: {
+        dashboard: {
           Component: '@/components/CustomLayoutView/index#CustomView',
         },
       },
       Nav: '@/components/NavLinks/index#Nav',
+      
     },
   },
   globals: [Header, Footer, StaticTexts],

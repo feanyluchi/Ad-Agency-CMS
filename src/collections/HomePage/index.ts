@@ -1,11 +1,5 @@
-import HeroBlock from '@/blocks/Hero'
-import RichTextBlock from '@/blocks/RichTextBlock'
-import ThreeColumnBlock from '@/blocks/ThreeColumn'
-import WhatWeDoBlock from '@/blocks/WhatWeDo'
-import WhyChooseADAgencyBlock from '@/blocks/WhyChooseAgency'
 import { colorOptions } from '@/fields/colorOptions'
 import { slugField } from '@/fields/slug'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { CollectionConfig } from 'payload'
 
 const isClientUser = (user: any) => user?.role === 'client-user'

@@ -26,6 +26,8 @@ export const Properties: CollectionConfig = {
     {
       name: 'description',
       type: 'textarea',
+      required: true,
+      localized: true,
     },
     {
       name: 'price',
