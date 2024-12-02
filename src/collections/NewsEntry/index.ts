@@ -7,7 +7,7 @@ export const NewsEntry: CollectionConfig = {
     plural: 'News Entry',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -16,6 +16,12 @@ export const NewsEntry: CollectionConfig = {
     read: () => true,
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',
@@ -29,12 +35,6 @@ export const NewsEntry: CollectionConfig = {
         },
       },
       fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
         {
           name: 'excerpt',
           type: 'textarea',

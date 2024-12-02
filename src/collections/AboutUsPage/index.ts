@@ -7,7 +7,7 @@ export const AboutUsPage: CollectionConfig = {
     plural: 'About Us',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -25,6 +25,12 @@ export const AboutUsPage: CollectionConfig = {
   },
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
       name: 'home',
       type: 'group',
       label: 'Home',
@@ -37,12 +43,6 @@ export const AboutUsPage: CollectionConfig = {
         },
       },
       fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
         {
           name: 'excerpt',
           type: 'textarea',

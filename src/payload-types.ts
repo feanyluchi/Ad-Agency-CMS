@@ -91,8 +91,8 @@ export interface UserAuthOperations {
  */
 export interface Home {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
     layout: (
       | {
@@ -416,8 +416,8 @@ export interface Photo {
  */
 export interface Aboutus {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
   };
   aboutuscontent: {
@@ -454,8 +454,8 @@ export interface Aboutus {
  */
 export interface Contact {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
     layout: (
       | {
@@ -540,8 +540,8 @@ export interface Contact {
  */
 export interface Productsoverview {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
   };
   meta?: {
@@ -559,8 +559,8 @@ export interface Productsoverview {
  */
 export interface Newsoverview {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
   };
   meta?: {
@@ -578,8 +578,8 @@ export interface Newsoverview {
  */
 export interface Productentry {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
   };
   updatedAt: string;
@@ -592,8 +592,8 @@ export interface Productentry {
  */
 export interface Newsentry {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
   };
   updatedAt: string;
@@ -606,8 +606,8 @@ export interface Newsentry {
  */
 export interface GeneralPageEntry {
   id: string;
+  title: string;
   home: {
-    title: string;
     excerpt: string;
     layout: (
       | {
@@ -1275,10 +1275,10 @@ export interface PayloadMigration {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
         layout?:
           | T
@@ -1500,10 +1500,10 @@ export interface HomeSelect<T extends boolean = true> {
  * via the `definition` "aboutus_select".
  */
 export interface AboutusSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
       };
   aboutuscontent?:
@@ -1549,10 +1549,10 @@ export interface AboutusSelect<T extends boolean = true> {
  * via the `definition` "productsoverview_select".
  */
 export interface ProductsoverviewSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
       };
   meta?:
@@ -1573,10 +1573,10 @@ export interface ProductsoverviewSelect<T extends boolean = true> {
  * via the `definition` "newsoverview_select".
  */
 export interface NewsoverviewSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
       };
   meta?:
@@ -1597,10 +1597,10 @@ export interface NewsoverviewSelect<T extends boolean = true> {
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
         layout?:
           | T
@@ -1669,10 +1669,10 @@ export interface ContactSelect<T extends boolean = true> {
  * via the `definition` "productentry_select".
  */
 export interface ProductentrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
       };
   updatedAt?: T;
@@ -1684,10 +1684,10 @@ export interface ProductentrySelect<T extends boolean = true> {
  * via the `definition` "newsentry_select".
  */
 export interface NewsentrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
       };
   updatedAt?: T;
@@ -1699,10 +1699,10 @@ export interface NewsentrySelect<T extends boolean = true> {
  * via the `definition` "generalPageEntry_select".
  */
 export interface GeneralPageEntrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
-        title?: T;
         excerpt?: T;
         layout?:
           | T

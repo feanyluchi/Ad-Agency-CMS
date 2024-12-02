@@ -52,7 +52,7 @@ export const GeneralPageEntry: CollectionConfig = {
     plural: 'General Page Entry',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -62,6 +62,12 @@ export const GeneralPageEntry: CollectionConfig = {
   },
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
       name: 'home',
       type: 'group',
       label: 'Home',
@@ -70,12 +76,6 @@ export const GeneralPageEntry: CollectionConfig = {
         update: ({ req: { user } }) => user?.role === 'admin',
       },
       fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
         {
           name: 'excerpt',
           type: 'textarea',

@@ -21,7 +21,7 @@ export const HomePage: CollectionConfig = {
     plural: 'Home',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -39,6 +39,12 @@ export const HomePage: CollectionConfig = {
   },
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
+    {
       name: 'home',
       type: 'group',
       label: 'Home',
@@ -51,12 +57,6 @@ export const HomePage: CollectionConfig = {
         },
       },
       fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
         {
           name: 'excerpt',
           type: 'textarea',
