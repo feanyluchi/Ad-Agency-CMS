@@ -36,6 +36,12 @@ export const ProductEntry: CollectionConfig = {
       },
       fields: [
         {
+          name: 'title',
+          type: 'text',
+          required: true,
+          localized: true,
+        },
+        {
           name: 'excerpt',
           type: 'textarea',
           required: true,
