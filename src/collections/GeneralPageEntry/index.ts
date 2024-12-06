@@ -17,6 +17,7 @@ import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import { Banner } from '@/blocks/beta/banner'
 import { CustomBlock } from 'block-types'
+import ClientReview from '@/blocks/alpha/ClientReview'
 
 // Get block type from the environment variable
 const BLOCK_TYPE = process.env.BLOCK_TYPE || 'both'
@@ -27,6 +28,7 @@ const allBlocks: CustomBlock[] = [
   PrestigeLivingSection,
   ImageGallery,
   RichText,
+  ClientReview,
   ContactForm,
   FeaturedProperties,
   //Beta starts here
