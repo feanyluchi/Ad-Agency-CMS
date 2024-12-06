@@ -3,8 +3,8 @@ import { Block } from "payload"
 const ClientReview: Block = {
     slug: 'clientReview',
     labels: {
-      singular: 'Client Reivew',
-      plural: 'Client Reivews',
+      singular: 'Client Review',
+      plural: 'Client Reviews',
     },
     fields: [
       {
