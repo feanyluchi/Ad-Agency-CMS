@@ -17,6 +17,8 @@ import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
 import { Banner } from '@/blocks/beta/banner'
 import { CustomBlock } from 'block-types'
+import ClientReview from '@/blocks/alpha/ClientReview'
+import { GeneralContent } from '@/blocks/alpha/GeneralContent'
 
 // Get block type from the environment variable
 const BLOCK_TYPE = process.env.BLOCK_TYPE || 'both'
@@ -26,7 +28,9 @@ const allBlocks: CustomBlock[] = [
   Hero,
   PrestigeLivingSection,
   ImageGallery,
+  GeneralContent,
   RichText,
+  ClientReview,
   ContactForm,
   FeaturedProperties,
   //Beta starts here
@@ -52,7 +56,7 @@ export const GeneralPageEntry: CollectionConfig = {
     plural: 'General Page Entry',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -61,6 +65,12 @@ export const GeneralPageEntry: CollectionConfig = {
     read: () => true,
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',

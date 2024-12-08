@@ -1,4 +1,5 @@
 import { ContactForm } from '@/blocks/alpha/ ContactForm'
+import ClientReview from '@/blocks/alpha/ClientReview'
 import { FeaturedProperties } from '@/blocks/alpha/FeaturedProperties'
 import { Hero } from '@/blocks/alpha/Hero'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
@@ -12,7 +13,36 @@ import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
 import NewsletterSignupBlock from '@/blocks/beta/NewsletterSignup'
 import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
+import { CustomBlock } from 'block-types'
 import type { CollectionConfig } from 'payload'
+
+// Get block type from the environment variable
+const BLOCK_TYPE = process.env.BLOCK_TYPE || 'both'
+
+// Define all blocks
+const allBlocks: CustomBlock[] = [
+  Hero,
+  PrestigeLivingSection,
+  ImageGallery,
+  RichText,
+  ClientReview,
+  ContactForm,
+  FeaturedProperties,
+  //Beta starts here
+  Banner,
+  AboutUsBlock,
+  PopularNeighborhoodsBlock,
+  WhyChooseUsBlock,
+  Testimonials,
+  ContactUs,
+  NewsletterSignupBlock,
+  ContactInfoMapBlock,
+]
+
+// Filter blocks based on the environment variable
+const allowedBlocks = allBlocks.filter(
+  (block) => BLOCK_TYPE === 'both' || block.customBlockType === BLOCK_TYPE,
+)
 
 export const HomePage: CollectionConfig = {
   slug: 'home',
@@ -21,7 +51,7 @@ export const HomePage: CollectionConfig = {
     plural: 'Home',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -38,6 +68,12 @@ export const HomePage: CollectionConfig = {
     },
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',
@@ -67,22 +103,7 @@ export const HomePage: CollectionConfig = {
           name: 'layout',
           type: 'blocks',
           required: true,
-          blocks: [
-            Hero,
-            PrestigeLivingSection,
-            ImageGallery,
-            RichText,
-            ContactForm,
-            FeaturedProperties,
-            Banner,
-            AboutUsBlock,
-            PopularNeighborhoodsBlock,
-            WhyChooseUsBlock,
-            Testimonials,
-            ContactUs,
-            NewsletterSignupBlock,
-            ContactInfoMapBlock
-          ],
+          blocks: allowedBlocks,
         },
       ],
     },

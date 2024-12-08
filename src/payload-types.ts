@@ -91,6 +91,7 @@ export interface UserAuthOperations {
  */
 export interface Home {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -207,158 +208,6 @@ export interface Home {
           blockName?: string | null;
           blockType: 'featuredProperties';
         }
-      | {
-          image: string | Photo;
-          bannerText: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'banner';
-        }
-      | {
-          subtitle: string;
-          title: string;
-          experienceImage: string | Photo;
-          nightImage: string | Photo;
-          experience: string;
-          description: {
-            root: {
-              type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
-              version: number;
-            };
-            [k: string]: unknown;
-          };
-          testimonialsImage?:
-            | {
-                image?: (string | null) | Photo;
-                id?: string | null;
-              }[]
-            | null;
-          testimonialsCount?: string | null;
-          link: {
-            type?: ('reference' | 'custom') | null;
-            reference?:
-              | ({
-                  relationTo: 'aboutus';
-                  value: string | Aboutus;
-                } | null)
-              | ({
-                  relationTo: 'home';
-                  value: string | Home;
-                } | null)
-              | ({
-                  relationTo: 'contact';
-                  value: string | Contact;
-                } | null);
-            url?: string | null;
-            label: string;
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'about-us';
-        }
-      | {
-          title: string;
-          subtitle?: string | null;
-          neighborhoods?:
-            | {
-                image: string | Photo;
-                location: string;
-                link: {
-                  type?: ('reference' | 'custom') | null;
-                  reference?:
-                    | ({
-                        relationTo: 'aboutus';
-                        value: string | Aboutus;
-                      } | null)
-                    | ({
-                        relationTo: 'home';
-                        value: string | Home;
-                      } | null)
-                    | ({
-                        relationTo: 'contact';
-                        value: string | Contact;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'popular-neighborhoods';
-        }
-      | {
-          sectionTitle: string;
-          sectionSubtitle?: string | null;
-          features?:
-            | {
-                icon: string | Photo;
-                title: string;
-                description: string;
-                id?: string | null;
-              }[]
-            | null;
-          image: string | Photo;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'why-choose-us';
-        }
-      | {
-          title: string;
-          subtitle: string;
-          testimonials?:
-            | {
-                image: string | Photo;
-                name: string;
-                rating: number;
-                testimonial: string;
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'testimonials';
-        }
-      | {
-          title: string;
-          subTitle: string;
-          backgroundImage: string | Photo;
-          description: string;
-          contactInfo: {
-            email: string;
-            phone: string;
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'contact-us';
-        }
-      | {
-          title: string;
-          placeholderText: string;
-          buttonText: string;
-          footerText: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'newsletter-signup';
-        }
-      | {
-          addressTitle: string;
-          addressDetails: string;
-          email: string;
-          phone: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'contact-info-map';
-        }
     )[];
   };
   updatedAt: string;
@@ -416,6 +265,7 @@ export interface Photo {
  */
 export interface Aboutus {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -454,6 +304,7 @@ export interface Aboutus {
  */
 export interface Contact {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -540,6 +391,7 @@ export interface Contact {
  */
 export interface Productsoverview {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -559,6 +411,7 @@ export interface Productsoverview {
  */
 export interface Newsoverview {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -578,6 +431,7 @@ export interface Newsoverview {
  */
 export interface Productentry {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -592,6 +446,7 @@ export interface Productentry {
  */
 export interface Newsentry {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -606,6 +461,7 @@ export interface Newsentry {
  */
 export interface GeneralPageEntry {
   id: string;
+  title: string;
   home: {
     title: string;
     excerpt: string;
@@ -1275,6 +1131,7 @@ export interface PayloadMigration {
  * via the `definition` "home_select".
  */
 export interface HomeSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1361,134 +1218,6 @@ export interface HomeSelect<T extends boolean = true> {
                     id?: T;
                     blockName?: T;
                   };
-              banner?:
-                | T
-                | {
-                    image?: T;
-                    bannerText?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'about-us'?:
-                | T
-                | {
-                    subtitle?: T;
-                    title?: T;
-                    experienceImage?: T;
-                    nightImage?: T;
-                    experience?: T;
-                    description?: T;
-                    testimonialsImage?:
-                      | T
-                      | {
-                          image?: T;
-                          id?: T;
-                        };
-                    testimonialsCount?: T;
-                    link?:
-                      | T
-                      | {
-                          type?: T;
-                          reference?: T;
-                          url?: T;
-                          label?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              'popular-neighborhoods'?:
-                | T
-                | {
-                    title?: T;
-                    subtitle?: T;
-                    neighborhoods?:
-                      | T
-                      | {
-                          image?: T;
-                          location?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                              };
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              'why-choose-us'?:
-                | T
-                | {
-                    sectionTitle?: T;
-                    sectionSubtitle?: T;
-                    features?:
-                      | T
-                      | {
-                          icon?: T;
-                          title?: T;
-                          description?: T;
-                          id?: T;
-                        };
-                    image?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              testimonials?:
-                | T
-                | {
-                    title?: T;
-                    subtitle?: T;
-                    testimonials?:
-                      | T
-                      | {
-                          image?: T;
-                          name?: T;
-                          rating?: T;
-                          testimonial?: T;
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              'contact-us'?:
-                | T
-                | {
-                    title?: T;
-                    subTitle?: T;
-                    backgroundImage?: T;
-                    description?: T;
-                    contactInfo?:
-                      | T
-                      | {
-                          email?: T;
-                          phone?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              'newsletter-signup'?:
-                | T
-                | {
-                    title?: T;
-                    placeholderText?: T;
-                    buttonText?: T;
-                    footerText?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              'contact-info-map'?:
-                | T
-                | {
-                    addressTitle?: T;
-                    addressDetails?: T;
-                    email?: T;
-                    phone?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
             };
       };
   updatedAt?: T;
@@ -1500,6 +1229,7 @@ export interface HomeSelect<T extends boolean = true> {
  * via the `definition` "aboutus_select".
  */
 export interface AboutusSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1549,6 +1279,7 @@ export interface AboutusSelect<T extends boolean = true> {
  * via the `definition` "productsoverview_select".
  */
 export interface ProductsoverviewSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1573,6 +1304,7 @@ export interface ProductsoverviewSelect<T extends boolean = true> {
  * via the `definition` "newsoverview_select".
  */
 export interface NewsoverviewSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1597,6 +1329,7 @@ export interface NewsoverviewSelect<T extends boolean = true> {
  * via the `definition` "contact_select".
  */
 export interface ContactSelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1669,6 +1402,7 @@ export interface ContactSelect<T extends boolean = true> {
  * via the `definition` "productentry_select".
  */
 export interface ProductentrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1684,6 +1418,7 @@ export interface ProductentrySelect<T extends boolean = true> {
  * via the `definition` "newsentry_select".
  */
 export interface NewsentrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -1699,6 +1434,7 @@ export interface NewsentrySelect<T extends boolean = true> {
  * via the `definition` "generalPageEntry_select".
  */
 export interface GeneralPageEntrySelect<T extends boolean = true> {
+  title?: T;
   home?:
     | T
     | {
@@ -2061,6 +1797,30 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        hasChildren?: boolean | null;
+        children?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                reference?:
+                  | ({
+                      relationTo: 'aboutus';
+                      value: string | Aboutus;
+                    } | null)
+                  | ({
+                      relationTo: 'home';
+                      value: string | Home;
+                    } | null)
+                  | ({
+                      relationTo: 'contact';
+                      value: string | Contact;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -2117,6 +1877,20 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        hasChildren?: T;
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };

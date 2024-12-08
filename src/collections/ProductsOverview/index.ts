@@ -7,7 +7,7 @@ export const ProductsOverview: CollectionConfig = {
     plural: 'Products Overview',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -24,6 +24,12 @@ export const ProductsOverview: CollectionConfig = {
     },
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',

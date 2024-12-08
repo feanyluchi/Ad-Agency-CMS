@@ -10,7 +10,7 @@ export const Contact: CollectionConfig = {
     plural: 'Contact',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -27,6 +27,12 @@ export const Contact: CollectionConfig = {
     },
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',

@@ -7,7 +7,7 @@ export const ProductEntry: CollectionConfig = {
     plural: 'Product Entry',
   },
   admin: {
-    // useAsTitle: 'title',
+    useAsTitle: 'title',
   },
   versions: {
     drafts: true,
@@ -16,6 +16,12 @@ export const ProductEntry: CollectionConfig = {
     read: () => true,
   },
   fields: [
+    {
+      name: 'title',
+      type: 'text',
+      required: true,
+      localized: true,
+    },
     {
       name: 'home',
       type: 'group',
