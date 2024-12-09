@@ -68,7 +68,9 @@ export default buildConfig({
       titleSuffix: '- Master payload',
       icons: [
         {
-          url: '@/graphics/favicon.png',
+          rel: 'icon',
+          type: 'image/x-icon',
+          url: '/Tesoro-T.svg',
         },
       ],
     },
