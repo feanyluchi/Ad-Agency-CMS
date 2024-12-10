@@ -35,7 +35,9 @@ const CustomViewClient: React.FC = () => {
 
   const filteredCollections = collections.filter(
     (collection: any) =>
-      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations' && collection.slug !== 'payload-locked-documents',
+      collection.slug !== 'payload-preferences' &&
+      collection.slug !== 'payload-migrations' &&
+      collection.slug !== 'payload-locked-documents',
   )
 
   const groupedCollections = filteredCollections.reduce((acc: any, collection: any) => {
@@ -210,6 +212,15 @@ const CustomViewClient: React.FC = () => {
               </div>
             </div>
           </div>
+          <h2
+            style={{
+              fontSize: '12px',
+              textAlign: 'center',
+              color: 'var(--text-color)',
+            }}
+          >
+            Payload Version: 3.1.0
+          </h2>
         </div>
       </Gutter>
     </div>
