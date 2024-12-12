@@ -75,10 +75,6 @@ export const GeneralPageEntry: CollectionConfig = {
       name: 'home',
       type: 'group',
       label: 'Home',
-      access: {
-        read: ({ req: { user } }) => user?.role === 'admin',
-        update: ({ req: { user } }) => user?.role === 'admin',
-      },
       fields: [
         {
           name: 'title',

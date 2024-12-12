@@ -26,14 +26,6 @@ export const ProductEntry: CollectionConfig = {
       name: 'home',
       type: 'group',
       label: 'Home',
-      access: {
-        read: ({ req: { user } }) => {
-          return user?.role === 'admin'
-        },
-        update: ({ req: { user } }) => {
-          return user?.role === 'admin'
-        },
-      },
       fields: [
         {
           name: 'title',

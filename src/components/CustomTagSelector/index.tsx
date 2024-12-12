@@ -7,7 +7,9 @@ import { TextFieldClientProps } from 'payload'
 type Props = TextFieldClientProps & { apiUrl: string; apiKey: string }
 
 export const CustomTagSelector: React.FC<Props> = ({ apiUrl, apiKey }) => {
-  const { value, setValue, path } = useField<string>({})
+  const { value, setValue } = useField<string>({
+    path: ''
+  })
   const [hashtags, setHashtags] = React.useState<{ id: string; name: string }[]>([])
 
   React.useEffect(() => {
