@@ -21,7 +21,7 @@ const Users: CollectionConfig = {
           value: 'client',
         },
       ],
-      defaultValue: 'client',
+      defaultValue: 'admin',
       required: true,
       admin: {
         condition: (data, siblingData, { user }) => {
