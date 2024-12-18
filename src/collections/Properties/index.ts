@@ -1,5 +1,3 @@
-
-// collections/Properties.js
 import { slugField } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 

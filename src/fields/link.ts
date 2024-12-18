@@ -24,7 +24,7 @@ type LinkType = (options?: {
   overrides?: Record<string, unknown>
 }) => Field
 
-const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = {}) => {
+const link: LinkType = ({ disableLabel = false, overrides = {} } = {}) => {
   const linkResult: Field = {
     name: 'link',
     type: 'group',
@@ -54,17 +54,6 @@ const link: LinkType = ({ appearances, disableLabel = false, overrides = {} } = 
               width: '50%',
             },
           },
-          // {
-          //   name: 'newTab',
-          //   label: 'Open in new tab',
-          //   type: 'checkbox',
-          //   admin: {
-          //     width: '50%',
-          //     style: {
-          //       alignSelf: 'flex-end',
-          //     },
-          //   },
-          // },
         ],
       },
     ],
