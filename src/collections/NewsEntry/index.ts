@@ -1,3 +1,4 @@
+import { slugField } from '@/fields/slug'
 import type { CollectionConfig } from 'payload'
 
 export const NewsEntry: CollectionConfig = {
@@ -22,6 +23,7 @@ export const NewsEntry: CollectionConfig = {
       required: true,
       localized: true,
     },
+    slugField(),
     {
       name: 'home',
       type: 'group',

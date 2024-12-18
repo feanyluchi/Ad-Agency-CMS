@@ -19,6 +19,7 @@ import { Banner } from '@/blocks/beta/banner'
 import { CustomBlock } from 'block-types'
 import ClientReview from '@/blocks/alpha/ClientReview'
 import { GeneralContent } from '@/blocks/alpha/GeneralContent'
+import { slugField } from '@/fields/slug'
 
 // Get block type from the environment variable
 const BLOCK_TYPE = process.env.BLOCK_TYPE || 'both'
@@ -71,6 +72,7 @@ export const GeneralPageEntry: CollectionConfig = {
       required: true,
       localized: true,
     },
+    slugField(),
     {
       name: 'home',
       type: 'group',

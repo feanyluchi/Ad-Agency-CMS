@@ -19,27 +19,6 @@ export const slugField: Slug = (fieldToUse = 'title', overrides = {}) =>
       hooks: {
         beforeValidate: [formatSlug(fieldToUse)],
       },
-      // validate: async (value, { data, operation }) => {
-      //   if (operation === 'create') {
-      //     const existingSlug = await new Promise<Payload[]>((resolve, reject) => {
-      //       payload.find({
-      //         collection: 'pages',
-      //         where: { slug: value },
-      //         limit: 1,
-      //       }).then((result) => {
-      //         if (result) {
-      //           // handle the result
-      //         } else {
-      //           // handle the error
-      //         }
-      //       });
-      //     });
-      //     if (existingSlug) {
-      //       return 'Slug already exists';
-      //     }
-      //   }
-      //   return true;
-      // },
     },
     overrides,
   )
