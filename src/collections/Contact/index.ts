@@ -1,6 +1,7 @@
 import AddressBlock from '@/blocks/alpha/Address'
 import { ImageGallery } from '@/blocks/alpha/ImageGallery'
 import { RichText } from '@/blocks/alpha/Richtext'
+import { slugField } from '@/fields/slug'
 import type { CollectionConfig } from 'payload'
 
 export const Contact: CollectionConfig = {
@@ -33,6 +34,7 @@ export const Contact: CollectionConfig = {
       required: true,
       localized: true,
     },
+    slugField(),
     {
       name: 'home',
       type: 'group',

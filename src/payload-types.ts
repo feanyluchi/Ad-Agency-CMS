@@ -92,6 +92,7 @@ export interface UserAuthOperations {
 export interface Home {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -266,6 +267,7 @@ export interface Photo {
 export interface Aboutus {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -305,6 +307,7 @@ export interface Aboutus {
 export interface Contact {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -392,6 +395,7 @@ export interface Contact {
 export interface Productsoverview {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -412,6 +416,7 @@ export interface Productsoverview {
 export interface Newsoverview {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -432,6 +437,7 @@ export interface Newsoverview {
 export interface Productentry {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -447,6 +453,7 @@ export interface Productentry {
 export interface Newsentry {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -462,6 +469,7 @@ export interface Newsentry {
 export interface GeneralPageEntry {
   id: string;
   title: string;
+  slug?: string | null;
   home: {
     title: string;
     excerpt: string;
@@ -1132,6 +1140,7 @@ export interface PayloadMigration {
  */
 export interface HomeSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1230,6 +1239,7 @@ export interface HomeSelect<T extends boolean = true> {
  */
 export interface AboutusSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1280,6 +1290,7 @@ export interface AboutusSelect<T extends boolean = true> {
  */
 export interface ProductsoverviewSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1305,6 +1316,7 @@ export interface ProductsoverviewSelect<T extends boolean = true> {
  */
 export interface NewsoverviewSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1330,6 +1342,7 @@ export interface NewsoverviewSelect<T extends boolean = true> {
  */
 export interface ContactSelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1403,6 +1416,7 @@ export interface ContactSelect<T extends boolean = true> {
  */
 export interface ProductentrySelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1419,6 +1433,7 @@ export interface ProductentrySelect<T extends boolean = true> {
  */
 export interface NewsentrySelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {
@@ -1435,6 +1450,7 @@ export interface NewsentrySelect<T extends boolean = true> {
  */
 export interface GeneralPageEntrySelect<T extends boolean = true> {
   title?: T;
+  slug?: T;
   home?:
     | T
     | {

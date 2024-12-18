@@ -13,6 +13,7 @@ import PopularNeighborhoodsBlock from '@/blocks/beta/Neighbourhoods'
 import NewsletterSignupBlock from '@/blocks/beta/NewsletterSignup'
 import Testimonials from '@/blocks/beta/Testimonials'
 import WhyChooseUsBlock from '@/blocks/beta/WhyChooseUs'
+import { slugField } from '@/fields/slug'
 import { CustomBlock } from 'block-types'
 import type { CollectionConfig } from 'payload'
 
@@ -74,6 +75,7 @@ export const HomePage: CollectionConfig = {
       required: true,
       localized: true,
     },
+    slugField(),
     {
       name: 'home',
       type: 'group',
