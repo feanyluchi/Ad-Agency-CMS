@@ -1,4 +1,4 @@
-import configPromise from '@/ada.config'
+import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 
 export const GET = async () => {
