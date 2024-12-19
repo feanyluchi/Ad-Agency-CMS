@@ -27,7 +27,7 @@
         "./src/*"
       ],
       "@payload-config": [
-        "./src/payload.config.ts"
+        "src/ada.config.ts"
       ]
     },
     "target": "ES2017"
