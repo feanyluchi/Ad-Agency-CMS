@@ -1,18 +1,23 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { CollectionConfig, FieldHook, buildConfig } from 'payload'
+import { CollectionConfig, buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
-import { Media } from './collections/Media'
+import { s3Storage } from '@payloadcms/storage-s3'
+import { Videos } from './collections/Videos'
+import Users from './collections/Users'
+import { AboutUsPage } from './collections/AboutUsPage'
+import { HomePage } from './collections/HomePage'
+import { ProductsOverview } from './collections/ProductsOverview'
+import { NewsOverview } from './collections/NewsOverview'
+import { Contact } from './collections/Contact'
+import { ProductEntry } from './collections/ProductEntry'
+import { NewsEntry } from './collections/NewsEntry'
+import { GeneralPageEntry } from './collections/GeneralPageEntry'
+import { Photos } from './collections/Photos'
 import { Header } from './globals/Header'
 import { Footer } from './globals/Footer'
-import { HomePage } from './collections/HomePage'
-import { s3Storage } from '@payloadcms/storage-s3'
-
-import StaticTexts from './globals/StaticTexts'
-import Users from './collections/Users'
-import { Robots } from './collections/Robot'
 
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
@@ -21,6 +26,9 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+import { PropertyTypes } from './collections/PropertyType'
+// import { PropertiesOverview } from './collections/Properties'
+// import { Properties } from './collections/Properties'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -53,13 +61,14 @@ export default buildConfig({
   }),
   admin: {
     user: Users.slug,
+    importMap: {
+      baseDir: path.resolve(dirname),
+    },
     meta: {
-      titleSuffix: '- AD Agency',
+      titleSuffix: '- Master payload',
       icons: [
         {
-          rel: 'icon',
-          type: 'image/x-icon',
-          url: '/Tesoro-T.svg',
+          url: '@/graphics/favicon.png',
         },
       ],
     },
@@ -79,22 +88,26 @@ export default buildConfig({
       
     },
   },
-  globals: [Header, Footer, StaticTexts],
   collections: [
-    ...groupCollections('Single Pages', [HomePage]),
-    ...groupCollections('Channels Pages', [Properties]),
-    ...groupCollections('Library', [Media]),
-    ...groupCollections('Robot file', [Robots]),
+    ...groupCollections('Single Pages', [
+      HomePage,
+      AboutUsPage,
+      ProductsOverview,
+      NewsOverview,
+      Contact,
+    ]),
+    ...groupCollections('Channels Pages', [ProductEntry, NewsEntry, GeneralPageEntry, Properties]),
+    ...groupCollections('Library', [Photos, Videos, PropertyTypes]),
     ...groupCollections('User Groups', [Users]),
-    
   ],
+  globals: [Header, Footer],
   editor: lexicalEditor(),
   plugins: [
     s3Storage({
       collections: {
-        ['media']: {
+        ['photos']: {
           generateFileURL: (file) => {
-            return `${process.env.S3_BASE_URL}/ad-agency/${file.filename}`
+            return `${process.env.S3_BASE_URL}/${file.filename}`
           },
         },
       },
@@ -110,8 +123,18 @@ export default buildConfig({
       },
     }),
     seoPlugin({
-      collections: ['homepage', 'properties'],
-      uploadsCollection: 'media',
+      collections: [
+        'homepage',
+        'aboutus',
+        'productsoverview',
+        'newsoverview',
+        'contact',
+        'productEntry',
+        'newentry',
+        'generalPageEntry',
+        'propertiesoverview',
+      ],
+      uploadsCollection: 'photos',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
       generateDescription: ({ doc }) => doc.excerpt,
       tabbedUI: true,
@@ -127,8 +150,6 @@ export default buildConfig({
     locales: [
       { code: 'en', label: { en: 'English' } },
       { code: 'es', label: { en: 'Spanish', es: 'Español' } },
-      { code: 'nl', label: { en: 'Dutch', nl: 'Nederlands' } },
-      { code: 'fr', label: { en: 'French', fr: 'Français' } },
     ],
     defaultLocale: 'en',
     fallback: true,

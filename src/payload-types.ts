@@ -1015,6 +1015,21 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        hasChildren?: boolean | null;
+        children?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                reference?: {
+                  relationTo: 'homepage';
+                  value: string | Homepage;
+                } | null;
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1099,6 +1114,20 @@ export interface HeaderSelect<T extends boolean = true> {
               reference?: T;
               url?: T;
               label?: T;
+            };
+        hasChildren?: T;
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };

@@ -2,8 +2,6 @@ import { colorOptions } from '@/fields/colorOptions'
 import { slugField } from '@/fields/slug'
 import { CollectionConfig } from 'payload'
 
-const isClientUser = (user: any) => user?.role === 'client-user'
-
 export const HomePage: CollectionConfig = {
   slug: 'homepage',
   labels: {
