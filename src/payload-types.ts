@@ -20,6 +20,17 @@ export interface Config {
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
+  collectionsJoins: {};
+  collectionsSelect: {
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+    properties: PropertiesSelect<false> | PropertiesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    robots: RobotsSelect<false> | RobotsSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
     defaultIDType: string;
   };
@@ -28,9 +39,18 @@ export interface Config {
     footer: Footer;
     staticTexts: StaticText;
   };
+  globalsSelect: {
+    header: HeaderSelect<false> | HeaderSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
+    staticTexts: StaticTextsSelect<false> | StaticTextsSelect<true>;
+  };
   locale: 'en' | 'es' | 'nl' | 'fr';
   user: User & {
     collection: 'users';
+  };
+  jobs: {
+    tasks: unknown;
+    workflows: unknown;
   };
 }
 export interface UserAuthOperations {
@@ -229,7 +249,7 @@ export interface Property {
   id: string;
   title: string;
   slug?: string | null;
-  description?: string | null;
+  description: string;
   price?: number | null;
   featured?: boolean | null;
   meta?: {
@@ -286,54 +306,7 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?:
-            | (
-                | 'Albir'
-                | 'Alcalali'
-                | 'Alfaz del Pi'
-                | 'Altea'
-                | 'Altea Hills'
-                | 'Beniarbeig'
-                | 'Benidoleig'
-                | 'Benidorm'
-                | 'Benimeli'
-                | 'Benissa'
-                | 'Benitachell'
-                | 'Calpe'
-                | 'City 2'
-                | 'Denia'
-                | 'Dénia'
-                | 'El Vergel'
-                | 'Els Poblets'
-                | 'Finestrat'
-                | 'Gandia'
-                | 'Gata de Gorgos'
-                | 'Guadalest'
-                | 'Jalon'
-                | 'Javea'
-                | 'Jesus Pobre'
-                | 'Kota'
-                | 'La Nucia'
-                | 'La Xara'
-                | 'Lliber'
-                | 'Moraira'
-                | 'Murla'
-                | 'Mutxamel'
-                | 'Oliva'
-                | 'Ondara'
-                | 'Orba'
-                | 'Parcent'
-                | 'Pedreguer'
-                | 'Pego'
-                | 'Penaguila'
-                | 'Polop'
-                | 'Sagra'
-                | 'Senija'
-                | 'Teulada'
-                | 'Valdemadera'
-                | 'Vilajoyosa'
-              )
-            | null;
+          propertyCity?: 'Valdemadera' | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
@@ -734,6 +707,284 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  home?:
+    | T
+    | {
+        title?: T;
+        excerpt?: T;
+        slug?: T;
+      };
+  hero?:
+    | T
+    | {
+        mediaType?: T;
+        backgroundImage?: T;
+        backgroundVideo?: T;
+        backgroundColor?: T;
+        heroTitle?: T;
+        subtitle?: T;
+        description?: T;
+      };
+  discoverblock?:
+    | T
+    | {
+        blockTitle?: T;
+        columns?:
+          | T
+          | {
+              columnTitle?: T;
+              columnContent?: T;
+              id?: T;
+            };
+      };
+  whatWeDoBlock?:
+    | T
+    | {
+        backgroundImage?: T;
+        teamPhoto?: T;
+        title?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        description?: T;
+        backgroundColor?: T;
+      };
+  whyChooseAdAgencyBlock?:
+    | T
+    | {
+        rows?:
+          | T
+          | {
+              rowTitle?: T;
+              image?: T;
+              imagePosition?: T;
+              backgroundColor?: T;
+              columns?:
+                | T
+                | {
+                    title?: T;
+                    text?: T;
+                    number?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  contactBlock?:
+    | T
+    | {
+        content?: T;
+      };
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "properties_select".
+ */
+export interface PropertiesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  price?: T;
+  featured?: T;
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        preview?: T;
+      };
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  propertyFilter?:
+    | T
+    | {
+        filters?:
+          | T
+          | {
+              filterType?: T;
+              propertyCity?: T;
+              numberOfBedrooms?: T;
+              numberOfBathrooms?: T;
+              propertyType?: T;
+              propertyFeaturesType?: T;
+              propertyStatus?: T;
+              propertyTransactionType?: T;
+              mlsType?: T;
+              buildingStatusType?: T;
+              energyCertificationConsumptionType?: T;
+              energyCertificationEmissionsType?: T;
+              floorType?: T;
+              furnishedType?: T;
+              garageType?: T;
+              gardenType?: T;
+              heatingType?: T;
+              hotWaterType?: T;
+              kitchenType?: T;
+              noOfBuildingFloorType?: T;
+              orientationType?: T;
+              parkingType?: T;
+              patioType?: T;
+              priceFrequencyType?: T;
+              propertyStatusType?: T;
+              refurbishedType?: T;
+              roadType?: T;
+              shuttersType?: T;
+              swimmingPoolType?: T;
+              terraceType?: T;
+              waterHeaterType?: T;
+              viewType?: T;
+              windowsMaterialType?: T;
+              windowsType?: T;
+              propertyConditionType?: T;
+              equipmentType?: T;
+              labelType?: T;
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        mobile?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        tablet?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        desktop?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "robots_select".
+ */
+export interface RobotsSelect<T extends boolean = true> {
+  domain?: T;
+  content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  firstName?: T;
+  lastName?: T;
+  profilePicture?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-locked-documents_select".
+ */
+export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-preferences_select".
+ */
+export interface PayloadPreferencesSelect<T extends boolean = true> {
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-migrations_select".
+ */
+export interface PayloadMigrationsSelect<T extends boolean = true> {
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
 export interface Header {
@@ -764,6 +1015,21 @@ export interface Header {
           url?: string | null;
           label: string;
         };
+        hasChildren?: boolean | null;
+        children?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                reference?: {
+                  relationTo: 'homepage';
+                  value: string | Homepage;
+                } | null;
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -818,6 +1084,106 @@ export interface StaticText {
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  firstNavItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  logo?: T;
+  secondNavItems?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        hasChildren?: T;
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  quickLinks?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  logo?: T;
+  copyright?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "staticTexts_select".
+ */
+export interface StaticTextsSelect<T extends boolean = true> {
+  title?: T;
+  featuredHousesSection?: T;
+  contactUs?: T;
+  contactFormPlaceholders?:
+    | T
+    | {
+        firstName?: T;
+        lastName?: T;
+        phoneNumber?: T;
+        email?: T;
+        message?: T;
+        send?: T;
+      };
+  interestedContactAgent?: T;
+  mainFeatures?: T;
+  otherFeatures?: T;
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

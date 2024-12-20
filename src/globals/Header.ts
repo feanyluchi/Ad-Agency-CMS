@@ -1,6 +1,5 @@
-// import type { GlobalConfig } from 'payload/types'
-import { GlobalConfig } from 'payload'
-import link from '../fields/link'
+import { GlobalConfig } from 'payload';
+import link from '../fields/link';
 
 export const Header: GlobalConfig = {
   slug: 'header',
@@ -33,7 +32,27 @@ export const Header: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: 'hasChildren',
+          label: 'Has Child Links?',
+          type: 'checkbox',
+        },
+        {
+          name: 'children',
+          label: 'Child Links',
+          type: 'array',
+          admin: {
+            condition: (_, siblingData) => siblingData?.hasChildren,
+          },
+          fields: [
+            link({
+              appearances: false,
+            }),
+          ],
+        },
       ],
     },
   ],
-}
+};
+
+export default Header;

@@ -35,7 +35,9 @@ const CustomViewClient: React.FC = () => {
 
   const filteredCollections = collections.filter(
     (collection: any) =>
-      collection.slug !== 'payload-preferences' && collection.slug !== 'payload-migrations' && collection.slug !== 'payload-locked-documents',
+      collection.slug !== 'payload-preferences' &&
+      collection.slug !== 'payload-migrations' &&
+      collection.slug !== 'payload-locked-documents',
   )
 
   const groupedCollections = filteredCollections.reduce((acc: any, collection: any) => {
@@ -47,7 +49,6 @@ const CustomViewClient: React.FC = () => {
     return acc
   }, {})
 
-  // Utility function to shorten text and add '...'
   const truncateText = (text: string, maxLength: number) => {
     return text.length > maxLength ? `${text.substring(0, maxLength)}...` : text
   }
@@ -80,7 +81,6 @@ const CustomViewClient: React.FC = () => {
                       <div key={collection.slug} className="channel_style">
                         <Link
                           href={
-                            // Check if it's a single page collection and has documents
                             collection.admin.group === 'Single Pages' &&
                             docs[collection.slug]?.length > 0
                               ? `/admin/collections/${collection.slug}/${docs[collection.slug][0].id}`
@@ -212,6 +212,15 @@ const CustomViewClient: React.FC = () => {
               </div>
             </div>
           </div>
+          <h2
+            style={{
+              fontSize: '12px',
+              textAlign: 'center',
+              color: 'var(--text-color)',
+            }}
+          >
+            Payload Version: 3.1.0
+          </h2>
         </div>
       </Gutter>
     </div>

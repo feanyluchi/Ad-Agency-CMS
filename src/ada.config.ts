@@ -1,4 +1,3 @@
-// storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
@@ -58,7 +57,9 @@ export default buildConfig({
       titleSuffix: '- AD Agency',
       icons: [
         {
-          url: './graphics/favicon.png',
+          rel: 'icon',
+          type: 'image/x-icon',
+          url: '/Tesoro-T.svg',
         },
       ],
     },
@@ -70,11 +71,12 @@ export default buildConfig({
         Logo: '@/graphics/Logo/index#Logo',
       },
       views: {
-        Dashboard: {
+        dashboard: {
           Component: '@/components/CustomLayoutView/index#CustomView',
         },
       },
       Nav: '@/components/NavLinks/index#Nav',
+      
     },
   },
   globals: [Header, Footer, StaticTexts],
