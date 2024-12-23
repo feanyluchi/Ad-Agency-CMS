@@ -1274,11 +1274,9 @@ export interface AboutusSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1300,11 +1298,9 @@ export interface ProductsoverviewSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1326,11 +1322,9 @@ export interface NewsoverviewSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1400,11 +1394,9 @@ export interface ContactSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1542,11 +1534,9 @@ export interface GeneralPageEntrySelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
