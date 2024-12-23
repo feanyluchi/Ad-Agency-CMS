@@ -52,7 +52,7 @@ export const Photos: CollectionConfig = {
       name: 'alt',
       type: 'text',
       required: true,
-      defaultValue: ({ data }) => {
+      defaultValue: ({ data }: {data: any}) => {
         if (data?.filename) {
           return generateAltText(data.filename)
         }
