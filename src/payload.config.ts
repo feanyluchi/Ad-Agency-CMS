@@ -109,7 +109,7 @@ export default buildConfig({
       collections: {
         ['photos']: {
           generateFileURL: (file) => {
-            return `${process.env.S3_BASE_URL}/${file.filename}`
+            return `${process.env.S3_BASE_URL}/masterpayload/${file.filename}`
           },
         },
       },
