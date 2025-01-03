@@ -58,7 +58,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: 'en' | 'es';
+  locale: 'af' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -210,6 +210,11 @@ export interface Home {
           blockType: 'featuredProperties';
         }
     )[];
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
   };
   updatedAt: string;
   createdAt: string;
@@ -442,6 +447,11 @@ export interface Productentry {
     title: string;
     excerpt: string;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -457,6 +467,11 @@ export interface Newsentry {
   home: {
     title: string;
     excerpt: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
   };
   updatedAt: string;
   createdAt: string;
@@ -608,6 +623,11 @@ export interface Property {
   description: string;
   price?: number | null;
   featured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    image?: (string | null) | Photo;
+  };
   parent?: (string | null) | Property;
   breadcrumbs?:
     | {
@@ -1229,6 +1249,13 @@ export interface HomeSelect<T extends boolean = true> {
                   };
             };
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1415,6 +1442,13 @@ export interface ProductentrySelect<T extends boolean = true> {
         title?: T;
         excerpt?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1431,6 +1465,13 @@ export interface NewsentrySelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1552,6 +1593,13 @@ export interface PropertiesSelect<T extends boolean = true> {
   description?: T;
   price?: T;
   featured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   parent?: T;
   breadcrumbs?:
     | T

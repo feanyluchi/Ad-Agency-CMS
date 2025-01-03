@@ -27,9 +27,9 @@ import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
 import { PropertyTypes } from './collections/PropertyType'
-// import { PropertiesOverview } from './collections/Properties'
-// import { Properties } from './collections/Properties'
+import { fetchLanguages } from './helper/fetchLanguages'
 
+const dynamicLanguages = await fetchLanguages();
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -126,15 +126,15 @@ export default buildConfig({
     }),
     seoPlugin({
       collections: [
-        'homepage',
+        'home',
         'aboutus',
         'productsoverview',
         'newsoverview',
         'contact',
-        'productEntry',
-        'newentry',
+        'productentry',
+        'newsentry',
         'generalPageEntry',
-        'propertiesoverview',
+        'properties',
       ],
       uploadsCollection: 'photos',
       generateTitle: ({ doc }) => `${process.env.SITE_SEO_TITLE} - ${doc.title}`,
@@ -149,11 +149,8 @@ export default buildConfig({
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   localization: {
-    locales: [
-      { code: 'en', label: { en: 'English' } },
-      { code: 'es', label: { en: 'Spanish', es: 'Español' } },
-    ],
-    defaultLocale: 'en',
+    locales: dynamicLanguages,
+    defaultLocale: dynamicLanguages[0]?.code || 'en',
     fallback: true,
   },
   typescript: {

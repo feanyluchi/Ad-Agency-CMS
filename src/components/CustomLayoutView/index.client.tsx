@@ -60,7 +60,7 @@ const CustomViewClient: React.FC = () => {
           {isLoading ? (
             <div className="spinner-container">
               <div className="spinner"></div>
-            </div> // Replace with your loading spinner
+            </div>
           ) : (
             Object.keys(groupedCollections).map((group) => (
               <div style={{ marginBottom: '40px' }} key={group}>
