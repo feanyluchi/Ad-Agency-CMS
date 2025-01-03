@@ -44,7 +44,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     staticTexts: StaticTextsSelect<false> | StaticTextsSelect<true>;
   };
-  locale: 'af' | 'es';
+  locale: 'en' | 'nl' | 'es' | 'fr';
   user: User & {
     collection: 'users';
   };
@@ -306,7 +306,20 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?: 'Valdemadera' | null;
+          propertyCity?:
+            | (
+                | 'Altea'
+                | 'Altea Hills'
+                | 'Benitachell'
+                | 'Calpe'
+                | 'Dénia'
+                | 'Gandia'
+                | 'Javea'
+                | 'Jesus Pobre'
+                | 'Jávea'
+                | 'Moraira'
+              )
+            | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
