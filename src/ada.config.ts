@@ -21,7 +21,9 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
+import { fetchLanguages } from './helper/fetchLanguages'
 
+const dynamicLanguages = await fetchLanguages();
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -124,13 +126,8 @@ export default buildConfig({
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   localization: {
-    locales: [
-      { code: 'en', label: { en: 'English' } },
-      { code: 'es', label: { en: 'Spanish', es: 'Español' } },
-      { code: 'nl', label: { en: 'Dutch', nl: 'Nederlands' } },
-      { code: 'fr', label: { en: 'French', fr: 'Français' } },
-    ],
-    defaultLocale: 'en',
+    locales: dynamicLanguages,
+    defaultLocale: dynamicLanguages[0]?.code || 'en',
     fallback: true,
   },
   typescript: {

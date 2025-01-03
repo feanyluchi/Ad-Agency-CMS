@@ -44,7 +44,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     staticTexts: StaticTextsSelect<false> | StaticTextsSelect<true>;
   };
-  locale: 'en' | 'es' | 'nl' | 'fr';
+  locale: 'af' | 'es';
   user: User & {
     collection: 'users';
   };
