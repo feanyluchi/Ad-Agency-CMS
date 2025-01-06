@@ -44,7 +44,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     staticTexts: StaticTextsSelect<false> | StaticTextsSelect<true>;
   };
-  locale: 'en' | 'es' | 'nl' | 'fr';
+  locale: 'en' | 'nl' | 'es' | 'fr';
   user: User & {
     collection: 'users';
   };
@@ -306,7 +306,20 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?: 'Valdemadera' | null;
+          propertyCity?:
+            | (
+                | 'Altea'
+                | 'Altea Hills'
+                | 'Benitachell'
+                | 'Calpe'
+                | 'Dénia'
+                | 'Gandia'
+                | 'Javea'
+                | 'Jesus Pobre'
+                | 'Jávea'
+                | 'Moraira'
+              )
+            | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
@@ -783,11 +796,9 @@ export interface HomepageSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -806,11 +817,9 @@ export interface PropertiesSelect<T extends boolean = true> {
   meta?:
     | T
     | {
-        overview?: T;
         title?: T;
         description?: T;
         image?: T;
-        preview?: T;
       };
   parent?: T;
   breadcrumbs?:
