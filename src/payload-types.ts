@@ -58,7 +58,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: 'en' | 'es';
+  locale: 'af' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -104,6 +104,9 @@ export interface Home {
                 id?: string | null;
               }[]
             | null;
+          /**
+           * Enable auto-sliding between background images.
+           */
           autoSlide?: boolean | null;
           id?: string | null;
           blockName?: string | null;
@@ -111,9 +114,18 @@ export interface Home {
         }
       | {
           title: string;
+          /**
+           * Main descriptive content for this section.
+           */
           content: string;
           mapSection: {
+            /**
+             * Upload the map image.
+             */
             mapImage: string | Photo;
+            /**
+             * Select the autonomous regions where you operate.
+             */
             regions: (
               | 'andalusia'
               | 'aragon'
@@ -141,9 +153,21 @@ export interface Home {
       | {
           images?:
             | {
+                /**
+                 * Upload the image that will be displayed in the gallery.
+                 */
                 image: string | Photo;
+                /**
+                 * Text that will appear over the image.
+                 */
                 overlayText: string;
+                /**
+                 * Select the position of the overlay text on the image.
+                 */
                 textPosition: 'top' | 'center' | 'bottom';
+                /**
+                 * Check to add a link to this image.
+                 */
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -191,25 +215,57 @@ export interface Home {
           blockType: 'richText';
         }
       | {
+          /**
+           * The title displayed above the contact form.
+           */
           title: string;
+          /**
+           * A short description or introductory text displayed above the form.
+           */
           description?: string | null;
+          /**
+           * Message displayed after the form is successfully submitted.
+           */
           successMessage: string;
+          /**
+           * Text displayed on the form submission button.
+           */
           submitButtonText: string;
           id?: string | null;
           blockName?: string | null;
           blockType: 'contactForm';
         }
       | {
+          /**
+           * Title displayed above the featured properties section.
+           */
           title: string;
           propertyHashtag?: string | null;
+          /**
+           * Specify the number of properties to fetch and display as featured properties.
+           */
           propertyCount: number;
+          /**
+           * Toggle to show or hide the price of each property.
+           */
           displayPrice?: boolean | null;
+          /**
+           * Toggle to show or hide the address of each property.
+           */
           displayAddress?: boolean | null;
           id?: string | null;
           blockName?: string | null;
           blockType: 'featuredProperties';
         }
     )[];
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Photo;
   };
   updatedAt: string;
   createdAt: string;
@@ -221,6 +277,9 @@ export interface Home {
  */
 export interface Photo {
   id: string;
+  /**
+   * If left empty, the alt text will be generated from the filename.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -294,6 +353,9 @@ export interface Aboutus {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Photo;
   };
   updatedAt: string;
@@ -315,9 +377,21 @@ export interface Contact {
       | {
           images?:
             | {
+                /**
+                 * Upload the image that will be displayed in the gallery.
+                 */
                 image: string | Photo;
+                /**
+                 * Text that will appear over the image.
+                 */
                 overlayText: string;
+                /**
+                 * Select the position of the overlay text on the image.
+                 */
                 textPosition: 'top' | 'center' | 'bottom';
+                /**
+                 * Check to add a link to this image.
+                 */
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -382,6 +456,9 @@ export interface Contact {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Photo;
   };
   updatedAt: string;
@@ -403,6 +480,9 @@ export interface Productsoverview {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Photo;
   };
   updatedAt: string;
@@ -424,6 +504,9 @@ export interface Newsoverview {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Photo;
   };
   updatedAt: string;
@@ -442,6 +525,14 @@ export interface Productentry {
     title: string;
     excerpt: string;
   };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Photo;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -457,6 +548,14 @@ export interface Newsentry {
   home: {
     title: string;
     excerpt: string;
+  };
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Photo;
   };
   updatedAt: string;
   createdAt: string;
@@ -481,6 +580,9 @@ export interface GeneralPageEntry {
                 id?: string | null;
               }[]
             | null;
+          /**
+           * Enable auto-sliding between background images.
+           */
           autoSlide?: boolean | null;
           id?: string | null;
           blockName?: string | null;
@@ -488,9 +590,18 @@ export interface GeneralPageEntry {
         }
       | {
           title: string;
+          /**
+           * Main descriptive content for this section.
+           */
           content: string;
           mapSection: {
+            /**
+             * Upload the map image.
+             */
             mapImage: string | Photo;
+            /**
+             * Select the autonomous regions where you operate.
+             */
             regions: (
               | 'andalusia'
               | 'aragon'
@@ -518,9 +629,21 @@ export interface GeneralPageEntry {
       | {
           images?:
             | {
+                /**
+                 * Upload the image that will be displayed in the gallery.
+                 */
                 image: string | Photo;
+                /**
+                 * Text that will appear over the image.
+                 */
                 overlayText: string;
+                /**
+                 * Select the position of the overlay text on the image.
+                 */
                 textPosition: 'top' | 'center' | 'bottom';
+                /**
+                 * Check to add a link to this image.
+                 */
                 enableLink?: boolean | null;
                 link?: {
                   type?: ('reference' | 'custom') | null;
@@ -568,19 +691,43 @@ export interface GeneralPageEntry {
           blockType: 'richText';
         }
       | {
+          /**
+           * The title displayed above the contact form.
+           */
           title: string;
+          /**
+           * A short description or introductory text displayed above the form.
+           */
           description?: string | null;
+          /**
+           * Message displayed after the form is successfully submitted.
+           */
           successMessage: string;
+          /**
+           * Text displayed on the form submission button.
+           */
           submitButtonText: string;
           id?: string | null;
           blockName?: string | null;
           blockType: 'contactForm';
         }
       | {
+          /**
+           * Title displayed above the featured properties section.
+           */
           title: string;
           propertyHashtag?: string | null;
+          /**
+           * Specify the number of properties to fetch and display as featured properties.
+           */
           propertyCount: number;
+          /**
+           * Toggle to show or hide the price of each property.
+           */
           displayPrice?: boolean | null;
+          /**
+           * Toggle to show or hide the address of each property.
+           */
           displayAddress?: boolean | null;
           id?: string | null;
           blockName?: string | null;
@@ -591,6 +738,9 @@ export interface GeneralPageEntry {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Photo;
   };
   updatedAt: string;
@@ -608,6 +758,14 @@ export interface Property {
   description: string;
   price?: number | null;
   featured?: boolean | null;
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Photo;
+  };
   parent?: (string | null) | Property;
   breadcrumbs?:
     | {
@@ -620,6 +778,9 @@ export interface Property {
   propertyFilter?: {
     filters?:
       | {
+          /**
+           * Select which filter you want to add.
+           */
           filterType:
             | 'propertyCity'
             | 'numberOfBedrooms'
@@ -1007,7 +1168,13 @@ export interface Video {
 export interface PropertyType {
   id: string;
   name: string;
+  /**
+   * Optional description of the property type.
+   */
   description?: string | null;
+  /**
+   * Optional icon for the property type.
+   */
   icon?: (string | null) | Photo;
   updatedAt: string;
   createdAt: string;
@@ -1229,6 +1396,13 @@ export interface HomeSelect<T extends boolean = true> {
                   };
             };
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1415,6 +1589,13 @@ export interface ProductentrySelect<T extends boolean = true> {
         title?: T;
         excerpt?: T;
       };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1431,6 +1612,13 @@ export interface NewsentrySelect<T extends boolean = true> {
     | {
         title?: T;
         excerpt?: T;
+      };
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -1552,6 +1740,13 @@ export interface PropertiesSelect<T extends boolean = true> {
   description?: T;
   price?: T;
   featured?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        image?: T;
+      };
   parent?: T;
   breadcrumbs?:
     | T
