@@ -219,7 +219,7 @@ const CustomViewClient: React.FC = () => {
               color: 'var(--text-color)',
             }}
           >
-            Payload Version: 3.9.0
+            Payload Version: 3.15.1
           </h2>
         </div>
       </Gutter>

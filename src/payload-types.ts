@@ -190,6 +190,9 @@ export interface Homepage {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   updatedAt: string;
@@ -202,6 +205,9 @@ export interface Homepage {
  */
 export interface Media {
   id: string;
+  /**
+   * If left empty, the alt text will be generated from the filename.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -255,6 +261,9 @@ export interface Property {
   meta?: {
     title?: string | null;
     description?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
     image?: (string | null) | Media;
   };
   parent?: (string | null) | Property;
@@ -269,6 +278,9 @@ export interface Property {
   propertyFilter?: {
     filters?:
       | {
+          /**
+           * Select which filter you want to add.
+           */
           filterType:
             | 'propertyCity'
             | 'numberOfBedrooms'
@@ -1071,6 +1083,8 @@ export interface Footer {
   createdAt?: string | null;
 }
 /**
+ * This collection contains static text block that are used throughout the site.
+ *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "staticTexts".
  */
