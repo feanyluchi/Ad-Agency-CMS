@@ -34,35 +34,18 @@ export const Contact: CollectionConfig = {
       required: true,
       localized: true,
     },
+    {
+      name: 'excerpt',
+      type: 'textarea',
+      required: true,
+      localized: true,
+    },
     slugField(),
     {
-      name: 'home',
-      type: 'group',
-      label: 'Home',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'excerpt',
-          type: 'textarea',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'layout',
-          type: 'blocks',
-          required: true,
-          blocks: [
-            ImageGallery,
-            RichText,
-            AddressBlock
-          ]
-        }
-      ],
+      name: 'layout',
+      type: 'blocks',
+      required: true,
+      blocks: [ImageGallery, RichText, AddressBlock],
     },
   ],
 }
