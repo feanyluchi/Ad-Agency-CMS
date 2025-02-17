@@ -23,25 +23,12 @@ export const NewsEntry: CollectionConfig = {
       required: true,
       localized: true,
     },
-    slugField(),
     {
-      name: 'home',
-      type: 'group',
-      label: 'Home',
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-          required: true,
-          localized: true,
-        },
-        {
-          name: 'excerpt',
-          type: 'textarea',
-          required: true,
-          localized: true,
-        },
-      ],
+      name: 'excerpt',
+      type: 'textarea',
+      required: true,
+      localized: true,
     },
+    slugField(),
   ],
 }
