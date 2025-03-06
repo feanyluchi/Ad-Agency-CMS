@@ -1,16 +1,24 @@
 'use client'
 
 import * as React from 'react'
-import { useField } from '@payloadcms/ui'
+import { useField, useTheme } from '@payloadcms/ui'
 import { TextFieldClientProps } from 'payload'
+import { withRouter } from 'next/router'
 
-type Props = TextFieldClientProps & { apiUrl: string; apiKey: string }
+type Props = TextFieldClientProps & { apiUrl: string; apiKey: string; path: any }
 
-export const CustomTagSelector: React.FC<Props> = ({ apiUrl, apiKey }) => {
+export const CustomTagSelector: React.FC<Props> = ({ apiUrl, apiKey, path }) => {
   const { value, setValue } = useField<string>({
-    path: ''
+    path: path || '',
   })
+
   const [hashtags, setHashtags] = React.useState<{ id: string; name: string }[]>([])
+  const { theme } = useTheme()
+  const [currentTheme, setCurrentTheme] = React.useState<'light' | 'dark'>('light')
+
+  React.useEffect(() => {
+    setCurrentTheme(theme) // Update theme state
+  }, [theme])
 
   React.useEffect(() => {
     const fetchHashtags = async () => {
@@ -22,10 +30,12 @@ export const CustomTagSelector: React.FC<Props> = ({ apiUrl, apiKey }) => {
           },
         })
         const data = await response.json()
-        setHashtags(data.data.map((tag: { _id: string; name: string }) => ({
-          id: tag._id,
-          name: tag.name,
-        })))
+        setHashtags(
+          data.data.map((tag: { _id: string; name: string }) => ({
+            id: tag._id,
+            name: tag.name,
+          })),
+        )
       } catch (error) {
         console.error('Error fetching hashtags:', error)
       }
@@ -40,58 +50,61 @@ export const CustomTagSelector: React.FC<Props> = ({ apiUrl, apiKey }) => {
 
   return (
     <div>
-      <label className="field-label">Tags</label>
+      <label className="field-label">Property Tags</label>
       <div style={{ display: 'flex', gap: '25px', flexWrap: 'wrap', margin: '20px 0' }}>
-        {hashtags.map((tag, index) => (
-          <div
-            key={tag.id}
-            onClick={() => handleSelect(tag.id)}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              padding: '2px 7px',
-              borderRadius: '0px',
-              cursor: 'pointer',
-              backgroundColor: getRandomColor(index),
-              color: 'white',
-              fontWeight: 'bold',
-              fontSize: '10px',
-              letterSpacing: '1px',
-              position: 'relative',
-              textTransform: "uppercase",
-              boxShadow: value === tag.id ? '0 0 10px rgba(255, 255, 255, 0.8)' : '0 2px 4px rgba(0, 0, 0, 0.2)',
-              transform: value === tag.id ? 'scale(1.05)' : 'scale(1)',
-              transition: 'all 0.3s ease',
-            }}
-          >
-            {tag.name}
-            <span
-              style={{
-                position: 'absolute',
-                right: '-12px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '0',
-                height: '0',
-                borderStyle: 'solid',
-                borderWidth: '12px 0 12px 12px',
-                borderColor: `transparent transparent transparent ${getRandomColor(index)}`,
-              }}
-            ></span>
+        {hashtags.map((tag, index) => {
+          const isActive = value === tag.id
+          const tagColor = getRandomColor(index)
+
+          // Dynamic shadow based on theme
+          const shadowColor = currentTheme === 'dark' ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.3)'
+
+          return (
             <div
+              key={tag.id}
               style={{
-                position: 'absolute',
-                right: '-6px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: '4px',
-                height: '4px',
-                borderRadius: '50%',
-                backgroundColor: 'white',
+                display: 'inline-block',
+                padding: '5px', // Space for the shadow to show
+                boxShadow: isActive ? `0px 0px 15px ${shadowColor}` : 'none', // Dynamic shadow
+                borderRadius: '5px', // Soft rounded glow
               }}
-            ></div>
-          </div>
-        ))}
+            >
+              <div
+                onClick={() => handleSelect(tag.id)}
+                style={{
+                  position: 'relative',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  padding: isActive ? '6px 20px 6px 12px' : '2px 20px 2px 7px',
+                  cursor: 'pointer',
+                  backgroundColor: tagColor,
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: isActive ? '14px' : '10px',
+                  letterSpacing: '1px',
+                  textTransform: 'uppercase',
+                  clipPath: 'polygon(0% 0%, 85% 0%, 100% 50%, 85% 100%, 0% 100%)', // Keeps arrow shape
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                {tag.name}
+                {/* White Dot */}
+                <div
+                  style={{
+                    position: 'absolute',
+                    right: '6px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '100%',
+                    backgroundColor: 'white',
+                  }}
+                ></div>
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
