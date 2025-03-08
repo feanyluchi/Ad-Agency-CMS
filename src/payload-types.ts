@@ -6,10 +6,65 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
+/**
+ * Supported timezones in IANA format.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "supportedTimezones".
+ */
+export type SupportedTimezones =
+  | 'Pacific/Midway'
+  | 'Pacific/Niue'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Rarotonga'
+  | 'America/Anchorage'
+  | 'Pacific/Gambier'
+  | 'America/Los_Angeles'
+  | 'America/Tijuana'
+  | 'America/Denver'
+  | 'America/Phoenix'
+  | 'America/Chicago'
+  | 'America/Guatemala'
+  | 'America/New_York'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Santiago'
+  | 'America/Buenos_Aires'
+  | 'America/Sao_Paulo'
+  | 'Atlantic/South_Georgia'
+  | 'Atlantic/Azores'
+  | 'Atlantic/Cape_Verde'
+  | 'Europe/London'
+  | 'Europe/Berlin'
+  | 'Africa/Lagos'
+  | 'Europe/Athens'
+  | 'Africa/Cairo'
+  | 'Europe/Moscow'
+  | 'Asia/Riyadh'
+  | 'Asia/Dubai'
+  | 'Asia/Baku'
+  | 'Asia/Karachi'
+  | 'Asia/Tashkent'
+  | 'Asia/Calcutta'
+  | 'Asia/Dhaka'
+  | 'Asia/Almaty'
+  | 'Asia/Jakarta'
+  | 'Asia/Bangkok'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Tokyo'
+  | 'Asia/Seoul'
+  | 'Australia/Sydney'
+  | 'Pacific/Guam'
+  | 'Pacific/Noumea'
+  | 'Pacific/Auckland'
+  | 'Pacific/Fiji';
+
 export interface Config {
   auth: {
     users: UserAuthOperations;
   };
+  blocks: {};
   collections: {
     home: Home;
     aboutus: Aboutus;
@@ -58,7 +113,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: 'af' | 'es';
+  locale: 'en' | 'nl' | 'es';
   user: User & {
     collection: 'users';
   };
@@ -92,173 +147,170 @@ export interface UserAuthOperations {
 export interface Home {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-    layout: (
-      | {
-          backgroundImages?:
-            | {
-                image?: (string | null) | Photo;
-                id?: string | null;
-              }[]
-            | null;
+  layout: (
+    | {
+        backgroundImages?:
+          | {
+              image?: (string | null) | Photo;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enable auto-sliding between background images.
+         */
+        autoSlide?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'heroSection';
+      }
+    | {
+        title: string;
+        /**
+         * Main descriptive content for this section.
+         */
+        content: string;
+        mapSection: {
           /**
-           * Enable auto-sliding between background images.
+           * Upload the map image.
            */
-          autoSlide?: boolean | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'heroSection';
-        }
-      | {
-          title: string;
+          mapImage: string | Photo;
           /**
-           * Main descriptive content for this section.
+           * Select the autonomous regions where you operate.
            */
-          content: string;
-          mapSection: {
-            /**
-             * Upload the map image.
-             */
-            mapImage: string | Photo;
-            /**
-             * Select the autonomous regions where you operate.
-             */
-            regions: (
-              | 'andalusia'
-              | 'aragon'
-              | 'asturias'
-              | 'balearic_islands'
-              | 'basque_country'
-              | 'canary_islands'
-              | 'cantabria'
-              | 'castile_and_leon'
-              | 'castile_la_mancha'
-              | 'catalonia'
-              | 'extremadura'
-              | 'galicia'
-              | 'la_rioja'
-              | 'madrid'
-              | 'murcia'
-              | 'navarre'
-              | 'valencian_community'
-            )[];
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'prestigeLivingSection';
-        }
-      | {
-          images?:
-            | {
-                /**
-                 * Upload the image that will be displayed in the gallery.
-                 */
-                image: string | Photo;
-                /**
-                 * Text that will appear over the image.
-                 */
-                overlayText: string;
-                /**
-                 * Select the position of the overlay text on the image.
-                 */
-                textPosition: 'top' | 'center' | 'bottom';
-                /**
-                 * Check to add a link to this image.
-                 */
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  reference?:
-                    | ({
-                        relationTo: 'aboutus';
-                        value: string | Aboutus;
-                      } | null)
-                    | ({
-                        relationTo: 'home';
-                        value: string | Home;
-                      } | null)
-                    | ({
-                        relationTo: 'contact';
-                        value: string | Contact;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'imageGallery';
-        }
-      | {
-          content: {
-            root: {
+          regions: (
+            | 'andalusia'
+            | 'aragon'
+            | 'asturias'
+            | 'balearic_islands'
+            | 'basque_country'
+            | 'canary_islands'
+            | 'cantabria'
+            | 'castile_and_leon'
+            | 'castile_la_mancha'
+            | 'catalonia'
+            | 'extremadura'
+            | 'galicia'
+            | 'la_rioja'
+            | 'madrid'
+            | 'murcia'
+            | 'navarre'
+            | 'valencian_community'
+          )[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prestigeLivingSection';
+      }
+    | {
+        images?:
+          | {
+              /**
+               * Upload the image that will be displayed in the gallery.
+               */
+              image: string | Photo;
+              /**
+               * Text that will appear over the image.
+               */
+              overlayText: string;
+              /**
+               * Select the position of the overlay text on the image.
+               */
+              textPosition: 'top' | 'center' | 'bottom';
+              /**
+               * Check to add a link to this image.
+               */
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                reference?:
+                  | ({
+                      relationTo: 'aboutus';
+                      value: string | Aboutus;
+                    } | null)
+                  | ({
+                      relationTo: 'home';
+                      value: string | Home;
+                    } | null)
+                  | ({
+                      relationTo: 'contact';
+                      value: string | Contact;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageGallery';
+      }
+    | {
+        content: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'richText';
-        }
-      | {
-          /**
-           * The title displayed above the contact form.
-           */
-          title: string;
-          /**
-           * A short description or introductory text displayed above the form.
-           */
-          description?: string | null;
-          /**
-           * Message displayed after the form is successfully submitted.
-           */
-          successMessage: string;
-          /**
-           * Text displayed on the form submission button.
-           */
-          submitButtonText: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'contactForm';
-        }
-      | {
-          /**
-           * Title displayed above the featured properties section.
-           */
-          title: string;
-          propertyHashtag?: string | null;
-          /**
-           * Specify the number of properties to fetch and display as featured properties.
-           */
-          propertyCount: number;
-          /**
-           * Toggle to show or hide the price of each property.
-           */
-          displayPrice?: boolean | null;
-          /**
-           * Toggle to show or hide the address of each property.
-           */
-          displayAddress?: boolean | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'featuredProperties';
-        }
-    )[];
-  };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'richText';
+      }
+    | {
+        /**
+         * The title displayed above the contact form.
+         */
+        title: string;
+        /**
+         * A short description or introductory text displayed above the form.
+         */
+        description?: string | null;
+        /**
+         * Message displayed after the form is successfully submitted.
+         */
+        successMessage: string;
+        /**
+         * Text displayed on the form submission button.
+         */
+        submitButtonText: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactForm';
+      }
+    | {
+        /**
+         * Title displayed above the featured properties section.
+         */
+        title: string;
+        propertyHashtag?: string | null;
+        /**
+         * Specify the number of properties to fetch and display as featured properties.
+         */
+        propertyCount: number;
+        /**
+         * Toggle to show or hide the price of each property.
+         */
+        displayPrice?: boolean | null;
+        /**
+         * Toggle to show or hide the address of each property.
+         */
+        displayAddress?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featuredProperties';
+      }
+  )[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -326,11 +378,8 @@ export interface Photo {
 export interface Aboutus {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-  };
   aboutuscontent: {
     contentBackground: string | Photo;
     contentSubtitle: string;
@@ -369,90 +418,87 @@ export interface Aboutus {
 export interface Contact {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-    layout: (
-      | {
-          images?:
-            | {
-                /**
-                 * Upload the image that will be displayed in the gallery.
-                 */
-                image: string | Photo;
-                /**
-                 * Text that will appear over the image.
-                 */
-                overlayText: string;
-                /**
-                 * Select the position of the overlay text on the image.
-                 */
-                textPosition: 'top' | 'center' | 'bottom';
-                /**
-                 * Check to add a link to this image.
-                 */
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  reference?:
-                    | ({
-                        relationTo: 'aboutus';
-                        value: string | Aboutus;
-                      } | null)
-                    | ({
-                        relationTo: 'home';
-                        value: string | Home;
-                      } | null)
-                    | ({
-                        relationTo: 'contact';
-                        value: string | Contact;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'imageGallery';
-        }
-      | {
-          content: {
-            root: {
+  layout: (
+    | {
+        images?:
+          | {
+              /**
+               * Upload the image that will be displayed in the gallery.
+               */
+              image: string | Photo;
+              /**
+               * Text that will appear over the image.
+               */
+              overlayText: string;
+              /**
+               * Select the position of the overlay text on the image.
+               */
+              textPosition: 'top' | 'center' | 'bottom';
+              /**
+               * Check to add a link to this image.
+               */
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                reference?:
+                  | ({
+                      relationTo: 'aboutus';
+                      value: string | Aboutus;
+                    } | null)
+                  | ({
+                      relationTo: 'home';
+                      value: string | Home;
+                    } | null)
+                  | ({
+                      relationTo: 'contact';
+                      value: string | Contact;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageGallery';
+      }
+    | {
+        content: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'richText';
-        }
-      | {
-          addresses?:
-            | {
-                title: string;
-                addressLine: string;
-                phone: string;
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'addresses';
-        }
-    )[];
-  };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'richText';
+      }
+    | {
+        addresses?:
+          | {
+              title: string;
+              addressLine: string;
+              phone: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'addresses';
+      }
+  )[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -472,11 +518,8 @@ export interface Contact {
 export interface Productsoverview {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -496,11 +539,8 @@ export interface Productsoverview {
 export interface Newsoverview {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -520,11 +560,8 @@ export interface Newsoverview {
 export interface Productentry {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -544,11 +581,8 @@ export interface Productentry {
 export interface Newsentry {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -568,173 +602,170 @@ export interface Newsentry {
 export interface GeneralPageEntry {
   id: string;
   title: string;
+  excerpt: string;
   slug?: string | null;
-  home: {
-    title: string;
-    excerpt: string;
-    layout: (
-      | {
-          backgroundImages?:
-            | {
-                image?: (string | null) | Photo;
-                id?: string | null;
-              }[]
-            | null;
+  layout: (
+    | {
+        backgroundImages?:
+          | {
+              image?: (string | null) | Photo;
+              id?: string | null;
+            }[]
+          | null;
+        /**
+         * Enable auto-sliding between background images.
+         */
+        autoSlide?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'heroSection';
+      }
+    | {
+        title: string;
+        /**
+         * Main descriptive content for this section.
+         */
+        content: string;
+        mapSection: {
           /**
-           * Enable auto-sliding between background images.
+           * Upload the map image.
            */
-          autoSlide?: boolean | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'heroSection';
-        }
-      | {
-          title: string;
+          mapImage: string | Photo;
           /**
-           * Main descriptive content for this section.
+           * Select the autonomous regions where you operate.
            */
-          content: string;
-          mapSection: {
-            /**
-             * Upload the map image.
-             */
-            mapImage: string | Photo;
-            /**
-             * Select the autonomous regions where you operate.
-             */
-            regions: (
-              | 'andalusia'
-              | 'aragon'
-              | 'asturias'
-              | 'balearic_islands'
-              | 'basque_country'
-              | 'canary_islands'
-              | 'cantabria'
-              | 'castile_and_leon'
-              | 'castile_la_mancha'
-              | 'catalonia'
-              | 'extremadura'
-              | 'galicia'
-              | 'la_rioja'
-              | 'madrid'
-              | 'murcia'
-              | 'navarre'
-              | 'valencian_community'
-            )[];
-          };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'prestigeLivingSection';
-        }
-      | {
-          images?:
-            | {
-                /**
-                 * Upload the image that will be displayed in the gallery.
-                 */
-                image: string | Photo;
-                /**
-                 * Text that will appear over the image.
-                 */
-                overlayText: string;
-                /**
-                 * Select the position of the overlay text on the image.
-                 */
-                textPosition: 'top' | 'center' | 'bottom';
-                /**
-                 * Check to add a link to this image.
-                 */
-                enableLink?: boolean | null;
-                link?: {
-                  type?: ('reference' | 'custom') | null;
-                  reference?:
-                    | ({
-                        relationTo: 'aboutus';
-                        value: string | Aboutus;
-                      } | null)
-                    | ({
-                        relationTo: 'home';
-                        value: string | Home;
-                      } | null)
-                    | ({
-                        relationTo: 'contact';
-                        value: string | Contact;
-                      } | null);
-                  url?: string | null;
-                  label: string;
-                };
-                id?: string | null;
-              }[]
-            | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'imageGallery';
-        }
-      | {
-          content: {
-            root: {
+          regions: (
+            | 'andalusia'
+            | 'aragon'
+            | 'asturias'
+            | 'balearic_islands'
+            | 'basque_country'
+            | 'canary_islands'
+            | 'cantabria'
+            | 'castile_and_leon'
+            | 'castile_la_mancha'
+            | 'catalonia'
+            | 'extremadura'
+            | 'galicia'
+            | 'la_rioja'
+            | 'madrid'
+            | 'murcia'
+            | 'navarre'
+            | 'valencian_community'
+          )[];
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'prestigeLivingSection';
+      }
+    | {
+        images?:
+          | {
+              /**
+               * Upload the image that will be displayed in the gallery.
+               */
+              image: string | Photo;
+              /**
+               * Text that will appear over the image.
+               */
+              overlayText: string;
+              /**
+               * Select the position of the overlay text on the image.
+               */
+              textPosition: 'top' | 'center' | 'bottom';
+              /**
+               * Check to add a link to this image.
+               */
+              enableLink?: boolean | null;
+              link?: {
+                type?: ('reference' | 'custom') | null;
+                reference?:
+                  | ({
+                      relationTo: 'aboutus';
+                      value: string | Aboutus;
+                    } | null)
+                  | ({
+                      relationTo: 'home';
+                      value: string | Home;
+                    } | null)
+                  | ({
+                      relationTo: 'contact';
+                      value: string | Contact;
+                    } | null);
+                url?: string | null;
+                label: string;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageGallery';
+      }
+    | {
+        content: {
+          root: {
+            type: string;
+            children: {
               type: string;
-              children: {
-                type: string;
-                version: number;
-                [k: string]: unknown;
-              }[];
-              direction: ('ltr' | 'rtl') | null;
-              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-              indent: number;
               version: number;
-            };
-            [k: string]: unknown;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
           };
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'richText';
-        }
-      | {
-          /**
-           * The title displayed above the contact form.
-           */
-          title: string;
-          /**
-           * A short description or introductory text displayed above the form.
-           */
-          description?: string | null;
-          /**
-           * Message displayed after the form is successfully submitted.
-           */
-          successMessage: string;
-          /**
-           * Text displayed on the form submission button.
-           */
-          submitButtonText: string;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'contactForm';
-        }
-      | {
-          /**
-           * Title displayed above the featured properties section.
-           */
-          title: string;
-          propertyHashtag?: string | null;
-          /**
-           * Specify the number of properties to fetch and display as featured properties.
-           */
-          propertyCount: number;
-          /**
-           * Toggle to show or hide the price of each property.
-           */
-          displayPrice?: boolean | null;
-          /**
-           * Toggle to show or hide the address of each property.
-           */
-          displayAddress?: boolean | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'featuredProperties';
-        }
-    )[];
-  };
+          [k: string]: unknown;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'richText';
+      }
+    | {
+        /**
+         * The title displayed above the contact form.
+         */
+        title: string;
+        /**
+         * A short description or introductory text displayed above the form.
+         */
+        description?: string | null;
+        /**
+         * Message displayed after the form is successfully submitted.
+         */
+        successMessage: string;
+        /**
+         * Text displayed on the form submission button.
+         */
+        submitButtonText: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactForm';
+      }
+    | {
+        /**
+         * Title displayed above the featured properties section.
+         */
+        title: string;
+        propertyHashtag?: string | null;
+        /**
+         * Specify the number of properties to fetch and display as featured properties.
+         */
+        propertyCount: number;
+        /**
+         * Toggle to show or hide the price of each property.
+         */
+        displayPrice?: boolean | null;
+        /**
+         * Toggle to show or hide the address of each property.
+         */
+        displayAddress?: boolean | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'featuredProperties';
+      }
+  )[];
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -818,7 +849,21 @@ export interface Property {
             | 'propertyConditionType'
             | 'equipmentType'
             | 'labelType';
-          propertyCity?: 'Valdemadera' | null;
+          propertyCity?:
+            | (
+                | 'Benissa'
+                | 'Benitachell'
+                | 'Cumbre del Sol'
+                | 'Javea'
+                | 'Javea '
+                | 'Jávea'
+                | 'Lliber'
+                | 'Moraira'
+                | 'Tarraula'
+                | 'Teulada'
+                | 'Tosalet'
+              )
+            | null;
           numberOfBedrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           numberOfBathrooms?: ('1' | '2' | '3' | '4' | '5') | null;
           propertyType?:
@@ -1307,93 +1352,88 @@ export interface PayloadMigration {
  */
 export interface HomeSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
+  layout?:
     | T
     | {
-        title?: T;
-        excerpt?: T;
-        layout?:
+        heroSection?:
           | T
           | {
-              heroSection?:
+              backgroundImages?:
                 | T
                 | {
-                    backgroundImages?:
+                    image?: T;
+                    id?: T;
+                  };
+              autoSlide?: T;
+              id?: T;
+              blockName?: T;
+            };
+        prestigeLivingSection?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              mapSection?:
+                | T
+                | {
+                    mapImage?: T;
+                    regions?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageGallery?:
+          | T
+          | {
+              images?:
+                | T
+                | {
+                    image?: T;
+                    overlayText?: T;
+                    textPosition?: T;
+                    enableLink?: T;
+                    link?:
                       | T
                       | {
-                          image?: T;
-                          id?: T;
-                        };
-                    autoSlide?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              prestigeLivingSection?:
-                | T
-                | {
-                    title?: T;
-                    content?: T;
-                    mapSection?:
-                      | T
-                      | {
-                          mapImage?: T;
-                          regions?: T;
+                          type?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
                         };
                     id?: T;
-                    blockName?: T;
                   };
-              imageGallery?:
-                | T
-                | {
-                    images?:
-                      | T
-                      | {
-                          image?: T;
-                          overlayText?: T;
-                          textPosition?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                              };
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              richText?:
-                | T
-                | {
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              contactForm?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    successMessage?: T;
-                    submitButtonText?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              featuredProperties?:
-                | T
-                | {
-                    title?: T;
-                    propertyHashtag?: T;
-                    propertyCount?: T;
-                    displayPrice?: T;
-                    displayAddress?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              successMessage?: T;
+              submitButtonText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featuredProperties?:
+          | T
+          | {
+              title?: T;
+              propertyHashtag?: T;
+              propertyCount?: T;
+              displayPrice?: T;
+              displayAddress?: T;
+              id?: T;
+              blockName?: T;
             };
       };
   meta?:
@@ -1413,13 +1453,8 @@ export interface HomeSelect<T extends boolean = true> {
  */
 export interface AboutusSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-      };
   aboutuscontent?:
     | T
     | {
@@ -1462,13 +1497,8 @@ export interface AboutusSelect<T extends boolean = true> {
  */
 export interface ProductsoverviewSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-      };
   meta?:
     | T
     | {
@@ -1486,13 +1516,8 @@ export interface ProductsoverviewSelect<T extends boolean = true> {
  */
 export interface NewsoverviewSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-      };
   meta?:
     | T
     | {
@@ -1510,59 +1535,54 @@ export interface NewsoverviewSelect<T extends boolean = true> {
  */
 export interface ContactSelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
+  layout?:
     | T
     | {
-        title?: T;
-        excerpt?: T;
-        layout?:
+        imageGallery?:
           | T
           | {
-              imageGallery?:
+              images?:
                 | T
                 | {
-                    images?:
+                    image?: T;
+                    overlayText?: T;
+                    textPosition?: T;
+                    enableLink?: T;
+                    link?:
                       | T
                       | {
-                          image?: T;
-                          overlayText?: T;
-                          textPosition?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                              };
-                          id?: T;
+                          type?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
                         };
                     id?: T;
-                    blockName?: T;
                   };
-              richText?:
-                | T
-                | {
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        addresses?:
+          | T
+          | {
               addresses?:
                 | T
                 | {
-                    addresses?:
-                      | T
-                      | {
-                          title?: T;
-                          addressLine?: T;
-                          phone?: T;
-                          id?: T;
-                        };
+                    title?: T;
+                    addressLine?: T;
+                    phone?: T;
                     id?: T;
-                    blockName?: T;
                   };
+              id?: T;
+              blockName?: T;
             };
       };
   meta?:
@@ -1582,13 +1602,8 @@ export interface ContactSelect<T extends boolean = true> {
  */
 export interface ProductentrySelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-      };
   meta?:
     | T
     | {
@@ -1606,13 +1621,8 @@ export interface ProductentrySelect<T extends boolean = true> {
  */
 export interface NewsentrySelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
-    | T
-    | {
-        title?: T;
-        excerpt?: T;
-      };
   meta?:
     | T
     | {
@@ -1630,93 +1640,88 @@ export interface NewsentrySelect<T extends boolean = true> {
  */
 export interface GeneralPageEntrySelect<T extends boolean = true> {
   title?: T;
+  excerpt?: T;
   slug?: T;
-  home?:
+  layout?:
     | T
     | {
-        title?: T;
-        excerpt?: T;
-        layout?:
+        heroSection?:
           | T
           | {
-              heroSection?:
+              backgroundImages?:
                 | T
                 | {
-                    backgroundImages?:
+                    image?: T;
+                    id?: T;
+                  };
+              autoSlide?: T;
+              id?: T;
+              blockName?: T;
+            };
+        prestigeLivingSection?:
+          | T
+          | {
+              title?: T;
+              content?: T;
+              mapSection?:
+                | T
+                | {
+                    mapImage?: T;
+                    regions?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        imageGallery?:
+          | T
+          | {
+              images?:
+                | T
+                | {
+                    image?: T;
+                    overlayText?: T;
+                    textPosition?: T;
+                    enableLink?: T;
+                    link?:
                       | T
                       | {
-                          image?: T;
-                          id?: T;
-                        };
-                    autoSlide?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              prestigeLivingSection?:
-                | T
-                | {
-                    title?: T;
-                    content?: T;
-                    mapSection?:
-                      | T
-                      | {
-                          mapImage?: T;
-                          regions?: T;
+                          type?: T;
+                          reference?: T;
+                          url?: T;
+                          label?: T;
                         };
                     id?: T;
-                    blockName?: T;
                   };
-              imageGallery?:
-                | T
-                | {
-                    images?:
-                      | T
-                      | {
-                          image?: T;
-                          overlayText?: T;
-                          textPosition?: T;
-                          enableLink?: T;
-                          link?:
-                            | T
-                            | {
-                                type?: T;
-                                reference?: T;
-                                url?: T;
-                                label?: T;
-                              };
-                          id?: T;
-                        };
-                    id?: T;
-                    blockName?: T;
-                  };
-              richText?:
-                | T
-                | {
-                    content?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              contactForm?:
-                | T
-                | {
-                    title?: T;
-                    description?: T;
-                    successMessage?: T;
-                    submitButtonText?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
-              featuredProperties?:
-                | T
-                | {
-                    title?: T;
-                    propertyHashtag?: T;
-                    propertyCount?: T;
-                    displayPrice?: T;
-                    displayAddress?: T;
-                    id?: T;
-                    blockName?: T;
-                  };
+              id?: T;
+              blockName?: T;
+            };
+        richText?:
+          | T
+          | {
+              content?: T;
+              id?: T;
+              blockName?: T;
+            };
+        contactForm?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              successMessage?: T;
+              submitButtonText?: T;
+              id?: T;
+              blockName?: T;
+            };
+        featuredProperties?:
+          | T
+          | {
+              title?: T;
+              propertyHashtag?: T;
+              propertyCount?: T;
+              displayPrice?: T;
+              displayAddress?: T;
+              id?: T;
+              blockName?: T;
             };
       };
   meta?:

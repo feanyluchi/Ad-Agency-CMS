@@ -29,6 +29,7 @@ import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 }
 import { Nav as Nav_aa886f8d08996e255693349b279b496c } from '@/components/NavLinks/index'
 import { Icon as Icon_9d6a4d1b1f3af306986355290634d01d } from '@/graphics/Icon/index'
 import { Logo as Logo_04bac20d87fe9128ba7c00ff1c562688 } from '@/graphics/Logo/index'
+import { S3ClientUploadHandler as S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24 } from '@payloadcms/storage-s3/client'
 import { CustomView as CustomView_c7b954299482154124c1004de7f47ea2 } from '@/components/CustomLayoutView/index'
 
 export const importMap = {
@@ -63,5 +64,6 @@ export const importMap = {
   "@/components/NavLinks/index#Nav": Nav_aa886f8d08996e255693349b279b496c,
   "@/graphics/Icon/index#Icon": Icon_9d6a4d1b1f3af306986355290634d01d,
   "@/graphics/Logo/index#Logo": Logo_04bac20d87fe9128ba7c00ff1c562688,
+  "@payloadcms/storage-s3/client#S3ClientUploadHandler": S3ClientUploadHandler_f97aa6c64367fa259c5bc0567239ef24,
   "@/components/CustomLayoutView/index#CustomView": CustomView_c7b954299482154124c1004de7f47ea2
 }
