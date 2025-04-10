@@ -1,4 +1,4 @@
-import { CollectionConfig, GlobalConfig } from 'payload';
+import { GlobalConfig } from 'payload';
 
 const StaticTexts: GlobalConfig = {
   slug: 'staticTexts',
