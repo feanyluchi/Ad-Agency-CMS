@@ -22,6 +22,7 @@ import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
 import { fetchLanguages } from './helper/fetchLanguages'
+import HealthCheck from './endpoint/HealthCheck'
 
 const dynamicLanguages = await fetchLanguages();
 const filename = fileURLToPath(import.meta.url)
@@ -40,38 +41,7 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
-  endpoints: [
-    {
-      path: '/health',
-      method: 'get',
-      handler: async (req: PayloadRequest) => {
-        try {
-          // Test database connection
-          await req.payload.find({
-            collection: 'users',
-            limit: 1,
-            overrideAccess: true
-          });
-  
-          return Response.json({
-            status: 'OK',
-            database: 'connected',
-            timestamp: new Date().toISOString()
-          });
-        } catch (error: any) {
-          req.payload.logger.error('Health check failed:', error);
-          return Response.json(
-            {
-              status: 'ERROR',
-              database: 'disconnected',
-              error: error.message
-            },
-            { status: 500 }
-          );
-        }
-      },
-    },
-  ],
+  endpoints: HealthCheck,
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
     defaultFromName: 'payload',
