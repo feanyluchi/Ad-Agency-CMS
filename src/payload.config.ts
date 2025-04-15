@@ -1,7 +1,7 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { CollectionConfig, buildConfig } from 'payload'
+import { CollectionConfig, PayloadRequest, buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Media } from './collections/Media'
@@ -40,6 +40,38 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
+  endpoints: [
+    {
+      path: '/health',
+      method: 'get',
+      handler: async (req: PayloadRequest) => {
+        try {
+          // Test database connection
+          await req.payload.find({
+            collection: 'users',
+            limit: 1,
+            overrideAccess: true
+          });
+  
+          return Response.json({
+            status: 'OK',
+            database: 'connected',
+            timestamp: new Date().toISOString()
+          });
+        } catch (error: any) {
+          req.payload.logger.error('Health check failed:', error);
+          return Response.json(
+            {
+              status: 'ERROR',
+              database: 'disconnected',
+              error: error.message
+            },
+            { status: 500 }
+          );
+        }
+      },
+    },
+  ],
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
     defaultFromName: 'payload',
