@@ -1,7 +1,7 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { CollectionConfig, buildConfig } from 'payload'
+import { CollectionConfig, PayloadRequest, buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Media } from './collections/Media'
@@ -22,6 +22,7 @@ import nodemailer from 'nodemailer'
 import { Properties } from './collections/Properties'
 import { propertyFilterPlugin } from 'plugins/property-filter-plugin/src'
 import { fetchLanguages } from './helper/fetchLanguages'
+import HealthCheck from './endpoint/HealthCheck'
 
 const dynamicLanguages = await fetchLanguages();
 const filename = fileURLToPath(import.meta.url)
@@ -40,6 +41,7 @@ const groupCollections = (group: string, collections: CollectionConfig[]): Colle
 }
 
 export default buildConfig({
+  endpoints: HealthCheck,
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
     defaultFromName: 'payload',
