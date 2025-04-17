@@ -11,9 +11,6 @@ export interface LanguageOption {
   label: Record<string, string>
 }
 
-/**
- * Fetch languages from the website settings API
- */
 export const fetchLanguages = async (): Promise<LanguageOption[]> => {
   try {
     const apiKey = process.env.PUBLIC_API_KEY

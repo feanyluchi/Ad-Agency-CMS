@@ -45,7 +45,6 @@ export default buildConfig({
   email: nodemailerAdapter({
     defaultFromAddress: process.env.SMTP_FROM_ADDRESS || '',
     defaultFromName: 'payload',
-    // Nodemailer transportOptions
     transport: nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: 587,
