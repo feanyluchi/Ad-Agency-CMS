@@ -1,7 +1,8 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { CollectionConfig, PayloadRequest, buildConfig } from 'payload'
+import { CollectionConfig, buildConfig } from 'payload'
+
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { Media } from './collections/Media'
@@ -13,7 +14,6 @@ import { s3Storage } from '@payloadcms/storage-s3'
 import StaticTexts from './globals/StaticTexts'
 import Users from './collections/Users'
 import { Robots } from './collections/Robot'
-
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
