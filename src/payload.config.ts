@@ -13,7 +13,6 @@ import { s3Storage } from '@payloadcms/storage-s3'
 
 import StaticTexts from './globals/StaticTexts'
 import Users from './collections/Users'
-import { Robots } from './collections/Robot'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 
@@ -87,7 +86,6 @@ export default buildConfig({
     ...groupCollections('Single Pages', [HomePage]),
     ...groupCollections('Channels Pages', [Properties]),
     ...groupCollections('Library', [Media]),
-    ...groupCollections('Robot file', [Robots]),
     ...groupCollections('User Groups', [Users]),
     
   ],
