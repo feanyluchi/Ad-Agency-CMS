@@ -17,16 +17,11 @@ export const HomePage: CollectionConfig = {
   access: {
     read: () => true,
     create: async ({ req }) => {
-      // Assuming you're using Payload's built-in 'find' method
       const { totalDocs } = await req.payload.find({
-        collection: 'homepage', // Replace with your collection slug
-        limit: 0, // Fetch all documents
+        collection: 'homepage',
+        limit: 0,
       })
-
-      // Define your limit here, for example, allow only 10 creations
       const creationLimit = 1
-
-      // Allow creation if the total number of documents is less than the limit
       return totalDocs < creationLimit
     },
   },
