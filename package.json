@@ -31,8 +31,7 @@
     "nodemailer": "^6.9.15",
     "payload": "3.31.0",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "sharp": "0.32.6"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
@@ -56,5 +55,8 @@
   "overrides": {
     "@types/react": "npm:types-react@19.0.0-rc.0",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.0"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.32.6"
   }
 }
